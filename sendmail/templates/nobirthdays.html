@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}  
+    <div class="mb-auto flex-grow flex-1 place-items-center mt-8">
+        <h1 class="text-3xl text-white font-semibold text-center">
+            There are no birthdays today.<br>
+            Check again tomorrow
+        </h1>
+    </div>
+{% endblock %}
