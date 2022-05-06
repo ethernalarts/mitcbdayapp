@@ -123,11 +123,12 @@ THUMBNAIL_PROCESSORS = (
 ROOT = os.path.join(BASE_DIR, 'templates')
 SENDMAIL = os.path.join(BASE_DIR, 'sendmail/templates/')
 THEME = os.path.join(BASE_DIR, 'theme/templates/')
+ANNEX = os.path.join(BASE_DIR, 'sendmail/templates/annex')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ROOT, SENDMAIL, THEME],
+        'DIRS': [ROOT, SENDMAIL, THEME, ANNEX],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

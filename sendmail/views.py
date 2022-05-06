@@ -34,7 +34,7 @@ def bdaycheck(request):
     if (len(celebrants) == 0):    
             
         print("No birthdays today \n")        
-        t = loader.get_template('nobirthdays.html')        
+        t = loader.get_template('nobday.html')        
         return HttpResponse(t.render(context = {'title': 'No Birthdays Today'}))    
     
     # there is one or more birthdays today
