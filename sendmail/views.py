@@ -20,7 +20,7 @@ def bdaycheck(request):
     # iterate over the QuerySet "data" to look for any record with "birth_month" 
     # and "birth_day" fields that matches "current_month" and "current_day"
     for record in data:
-        if record.bdaytoday:
+        if record.bdaytoday == True:
 
             celebrants.append(
                 {'databaseid': record.id, 
@@ -44,8 +44,8 @@ def bdaycheck(request):
         for celebrant in celebrants:
             for key, value in celebrant.items():
                 print(f'{key}: {value}')
-            print('')
-        
+            print('')            
+           
         time.sleep(2)        
         
         t = loader.get_template('emailsent.html')
