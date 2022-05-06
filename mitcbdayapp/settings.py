@@ -128,7 +128,7 @@ ANNEX = os.path.join(BASE_DIR, 'sendmail/templates/annex')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ROOT, SENDMAIL, THEME, ANNEX],
+        'DIRS': [ROOT, SENDMAIL, THEME],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
