@@ -48,7 +48,7 @@ def bdaycheck(request):
            
         time.sleep(2)        
         
-        t = loader.get_template('bmessage_1.html')
+        t = loader.get_template('bmessage_2.html')
         return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))
     
         return sendmail(request, celebrants)
