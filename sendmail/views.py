@@ -15,12 +15,12 @@ def bdaycheck(request):
     data = staffDetails.objects.all()
     celebrants = []
 
-    print("Checking...\n")
+    print("\nChecking...\n")
 
     # iterate over the QuerySet "data" to look for any record with "birth_month" 
     # and "birth_day" fields that matches "current_month" and "current_day"
     for record in data:
-        if record.bdaytoday == True:
+        if record.bdaytoday:
 
             celebrants.append(
                 {'databaseid': record.id, 

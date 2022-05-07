@@ -19,9 +19,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from sendmail import views as sendmail_view
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('birthday/', sendmail_view.bdaycheck, name = 'birthday'),
-    path("__reload__/", include("django_browser_reload.urls")),    
+    re_path(r'^birthday/$', sendmail_view.bdaycheck, name = 'birthday'),
+    re_path(r"^__reload__/$", include("django_browser_reload.urls")),    
     re_path(r'^', include('cms.urls'))
-] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+]
+
+
+# This is only needed when using runserver.
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
