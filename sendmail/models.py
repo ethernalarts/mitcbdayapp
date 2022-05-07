@@ -39,7 +39,7 @@ class staffDetails(models.Model):
     birth_day = models.IntegerField(blank = True, null = True)
     
     @property
-    def bdaytoday(self):
+    def BIRTHDAY_TODAY(self):
         if (self.birth_month, self.birth_day) == (date.today().month, date.today().day):
             return True
         return False

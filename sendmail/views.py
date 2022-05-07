@@ -20,7 +20,7 @@ def bdaycheck(request):
     # iterate over the QuerySet "data" to look for any record with "birth_month" 
     # and "birth_day" fields that matches "current_month" and "current_day"
     for record in data:
-        if record.bdaytoday:
+        if record.BIRTHDAY_TODAY:
 
             celebrants.append(
                 {'databaseid': record.id, 

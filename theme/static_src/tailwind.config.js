@@ -943,6 +943,13 @@ module.exports = {
             40: '40',
             50: '50',
         },
+
+        extends: {
+            fontFamily: {
+                'hind': ['Hind', 'sans-serif'],
+                'poppins': ['Poppins', 'sans-serif']
+            },
+        },
     },
     variantOrder: [
         'first',
@@ -963,4 +970,11 @@ module.exports = {
         'disabled',
     ],
     plugins: [],
+    
+    // purge: {
+    //     enabled: true,
+    //     content: [
+    //         './**/*.html'
+    //     ]
+    // }
 }

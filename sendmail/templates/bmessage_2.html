@@ -7,33 +7,46 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
         {% tailwind_preload_css %}       
         {% tailwind_css %}
     </head>
 
-    <body class="h-screen bg-gray-100">
+    <body class="font-sans h-screen bg-gray-100">
 
         <!-- Content -->
-        <div class="font-sans container pb-4 text-center mx-auto bg-white w-[800px]">
+        <div class="container pb-4 text-center mx-auto bg-white w-[800px]">
             <img src="https://github.com/ethernalarts/mitcbdayapp/raw/master/sendmail/templates/static/img/bday-banner.jpg" 
                 class="block mx-auto max-w-[800px] w-full h-full">
-            <img src="{% static 'img/edsg2.png' %}" class="block mx-auto mt-4 max-w-[130px] w-full h-full max-h-[130px]">
-            <p class="m-8 mx-auto text-3xl font-bold text-green-600">
+            <img src="https://github.com/ethernalarts/mitcbdayapp/raw/master/sendmail/templates/static/img/edsg2.png" 
+                class="block mx-auto mt-4 max-w-[130px] w-full h-full max-h-[130px]">
+            <p class="font-hind mt-8 mb-4 mx-auto text-3xl font-bold text-green-600">
                 Dear {{ NAME }},
-            </p><br>
-            <p class="font-sans -mt-2 px-8 w-full mx-auto text-2xl text-darkgray font-medium max-w-[700px] overflow-wrap-break-word">
+            </p>
+            <br>
+
+            <p class="font-poppins px-8 w-full mx-auto text-2xl text-gray-800 font-medium max-w-[700px]">
                 Today, on your special day we celebrate you,<br>
                 and we'd like you to know how valuable you are to us.
                 We thank you for all the good work you have done
-                and wish you the very best life has to offer always.</p><br>
-            <img src="{% static 'img/bbanner.jpg' %}" class="block mx-auto mt-4 max-w-[760px]">
-                            
-            <p class="mt-4 text-2xl font-medium">From all of us at the<br>
-            <h1 class="mt-4 text-[1.65em] text-green-600 font-bold">MINISTRY OF INDUSTRY, TRADE <br>AND
-                COOPERATIVES</h1>
+                and wish you the very best life has to offer always.
             </p>
-            <img src="{% static 'img/mitc-logo-trans.png' %}" class="block mx-auto mt-8 max-w-[150px] w-full h-full max-h-[150px]"><br>
-            <p><h2 class="m-4 text-2xl font-medium">Courtsey:</h2>
+            <br>
+
+            <img src="https://github.com/ethernalarts/mitcbdayapp/raw/master/sendmail/templates/static/img/bbanner.jpg" 
+                class="block mx-auto mt-4 max-w-[760px]">
+                            
+            <div class="mt-4">
+                <p class="font-poppins text-2xl font-medium text-gray-800">From all of us at the<br></p>
+                <h1 class="mt-4 text-[1.65em] text-green-600 font-bold">
+                    MINISTRY OF INDUSTRY, TRADE <br>AND COOPERATIVES
+                </h1>
+            </div>
+
+            <img src="https://github.com/ethernalarts/mitcbdayapp/raw/master/sendmail/templates/static/img/mitc-logo-trans.png" 
+                class="block mx-auto mt-8 max-w-[150px] w-full h-full max-h-[150px]"><br>
+            <p><h2 class="m-4 text-2xl font-medium font-poppins">Courtsey:</h2>
                 <h1 class="mt-4 mb-8 text-2xl text-green-600 font-bold">Digital Marketing Unit, <br>
                     Department of Trade Promotions and Marketing
                 </h1>
@@ -47,8 +60,8 @@
                     <!-- Location -->
                     <div class="mt-4 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" 
-                        class="w-7 h-7 mx-auto text-green-600" fill="currentColor" viewBox="0 0 384 512">
-                        <path d="M168.3 499.2C116.1 435 0 279.4 0 192C0 85.96 85.96 0 192 0C298 0 384 85.96 384 192C384 279.4 267 435 215.7 499.2C203.4 514.5 180.6 514.5 168.3 499.2H168.3zM192 256C227.3 256 256 227.3 256 192C256 156.7 227.3 128 192 128C156.7 128 128 156.7 128 192C128 227.3 156.7 256 192 256z"/></svg>
+                        class="w-7 h-7 mx-auto text-green-600" fill="currentColor" viewBox="0 0 576 512">
+                        <path d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.5 450.5 512.3 453.1 512 455.8V472C512 494.1 494.1 512 472 512H456C454.9 512 453.8 511.1 452.7 511.9C451.3 511.1 449.9 512 448.5 512H392C369.9 512 352 494.1 352 472V384C352 366.3 337.7 352 320 352H256C238.3 352 224 366.3 224 384V472C224 494.1 206.1 512 184 512H128.1C126.6 512 125.1 511.9 123.6 511.8C122.4 511.9 121.2 512 120 512H104C81.91 512 64 494.1 64 472V360C64 359.1 64.03 358.1 64.09 357.2V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z"/></svg>
 
                         <p class="mt-2 text-lg font-normal text-green-600">7th Floor, Block C, Secretariat Complex, Sapele Road,<br>
                             Benin City, Edo State, Nigeria.
