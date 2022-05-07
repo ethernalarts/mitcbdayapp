@@ -123,7 +123,6 @@ THUMBNAIL_PROCESSORS = (
 ROOT = os.path.join(BASE_DIR, 'templates')
 SENDMAIL = os.path.join(BASE_DIR, 'sendmail/templates/')
 THEME = os.path.join(BASE_DIR, 'theme/templates/')
-ANNEX = os.path.join(BASE_DIR, 'sendmail/templates/annex')
 
 TEMPLATES = [
     {
@@ -159,11 +158,11 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-SENDMAIL_STATIC_FILES = os.path.join(BASE_DIR, "sendmail/templates/static/")
+SENDMAIL_STATIC = os.path.join(BASE_DIR, "sendmail/templates/static/")
 
-THEME_STATIC_FILES = os.path.join(BASE_DIR, "theme/static/")
+THEME_STATIC = os.path.join(BASE_DIR, "theme/static/")
 
-STATICFILES_DIRS = [SENDMAIL_STATIC_FILES, THEME_STATIC_FILES]
+STATICFILES_DIRS = [SENDMAIL_STATIC, THEME_STATIC]
 
 
 # Location of static files

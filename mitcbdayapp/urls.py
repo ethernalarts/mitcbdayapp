@@ -23,7 +23,7 @@ from sendmail import views as sendmail_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^birthday/$', sendmail_view.bdaycheck, name = 'birthday'),
-    re_path(r"^__reload__/$", include("django_browser_reload.urls")),    
+    re_path(r"^__reload__/", include("django_browser_reload.urls")),    
     re_path(r'^', include('cms.urls'))
 ]
 
