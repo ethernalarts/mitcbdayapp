@@ -45,12 +45,9 @@ def bdaycheck(request):
             for key, value in celebrant.items():
                 print(f'{key}: {value}')
             print('')            
-           
-        time.sleep(2)        
         
-        t = loader.get_template('bmessage_2.html')
-        return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))
-    
+        # t = loader.get_template('bmessage_2.html')
+        # return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
         return sendmail(request, celebrants)
 
 
@@ -62,7 +59,7 @@ def sendmail(request, celebrants):
 
     print("Sending Birthday felicitation(s)...\n")
 
-    with open(f'sendmail/templates/bmessage_{random.randint(1, 1)}.html') as bmsg:
+    with open(f'sendmail/templates/bmsg.html') as bmsg:
             contents = bmsg.read()
             
     for celebrant in celebrants:    
