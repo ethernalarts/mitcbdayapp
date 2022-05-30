@@ -1,8 +1,5 @@
 
 # Create your views here.
-
-import time, random
-
 from django.template import Template, Context, loader
 from django.core import mail
 from django.http import HttpResponse
