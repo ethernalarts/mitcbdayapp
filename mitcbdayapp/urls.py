@@ -24,11 +24,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^birthday/$', sendmail_view.bdaycheck, name = 'birthday'),
     re_path(r"^__reload__/", include("django_browser_reload.urls")),    
-    re_path(r'^', include('cms.urls'))
+    re_path(r'^', include('cms.urls')),
+    re_path(r'^add/$', sendmail_view.bdaycheck, name = 'add'),
+    re_path(r'^update/$', sendmail_view.bdaycheck, name = 'update')
 ]
 
 
-# This is only needed when using runserver.
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
