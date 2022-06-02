@@ -6,12 +6,14 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from mitcbdayapp import settings
 from sendmail.models import staffDetails
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 
-def bdaycheck(request):    
+def bdaycheck(request):  
+    celebrants = []  
     data = staffDetails.objects.all()
-    celebrants = []
-
+    
     print("\nChecking...\n")
 
     # iterate over the QuerySet "data" to look for any record with "birth_month" 
@@ -98,3 +100,27 @@ def sendmail(request, celebrants):
     # one or more messages failed to send
     else:   
         return HttpResponse(render(request, 'emailerror.html', context = {'failed_msgs': failed}))
+
+
+# Add, Update or Delete Books
+class staffDetailsCreate(CreateView):
+    model = staffDetails
+    fields = [
+        'first_name', 'middle_name', 'last_name', 'phone_number', 'email',
+        'birth_month', 'birth_day'
+    ]    
+    template_name = 'book_create_form.html'
+
+class staffDetailsUpdate(UpdateView):
+    model = staffDetails
+    fields = [
+        'first_name', 'middle_name', 'last_name', 'phone_number', 'email',
+        'birth_month', 'birth_day'
+    ]    
+    template_name = 'book_update_form.html'
+
+class staffDetailsDelete(DeleteView):
+    model = staffDetails
+    #permission_required: 'catalog.can_renew'
+    template_name = 'book_confirm_delete.html'
+    success_url = reverse_lazy('books')
