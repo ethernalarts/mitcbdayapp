@@ -2,6 +2,7 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from datetime import date
+from django.urls import reverse  # To generate URLS by reversing URL patterns
 
 
 # Create your models here.
@@ -44,7 +45,10 @@ class staffDetails(models.Model):
             return True
         return False
     
-    #birthdayToday = models.BooleanField(staffDetails().bdaytoday default=False)
+    def get_absolute_url(self):
+        """Returns the url to access a particular staff instance."""
+        return reverse('book-detail', args=[str(self.id)])
+    
     
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)

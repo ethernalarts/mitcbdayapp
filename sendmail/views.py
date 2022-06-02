@@ -102,13 +102,17 @@ def sendmail(request, celebrants):
         return HttpResponse(render(request, 'emailerror.html', context = {'failed_msgs': failed}))
 
 
+# Index
+def index(request):
+    return render (request, 'index.html')
+
 # Add, Update or Delete Books
 class staffDetailsCreate(CreateView):
     model = staffDetails
     fields = [
         'first_name', 'middle_name', 'last_name', 'phone_number', 'email',
         'birth_month', 'birth_day'
-    ]    
+    ]
     template_name = 'book_create_form.html'
 
 class staffDetailsUpdate(UpdateView):
@@ -116,7 +120,7 @@ class staffDetailsUpdate(UpdateView):
     fields = [
         'first_name', 'middle_name', 'last_name', 'phone_number', 'email',
         'birth_month', 'birth_day'
-    ]    
+    ]   
     template_name = 'book_update_form.html'
 
 class staffDetailsDelete(DeleteView):

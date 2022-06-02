@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
@@ -21,15 +22,18 @@ from sendmail import views as sendmail_view
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),    
+    re_path(r'^', sendmail_view.index, name='index'),
+    re_path(r'^cms/', include('cms.urls')),
     re_path(r'^birthday/$', sendmail_view.bdaycheck, name = 'birthday'),
-    re_path(r"^__reload__/", include("django_browser_reload.urls")),    
-    re_path(r'^', include('cms.urls')),
-    re_path(r'^add/$', sendmail_view.bdaycheck, name = 'add'),
-    re_path(r'^update/$', sendmail_view.bdaycheck, name = 'update')
+    re_path(r"^__reload__/", include("django_browser_reload.urls")),
+    re_path(r'^add/$', sendmail_view.bdaycheck, name = 'add-staff'),
+    re_path(r'^update/(?P<pk>\d+)$', sendmail_view.bdaycheck, name = 'update-staff'),
+    re_path(r'^delete/(?P<pk>\d+)$', sendmail_view.bdaycheck, name = 'delete-staff')
 ]
 
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    
