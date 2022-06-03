@@ -26,7 +26,6 @@ urlpatterns = [
     re_path(r'^birthday/$', views.bdaycheck, name = 'birthday'),  
     re_path(r'^add/$', views.staffDetailsCreate.as_view(), name = 'add-staff'),
     re_path(r'^', views.index, name='index'),  
-    # path('birthday/', sendmail_view.bdaycheck, name = 'birthday'),
     re_path(r'^update/(?P<pk>\d+)$', views.bdaycheck, name = 'update-staff'),
     re_path(r'^delete/(?P<pk>\d+)$', views.bdaycheck, name = 'delete-staff'),
     re_path(r'^cms/', include('cms.urls')),

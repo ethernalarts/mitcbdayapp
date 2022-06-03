@@ -7,9 +7,11 @@ from django.shortcuts import render
 from mitcbdayapp import settings
 from sendmail.models import staffDetails
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView
 from django.urls import reverse_lazy
 
 
+# Birthday Check View
 def bdaycheck(request):  
     celebrants = []  
     data = staffDetails.objects.all()
@@ -50,6 +52,7 @@ def bdaycheck(request):
         return sendmail(request, celebrants)
 
 
+# Sendmail View
 def sendmail(request, celebrants):
     connection = mail.get_connection()
     connection.open()
@@ -102,11 +105,27 @@ def sendmail(request, celebrants):
         return HttpResponse(render(request, 'emailerror.html', context = {'failed_msgs': failed}))
 
 
-# Index
+# Index View
 def index(request):
     return render (request, 'index.html')
 
-# Add, Update or Delete Books
+
+# Staff Detail View
+class staffDetailsView(DetailView):
+    model = staffDetails
+    context_object_name = 'staff'  # your own name for the list as a template variable
+    template_name = 'staffdetails.html'
+           
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(staffDetailsView, self).get_context_data(**kwargs)
+        
+        # Create any data and add it to the context
+        context['title'] = "Author's Details"
+        return context
+
+
+# Add Staff View
 class staffDetailsCreate(CreateView):
     model = staffDetails
     fields = [
@@ -114,7 +133,9 @@ class staffDetailsCreate(CreateView):
         'birth_month', 'birth_day'
     ]
     template_name = 'addstaff.html'
+    
 
+# Update Staff View
 class staffDetailsUpdate(UpdateView):
     model = staffDetails
     fields = [
@@ -122,7 +143,9 @@ class staffDetailsUpdate(UpdateView):
         'birth_month', 'birth_day'
     ]   
     template_name = 'book_update_form.html'
+    
 
+# Delete Staff View
 class staffDetailsDelete(DeleteView):
     model = staffDetails
     #permission_required: 'catalog.can_renew'
