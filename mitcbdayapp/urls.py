@@ -22,12 +22,13 @@ from sendmail import views as sendmail_view
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),    
-    re_path(r'^', sendmail_view.index, name='index'),
+    path('admin/', admin.site.urls),
+    re_path(r'^birthday/$', sendmail_view.bdaycheck, name = 'birthday'),  
+    re_path(r'^', sendmail_view.index, name='index'),  
+    # path('birthday/', sendmail_view.bdaycheck, name = 'birthday'),
     re_path(r'^cms/', include('cms.urls')),
-    re_path(r'^birthday/$', sendmail_view.bdaycheck, name = 'birthday'),
     re_path(r"^__reload__/", include("django_browser_reload.urls")),
-    re_path(r'^add/$', sendmail_view.bdaycheck, name = 'add-staff'),
+    re_path(r'^add/$', sendmail_view.staffDetailsCreate.as_view(), name = 'add-staff'),
     re_path(r'^update/(?P<pk>\d+)$', sendmail_view.bdaycheck, name = 'update-staff'),
     re_path(r'^delete/(?P<pk>\d+)$', sendmail_view.bdaycheck, name = 'delete-staff')
 ]

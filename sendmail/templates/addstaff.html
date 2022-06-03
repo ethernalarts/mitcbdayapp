@@ -1,0 +1,85 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Django Tailwind</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% tailwind_css %}
+	</head>
+
+	<body class="bg-gray-400 font-sans leading-normal tracking-normal">
+		<div class="container mx-auto">
+			<!-- Edit -->
+			<section class="flex items-center justify-center h-screen" role="group">
+                <form action="" method="post" class="w3-large" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table>
+                        {% for field in form %}
+                            <div class="w3-block">
+                                <div class="w3-section">
+                                    {% for error in field.errors %}
+                                    <div class="row">
+                                        <div class="alert alert-danger">{{error}}</div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="w3-section">
+                                    <b>{{ field.label_tag }}</b>
+                                    <div>
+                                        <span>{{ field }}</span><br>
+                                        {% if field.help_text %}
+                                            <em>{{ field.help_text }}</em>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </table><br>
+                    <input class="w3-btn w3-light-green w3-round" type="submit" value="Add Book">
+                </form> 
+			</section>
+		</div>
+	</body>
+</html>
+
+
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div class="w3-container" style="margin-top:80px">       
+        <h1 class="w3-xxlarge"><b>Add a Book</b></h1>
+        <hr style="width:50px;border:5px solid red" class="w3-square"><br>
+
+        <form action="" method="post" class="w3-large" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {% for field in form %}
+                    <div class="w3-block">
+                        <div class="w3-section">
+                            {% for error in field.errors %}
+                            <div class="row">
+                                <div class="alert alert-danger">{{error}}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="w3-section">
+                            <b>{{ field.label_tag }}</b>
+                            <div>
+                                <span>{{ field }}</span><br>
+                                {% if field.help_text %}
+                                    <em>{{ field.help_text }}</em>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </table><br>
+            <input class="w3-btn w3-light-green w3-round" type="submit" value="Add Book">
+        </form>  
+    </div>
+{% endblock %}

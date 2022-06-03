@@ -113,7 +113,7 @@ class staffDetailsCreate(CreateView):
         'first_name', 'middle_name', 'last_name', 'phone_number', 'email',
         'birth_month', 'birth_day'
     ]
-    template_name = 'book_create_form.html'
+    template_name = 'addstaff.html'
 
 class staffDetailsUpdate(UpdateView):
     model = staffDetails
