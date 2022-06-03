@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'django.contrib.sites',
+    'widget_tweaks',
     'cms',
     'menus',
     'treebeard',
