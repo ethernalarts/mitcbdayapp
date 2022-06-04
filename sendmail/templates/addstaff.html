@@ -16,7 +16,7 @@
 	<body class="bg-gray-200 font-sans leading-normal tracking-normal">
         <div class="min-h-full flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
             <div class="max-w-md w-full space-y-px">
-                <!-- Add a Staff title -->
+                <!-- Title -->
                 <div>
                     <!-- <img class="mx-auto h-16 w-auto" src="{% static 'img/mitc-logo-trans.png' %}"
                         alt="Workflow"> -->
@@ -35,8 +35,7 @@
                                 {% render_field field class+="text-2xl font-medium relative block w-full p-3 rounded-md border border-gray-400 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder=field.label %}                                                
                             </div>
                         {% endfor %}
-                    </div>
-        
+                    </div>        
         
                     <!-- Submit Button -->
                     <div>
@@ -60,9 +59,9 @@
                 </form>
                          
                 <!-- Back to Home page -->
-                <div class="container mx-auto flex items-center justify-between">
+                <div class="container flex items-centerjustify-between">
                     <a href="{% url 'index' %}"
-                        class="text-md font-medium text-indigo-600 hover:underline hover:underline-offset-2">Back to Home</a>
+                        class="text-md font-medium mx-auto text-indigo-600 mt-8 underline underline-offset-2 hover:text-indigo-500">Back to Index</a>
                 </div>
             </div>
         </div>

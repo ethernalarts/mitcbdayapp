@@ -10,11 +10,11 @@ from django.urls import reverse  # To generate URLS by reversing URL patterns
 class staffDetails(models.Model):
     """ Staff Details """
     
-    first_name = models.CharField(max_length = 20)
-    middle_name = models.CharField(max_length = 20, null = True, blank = True)
-    last_name = models.CharField(max_length = 20)
-    phone_number = PhoneNumberField(null = True, blank = True)
-    email = models.EmailField(max_length = 254, help_text = 'Official Email(e.g. j.doe@edostate.gov.ng)')
+    first_name = models.CharField(verbose_name='First Name', max_length = 20)
+    middle_name = models.CharField(verbose_name='Middle Name', max_length = 20, null = True, blank = True)
+    last_name = models.CharField(verbose_name='Last Name', max_length = 20)
+    phone_number = PhoneNumberField(verbose_name='Phone Number', null = True, blank = True)
+    email = models.EmailField(verbose_name='Official Email', max_length = 254, help_text = 'Official Email(e.g. j.doe@edostate.gov.ng)')
     
     MONTHS = (
         (1, 'January'),
@@ -32,12 +32,13 @@ class staffDetails(models.Model):
     )
     
     birth_month = models.IntegerField(
+        verbose_name='Birth Month', 
         choices = MONTHS, 
         default = 1, 
         blank = False, 
         help_text = 'Birth month of staff')
     
-    birth_day = models.IntegerField(blank = True, null = True)
+    birth_day = models.IntegerField(verbose_name='Birth Day', blank = True, null = True)
     
     @property
     def BIRTHDAY_TODAY(self):
