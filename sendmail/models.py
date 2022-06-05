@@ -48,7 +48,7 @@ class staffDetails(models.Model):
     
     def get_absolute_url(self):
         """Returns the url to access a particular staff instance."""
-        return reverse('staff-detail', args=[str(self.id)])
+        return reverse('staffdetails', args=[str(self.id)])
     
     
     def __str__(self):

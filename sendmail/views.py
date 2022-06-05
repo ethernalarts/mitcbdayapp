@@ -121,7 +121,7 @@ class staffDetailsView(DetailView):
         context = super(staffDetailsView, self).get_context_data(**kwargs)
         
         # Create any data and add it to the context
-        context['title'] = "Author's Details"
+        context['title'] = "Staff's Details"
         return context
 
 

@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^birthday/$', views.bdaycheck, name = 'birthday'),  
     re_path(r'^add/$', views.staffDetailsCreate.as_view(), name = 'add-staff'),
+    re_path(r'^staff/(?P<pk>\d+)$', views.staffDetailsView.as_view(), name='staffdetails'),
     re_path(r'^', views.index, name='index'),  
     re_path(r'^update/(?P<pk>\d+)$', views.bdaycheck, name = 'update-staff'),
     re_path(r'^delete/(?P<pk>\d+)$', views.bdaycheck, name = 'delete-staff'),
