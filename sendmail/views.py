@@ -28,6 +28,7 @@ def bdaycheck(request):
                 {
                     'databaseid': record.id,
                     'firstname': record.first_name,
+                    'middlename': record.middle_name,
                     'lastname': record.last_name,
                     'email': record.email,
                     'phonenumber': record.phone_number
@@ -50,7 +51,7 @@ def bdaycheck(request):
                 print(f'{key}: {value}')
             print('')            
         
-        # t = loader.get_template('bmessage_2.html')
+        # t = loader.get_template('emailsent.html')
         # return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
         return sendmail(request, celebrants)
 
