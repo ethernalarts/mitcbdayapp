@@ -24,6 +24,7 @@ from sendmail import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^birthday/$', views.bdaycheck, name = 'birthday'),  
+    re_path(r'^staff/$', views.staffListView.as_view(), name='stafflist'),
     re_path(r'^add/$', views.staffDetailsCreate.as_view(), name = 'add-staff'),
     re_path(r'^staff/(?P<pk>\d+)$', views.staffDetailsView.as_view(), name='staffdetails'),
     re_path(r'^', views.index, name='index'),  

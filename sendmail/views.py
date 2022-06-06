@@ -7,6 +7,7 @@ from django.shortcuts import render
 from mitcbdayapp import settings
 from sendmail.models import staffDetails
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from django.views.generic import DetailView
 from django.urls import reverse_lazy
 
@@ -115,6 +116,25 @@ def sendmail(request, celebrants):
 def index(request):
     return render (request, 'index.html')
 
+
+
+class staffListView(ListView):
+    model = staffDetails
+    context_object_name = 'stafflist'   # your own name for the list as a template variable
+    template_name = 'stafflist.html'  # Specify your own template name/location
+    paginate_by = 10
+    
+    def get_queryset(self):        
+        return staffDetails.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(staffListView, self).get_context_data(**kwargs)
+        
+        # Create any data and add it to the context
+        context['title'] = 'List of Staff'
+        return context
+    
 
 
 # Staff Detail View
