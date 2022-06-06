@@ -32,8 +32,7 @@
                     <div class="space-y-px">                        
                         {% for field in form %}
                             <div>
-                                {% render_field field  placeholder=field.label class+="text-2xl font-medium relative block w-full p-3 rounded-md border border-gray-400 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}                                                
-                                {{ field.help_text }}
+                                {% render_field field  placeholder=field.label class+="text-2xl font-medium relative block w-full p-3 rounded-md border border-gray-400 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}                                
                             </div>
                         {% endfor %}
                     </div>        

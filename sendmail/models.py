@@ -32,11 +32,10 @@ class staffDetails(models.Model):
     )
     
     birth_month = models.IntegerField(
-        verbose_name='Birth Month', 
+        'Birth Month', 
         choices = MONTHS, 
         default = 1, 
-        blank = False, 
-        help_text = 'Birth month of staff')
+        blank = False)
     
     birth_day = models.IntegerField(verbose_name='Birth Day', blank = True, null = True)
     
