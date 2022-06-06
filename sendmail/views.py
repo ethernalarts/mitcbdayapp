@@ -11,6 +11,7 @@ from django.views.generic import DetailView
 from django.urls import reverse_lazy
 
 
+
 # Birthday Check View
 def bdaycheck(request):  
     celebrants = []  
@@ -24,12 +25,14 @@ def bdaycheck(request):
         if record.BIRTHDAY_TODAY:
 
             celebrants.append(
-                {'databaseid': record.id, 
-                 'firstname': record.first_name, 
-                 'lastname': record.last_name, 
-                 'email': record.email, 
-                 'phonenumber': record.phone_number}
-                )
+                {
+                    'databaseid': record.id,
+                    'firstname': record.first_name,
+                    'lastname': record.last_name,
+                    'email': record.email,
+                    'phonenumber': record.phone_number
+                }
+            )
 
     # no birthdays today
     if (len(celebrants) == 0):    
@@ -50,6 +53,7 @@ def bdaycheck(request):
         # t = loader.get_template('bmessage_2.html')
         # return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
         return sendmail(request, celebrants)
+
 
 
 # Sendmail View
@@ -105,9 +109,11 @@ def sendmail(request, celebrants):
         return HttpResponse(render(request, 'emailerror.html', context = {'failed_msgs': failed}))
 
 
+
 # Index View
 def index(request):
     return render (request, 'index.html')
+
 
 
 # Staff Detail View
@@ -123,6 +129,7 @@ class staffDetailsView(DetailView):
         # Create any data and add it to the context
         context['title'] = "Staff's Details"
         return context
+    
 
 
 # Add Staff View
@@ -134,6 +141,7 @@ class staffDetailsCreate(CreateView):
     ]
     template_name = 'addstaff.html'
     
+    
 
 # Update Staff View
 class staffDetailsUpdate(UpdateView):
@@ -142,12 +150,13 @@ class staffDetailsUpdate(UpdateView):
         'first_name', 'middle_name', 'last_name', 'phone_number', 'email',
         'birth_month', 'birth_day'
     ]   
-    template_name = 'book_update_form.html'
+    template_name = 'updatestaff.html'
     
+
 
 # Delete Staff View
 class staffDetailsDelete(DeleteView):
     model = staffDetails
     #permission_required: 'catalog.can_renew'
-    template_name = 'book_confirm_delete.html'
+    template_name = 'removestaff.html'
     success_url = reverse_lazy('books')
