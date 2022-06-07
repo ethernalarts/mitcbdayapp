@@ -155,15 +155,21 @@ CMS_TEMPLATES = [
 
 # Location of static files
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 SENDMAIL_STATIC = os.path.join(BASE_DIR, "sendmail/templates/static/")
 THEME_STATIC = os.path.join(BASE_DIR, "theme/static/")
 STATICFILES_DIRS = [SENDMAIL_STATIC, THEME_STATIC]
 
 
 # Location of media files
+
+# Base url to serve media files
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+STATICFILES_DIRS = [ MEDIA_ROOT ]
 
 
 WSGI_APPLICATION = 'mitcbdayapp.wsgi.application'
