@@ -16,11 +16,10 @@ class staffDetails(models.Model):
     phone_number = PhoneNumberField(verbose_name='Phone Number', null = True, blank = True)
     email = models.EmailField(verbose_name='Official Email', max_length = 254)    
     
-    
     image = models.ImageField(
         verbose_name="Staff's Image",
         upload_to='staffimages', 
-        default='default.jpg', 
+        default='staffimages/default.jpg', 
         null=True, 
         blank=True
     )
@@ -48,15 +47,24 @@ class staffDetails(models.Model):
     
     birth_day = models.IntegerField(verbose_name='Birth Day', blank = True, null = True)
     
+    class Meta:        
+        db_table = 'sendmail_staffdetails'
+        
     @property
     def BIRTHDAY_TODAY(self):
         if (self.birth_month, self.birth_day) == (date.today().month, date.today().day):
             return True
         return False
     
+    # Staff Details Reverse URL
     def get_absolute_url(self):
         """Returns the url to access a particular staff instance."""
         return reverse('staffdetails', args=[str(self.id)])
+    
+    # Update Staff Reverse URL
+    def get_absolute_url_update_staff(self):
+        """Returns the url to access a particular staff instance."""
+        return reverse('updatestaff', args=[str(self.id)])
     
     
     def __str__(self):

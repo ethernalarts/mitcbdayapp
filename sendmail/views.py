@@ -167,9 +167,10 @@ class staffDetailsCreate(CreateView):
 # Update Staff View
 class staffDetailsUpdate(UpdateView):
     model = staffDetails
+    context_object_name = 'staff'
     fields = [
         'first_name', 'middle_name', 'last_name', 'phone_number', 'email', 
-        'birth_month', 'birth_day'
+        'image', 'birth_month', 'birth_day'
     ]   
     template_name = 'updatestaff.html'
     

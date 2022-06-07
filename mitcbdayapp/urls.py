@@ -25,11 +25,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^birthday/$', views.bdaycheck, name = 'birthday'),  
     re_path(r'^staff/$', views.staffListView.as_view(), name='stafflist'),
-    re_path(r'^add/$', views.staffDetailsCreate.as_view(), name = 'add-staff'),
+    re_path(r'^add/$', views.staffDetailsCreate.as_view(), name = 'addstaff'),
+    re_path(r'^staff/(?P<pk>\d+)/update/$', views.staffDetailsUpdate.as_view(), name = 'updatestaff'),
     re_path(r'^staff/(?P<pk>\d+)$', views.staffDetailsView.as_view(), name='staffdetails'),
     re_path(r'^', views.index, name='index'),  
-    re_path(r'^update/(?P<pk>\d+)$', views.bdaycheck, name = 'update-staff'),
-    re_path(r'^delete/(?P<pk>\d+)$', views.bdaycheck, name = 'delete-staff'),
+    re_path(r'^delete/(?P<pk>\d+)$', views.bdaycheck, name = 'deletestaff'),
     re_path(r'^cms/', include('cms.urls')),
     re_path(r"^__reload__/", include("django_browser_reload.urls"))
 ]

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    <title>Add a Staff</title>
+    <title>Update Staff</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -15,12 +15,14 @@
 
 	<body class="bg-gray-200 font-sans leading-normal tracking-normal">
         <div class="min-h-full flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-md w-full space-y-px">
+            <div class="max-w-md lg:max-w-lg w-full space-y-px">
                 <!-- Title -->
-                <div>
+                <div class="w-full">
                     <!-- <img class="mx-auto h-16 w-auto" src="{% static 'img/mitc-logo-trans.png' %}"
                         alt="Workflow"> -->
-                    <h2 class="mb-6 text-center text-3xl font-extrabold text-gray-900">ADD A STAFF</h2>
+                    <h2 class="mb-6 text-center text-3xl font-extrabold text-gray-900">
+                        Update "{{ staff.first_name }} {{ staff.last_name }}"
+                    </h2>
                 </div>
                 
                 <!-- Form -->
@@ -29,18 +31,12 @@
                     <input type="hidden" name="remember" value="true">
 
                     <!-- Form fields -->
-                    <div class="space-y-px">                        
-                        {% for field in form %}                
-                            {% if field.image %}                                
-                                <div>
-                                    <p class="font-bold text-gray-700">{{ field.image.label_tag }}</p>                                    
-                                    {% render_field field.image type=image class+="lg:text-md font-medium relative block w-full p-3 border border-gray-400 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}                                
-                                </div>    
-                                {% else %}
-                                    <div>
-                                        {% render_field field placeholder=field.label class+="lg:text-md font-medium relative block w-full p-3 border border-gray-400 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}                                
-                                    </div>        
-                            {% endif %}
+                    <div class="space-y-4">                        
+                        {% for field in form %}                                
+                            <div>
+                                <p class="font-bold text-gray-700">{{ field.label_tag }}</p>                                    
+                                {% render_field field class+="lg:text-md font-medium relative block w-full p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}                                  
+                            </div> 
                         {% endfor %}
                     </div>        
         
@@ -60,21 +56,21 @@
                                         clip-rule="evenodd" />
                                 </svg>
                             </span>
-                            Add
+                            Update
                         </button>
                     </div>
                 </form>
                          
-                <!-- Back to Home page -->
+                <!-- Back to Staff List -->
                 <div class="container flex items-center">
-                    <a href="{% url 'index' %}"
-                        class="inline-flex text-sm font-medium mx-auto text-gray-700 mt-8 px-4 py-2 border 
+                    <a href="{% url 'stafflist' %}"
+                        class="inline-flex text-sm font-semibold mx-auto text-gray-700 mt-8 px-4 py-2 border 
                             rounded-md border-gray-300 bg-white hover:bg-gray-50 focus:outline-none 
                             focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
                             <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>
-                            Dashboard
+                            Stafflist
                     </a>
                 </div>
             </div>

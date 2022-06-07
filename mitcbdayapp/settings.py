@@ -153,23 +153,17 @@ CMS_TEMPLATES = [
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-
 # Location of static files
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
 SENDMAIL_STATIC = os.path.join(BASE_DIR, "sendmail/templates/static/")
-
 THEME_STATIC = os.path.join(BASE_DIR, "theme/static/")
-
 STATICFILES_DIRS = [SENDMAIL_STATIC, THEME_STATIC]
 
 
-# Location of static files
-MEDIA_URL = "/media/"
-
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# Location of media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 WSGI_APPLICATION = 'mitcbdayapp.wsgi.application'
