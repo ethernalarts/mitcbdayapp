@@ -14,7 +14,16 @@ class staffDetails(models.Model):
     middle_name = models.CharField(verbose_name='Middle Name', max_length = 20, null = True, blank = True)
     last_name = models.CharField(verbose_name='Last Name', max_length = 20)
     phone_number = PhoneNumberField(verbose_name='Phone Number', null = True, blank = True)
-    email = models.EmailField(verbose_name='Official Email', max_length = 254, help_text = 'Official Email(e.g. j.doe@edostate.gov.ng)')
+    email = models.EmailField(verbose_name='Official Email', max_length = 254)    
+    
+    
+    image = models.ImageField(
+        verbose_name="Staff's Image",
+        upload_to='staffimages', 
+        default='default.jpg', 
+        null=True, 
+        blank=True
+    )
     
     MONTHS = (
         (1, 'January'),

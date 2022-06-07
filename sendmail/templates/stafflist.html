@@ -1,0 +1,104 @@
+{% load static tailwind_tags %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>All Staff</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% tailwind_css %}
+	</head>
+
+    <body class="bg-gray-200 font-sans py-8 px-4">
+        <div class="p-4 max-w-3xl bg-white rounded-lg border mx-auto shadow-md sm:p-8 min-h-full justify-center">
+            <div class="flex justify-between items-center mb-4">
+                <h5 class="text-3xl font-bold leading-none text-gray-900 dark:text-white">Staff List</h5>
+                <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                    View all
+                </a>
+            </div>
+            <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    {% for staff in stafflist %}
+                        <li class="py-3 sm:py-4">
+                            
+                            <!-- Profile Picture -->
+                            <div class="flex items-center space-x-4">
+                                <div class="flex-shrink-0">
+                                    <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg"
+                                        alt="Neil image">
+                                </div>
+                                
+                                <!-- Name and Email -->
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-lg font-medium text-gray-900 truncate dark:text-white">
+                                        {{ staff.first_name }} 
+                                        {% if staff.middle_name %}
+                                            {{ staff.middle_name }}                            
+                                            {% else %}
+                                            <span></span>
+                                        {% endif %} 
+                                        {{ staff.last_name }}
+                                    </p>
+                                    <p class="text-lg text-gray-500 truncate dark:text-gray-400">
+                                        {{ staff.email }}
+                                    </p>
+                                </div>
+                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+
+                                <!-- View Profile Button -->
+                                <a href="{% url 'index' %}">
+                                    <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm 
+                                                                                                text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none 
+                                                                                                focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                        </svg>
+                                        View Profile
+                                    </button>
+                                </a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>   
+
+        <!-- Pagination -->
+        {% block pagination %}
+            {% if is_paginated %}
+                <div class="container font-medium text-gray-500 text-lg flex items-center justify-center mt-8 mb-4 pagination ">
+                    <span class="page-links flex items-center justify-between">
+                        {% if page_obj.has_previous %}
+                            <a class="inline-flex items-center font-medium text-sm px-4 py-2 hover:bg-gray-50 bg-white text-gray-700 rounded-md border border-gray-300" 
+                                href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mx-1 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </a>
+                        {% endif %}
+                        <span class="page-current mx-4">
+                            page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a class="inline-flex items-center font-medium text-sm px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 rounded-md border border-gray-300" 
+                                href="{{ request.path }}?page={{ page_obj.next_page_number }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mx-1 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </body>
+</html>
+
