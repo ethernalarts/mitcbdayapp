@@ -30,7 +30,6 @@ urlpatterns = [
     re_path(r'^staff/(?P<pk>\d+)$', views.staffDetailsView.as_view(), name='staffdetails'),
     re_path(r'^', views.index, name='index'),  
     re_path(r'^delete/(?P<pk>\d+)$', views.bdaycheck, name = 'deletestaff'),
-    re_path(r'^cms/', include('cms.urls')),
     re_path(r"^__reload__/", include("django_browser_reload.urls"))
 ]
 

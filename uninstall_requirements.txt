@@ -1,0 +1,6 @@
+django-mptt==0.13.4
+django-sekizai==3.0.1
+django-treebeard==4.4
+djangocms-attributes-field==2.1.0
+djangocms-installer==2.0.0
+easy-thumbnails==2.8.1

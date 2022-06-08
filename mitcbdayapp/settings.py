@@ -46,7 +46,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'djangocms_admin_style',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,27 +57,10 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
-    'django.contrib.sites',
-    'widget_tweaks',
-    'cms',
-    'menus',
-    'treebeard',
-    'sekizai',
-    'filer',
-    'easy_thumbnails',
-    'mptt',
-    'djangocms_text_ckeditor',
-    'djangocms_link',
-    'djangocms_file',
-    'djangocms_picture',
-    'djangocms_video',
-    'djangocms_googlemap',
-    'djangocms_snippet',
-    'djangocms_style'
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
-    'cms.middleware.utils.ApphookReloadMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -87,37 +69,17 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.language.LanguageCookieMiddleware'
+    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'mitcbdayapp.urls'
-
 TAILWIND_APP_NAME = 'theme'
-
 TAILWIND_CSS_PATH = 'css/dist/styles.css'
-
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
 NPM_BIN_PATH = r"C:/Program Files/nodejs/npm.cmd"
-
-SITE_ID = 1
-
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-
-THUMBNAIL_HIGH_RESOLUTION = True
-
-THUMBNAIL_PROCESSORS = (
-    'easy_thumbnails.processors.colorspace',
-    'easy_thumbnails.processors.autocrop',
-    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
-    'easy_thumbnails.processors.filters'
-)
 
 
 # Template Directories
@@ -132,21 +94,16 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.media',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'sekizai.context_processors.sekizai',
-                'cms.context_processors.cms_settings',
-                'django.template.context_processors.i18n'
+                'django.contrib.messages.context_processors.messages'
             ],
         },
     },
 ]
 
-CMS_TEMPLATES = [
-    ('home.html', 'Home page template'),
-]
 
 
 # Static files (CSS, JavaScript, Images etc)
@@ -163,12 +120,8 @@ STATICFILES_DIRS = [SENDMAIL_STATIC, THEME_STATIC]
 
 # Location of media files
 
-# Base url to serve media files
-MEDIA_URL = '/media/'
-
-# Path where media is stored
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = [ MEDIA_ROOT ]
 
 
@@ -181,7 +134,7 @@ WSGI_APPLICATION = 'mitcbdayapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR,  'db.sqlite3'),
     
     'OPTIONS': {'timeout': 20}    
     }
@@ -211,15 +164,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'en'
-
 LANGUAGES = [
     ('en', 'English')
 ]
-
 TIME_ZONE = 'Africa/Lagos'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
