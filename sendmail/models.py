@@ -12,9 +12,10 @@ class staffDetails(models.Model):
     
     first_name = models.CharField(verbose_name='First Name', max_length = 20)
     middle_name = models.CharField(verbose_name='Middle Name', max_length = 20, null = True, blank = True)
-    last_name = models.CharField(verbose_name='Last Name', max_length = 20)
+    last_name = models.CharField(verbose_name='Last Name', max_length=20)
     phone_number = PhoneNumberField(verbose_name='Phone Number', null = True, blank = True)
     email = models.EmailField(verbose_name='Official Email', max_length = 254)    
+    position = models.CharField(verbose_name='Position', max_length=50, null=True, blank=True)
     
     staffimage = models.ImageField(
         verbose_name="Staff's Image",
@@ -44,6 +45,9 @@ class staffDetails(models.Model):
         choices = MONTHS, 
         default = 1, 
         blank = False)
+    
+    def birth_month_verbose(self):
+        return dict(staffDetails.MONTHS)[self.birth_month]
     
     birth_day = models.IntegerField(verbose_name='Birth Day', blank = True, null = True)
     

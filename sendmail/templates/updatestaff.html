@@ -13,20 +13,23 @@
 		{% tailwind_css %}
 	</head>
 
-	<body class="bg-gray-200 font-sans leading-normal tracking-normal">
+	<body class="bg-gray-300 font-sans">
+
+        <!-- Outer Container -->
         <div class="min-h-full flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-md lg:max-w-lg w-full space-y-px">
+
+            <!-- Inner Container -->
+            <div class="max-w-2xl lg:max-w-lg w-full space-y-px bg-white shadow-md rounded-lg px-10 py-6">
+                
                 <!-- Title -->
                 <div class="w-full">
-                    <!-- <img class="mx-auto h-16 w-auto" src="{% static 'img/mitc-logo-trans.png' %}"
-                        alt="Workflow"> -->
-                    <h2 class="mb-8 text-center text-3xl font-extrabold text-gray-900">
+                    <h2 class="mb-8 text-center text-2xl font-extrabold text-gray-900">
                         Update "<span class="underline underline-offset-2">{{ staff.first_name }} {{ staff.last_name }}</span>"
                     </h2>
                 </div>
                 
                 <!-- Form -->
-                <form class="mt-8 space-y-4" action="" method="POST" enctype="multipart/form-data">
+                <form class="mt-8 space-y-4 max-w-1xl mx-auto" action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="hidden" name="remember" value="true">
 
@@ -35,9 +38,9 @@
                         {% for field in form %}                                
                             <div>
                                 {% if not field %}
-                                    {% render_field field placeholder="nil" class+="lg:text-md font-medium relative block w-full p-3 border border-gray-300text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}                                  
+                                    {% render_field field placeholder="nil" class+="lg:text-md font-medium relative block w-full p-3 border border-gray-300 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}                                  
                                     {% else %}
-                                        {% render_field field class+="lg:text-md font-medium relative block w-full p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}                                  
+                                        {% render_field field class+="lg:text-md font-medium relative block w-full p-3 border bg-gray-100  placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}                                  
                                 {% endif %}
                                 <!-- <p class="font-bold text-gray-700">{{ field.label_tag }}</p> -->                                
                             </div> 
