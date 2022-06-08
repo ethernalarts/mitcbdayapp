@@ -13,93 +13,94 @@
 		{% tailwind_css %}
 	</head>
 
-	<body class="bg-gray-200 font-sans py-8 px-4">
-        <!-- 1st design -->
-        <div class="min-h-full flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-lg w-full">
-                <!-- Title -->
+	<body class="bg-gray-300 font-sans py-8 px-4">
+        
+        <!-- Profile card -->
+        <div class="min-h-full container mx-auto my-auto items-center max-w-lg w-full bg-white rounded-lg 
+                    border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex justify-end px-4 pt-4">
+
+                <!-- Dropdown button -->
+                <button id="dropdownButton" data-dropdown-toggle="dropdown"
+                    class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                    type="button">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z">
+                        </path>
+                    </svg>
+                </button>
+
+                <div id="dropdown" class="hidden z-10 w-44 text-base list-none bg-gray-300 
+                                        rounded divide-y divide-gray-100 shadow dark:bg-gray-700"
+                    data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top"
+                    style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(614px, 3238px);">
+                    <ul class="py-1" aria-labelledby="dropdownButton">
+                        <li>
+                            <a href="{% url 'index' %}"
+                                class="block py-2 px-4 text-sm font-medium text-gray-600 hover:bg-gray-100 
+                                    dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'stafflist' %}"
+                                class="block py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-100 
+                                      dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                Staff list
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center pb-10 space-y-4">
+                <!-- Staff image -->
+                <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="{{ staff.staffimage.url }}" alt="{{ staff.first_name }} image">
+
+                <!-- Name -->
                 <div>
-                    <!-- <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                        {{ staff.last_name }}, 
-                        {{ staff.first_name }}
+                    <h5 class="mb-1 text-2xl font-extrabold text-gray-800 dark:text-white">
+                        {{ staff.first_name }} 
                         {% if staff.middle_name %}
-                            {{ staff.middle_name }}
+                            {{ staff.middle_name }}                            
                             {% else %}
-                            <span></span>
-                        {% endif %} 
-                    </h2> -->
+                                <span></span>
+                        {% endif %}
+                        {{ staff.last_name }}
+                    </h5>
                 </div>
                 
-                <!-- Staff Details -->
-                <section class="-mt-4">
-                    <!-- First Name -->
+                <!-- Position -->
+                <div>
+                    <p class="text-lg font-bold text-gray-500 dark:text-gray-400">Visual Designer</p>
+                </div>
+
+                <!-- Phone Number -->
+                {% if staff.phone_number %}
                     <div>
-                        <p class="font-medium text-gray-500 lg:text-gray-500">First Name</p>
-                        <p class="text-2xl text-gray-700 font-bold">{{ staff.first_name }}</p>
-                        <br>
+                        <p class="text-lg font-bold text-gray-500 dark:text-gray-400">{{ staff.phone_number }}</p>
                     </div>
+                    {% else %}  
+                        <span></span>                     
+                {% endif %}
+                
+                <!-- Email -->
+                <div>
+                    <p class="text-lg font-bold text-gray-500 dark:text-gray-400">{{ staff.email }}</p>
+                </div>
 
-                    <!-- Middle Name -->
-                    <div>
-                        <p class="font-medium text-gray-500 lg:text-gray-500">Middle Name</p>                        
-                        <p class="text-2xl text-gray-700 font-bold">
-                            {% if staff.middle_name %}
-                                {{ staff.middle_name }}                            
-                                {% else %}
-                                Not given
-                            {% endif %}
-                        </p>
-                        <br>
-                    </div>
+                <!-- Birthday -->
+                <div>
+                    <p class="text-lg font-bold text-gray-500 dark:text-gray-400">{{ staff.birth_month }} {{ staff.birth_day }}</p>
+                </div>
+                <br>
 
-                    <!-- Last Name -->
-                    <div>
-                        <p class="font-medium text-gray-500 lg:text-gray-500">Last Name</p>
-                        <p class="text-2xl text-gray-700 font-bold">{{ staff.last_name }}</p>
-                        <br>
-                    </div>
+                <div class="flex mt-4 space-x-3 lg:mt-6">
 
-                    <!-- Phone Number -->
-                    <div>
-                        <p class="font-medium text-gray-500 lg:text-gray-500">Phone Number</p>
-                        <p class="text-2xl text-gray-700 font-bold">{{ staff.phone_number }}</p>
-                        <br>
-                    </div>
-
-                    <!-- Email -->
-                    <div>
-                        <p class="font-medium text-gray-500 lg:text-gray-500">Email</p>
-                        <p class="text-2xl text-gray-700 font-bold">{{ staff.email }}</p>
-                        <br>
-                    </div>
-
-                    <!-- Birthday -->
-                    <div>
-                        <p class="font-medium text-gray-500 lg:text-gray-500">Birthday</p>
-                        <p class="text-2xl text-gray-700 font-bold">{{ staff.birth_month }} {{ staff.birth_day }}</p>
-                        <br>
-                    </div>
-                </section>
-                        
-                <!-- Buttons -->
-                <div class="mt-4 -mb-4 mx-auto flex float-right">
-
-                    <!-- Back to Index -->
-                    <a  href="{% url 'stafflist' %}">
-                        <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm 
-                                                text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none 
-                                                focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                            </svg>
-                            Stafflist
-                        </button>
-                    </a>
-
-                    <!-- Update -->
+                    <!-- Update button -->
                     <a href="{% url 'updatestaff' staff.id %}">
-                        <button type="button" class="inline-flex items-center mx-4 px-4 py-2 border border-green-500 rounded-md shadow-sm 
-                                                text-sm font-medium text-white bg-green-600 hover:border-green-500 hover:bg-green-500 
+                        <button type="button" class="inline-flex items-center mr-1 ml-1 px-4 py-2 border border-green-500 rounded-md shadow-sm 
+                                                text-md font-medium text-white bg-green-600 hover:border-green-500 hover:bg-green-500 
                                                 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300">
                             <svg class="-ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
@@ -110,8 +111,8 @@
 
                     <!-- Remove -->
                     <a>
-                        <button type="button" class="inline-flex items-center px-4 py-2 border border-red-600 rounded-md shadow-sm 
-                                                text-sm font-medium text-white bg-red-600 hover:border-red-500 hover:bg-red-500 
+                        <button type="button" class="inline-flex items-center ml-1 px-4 py-2 border border-red-600 rounded-md shadow-sm 
+                                                text-md font-medium text-white bg-red-600 hover:border-red-500 hover:bg-red-500 
                                                 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-300">
                             <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                 stroke-width="2">
@@ -123,6 +124,6 @@
                     </a>
                 </div>
             </div>
-        </div>       
-	</body>
+        </div>           
+	</body>   
 </html>

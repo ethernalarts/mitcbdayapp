@@ -16,7 +16,7 @@ class staffDetails(models.Model):
     phone_number = PhoneNumberField(verbose_name='Phone Number', null = True, blank = True)
     email = models.EmailField(verbose_name='Official Email', max_length = 254)    
     
-    image = models.ImageField(
+    staffimage = models.ImageField(
         verbose_name="Staff's Image",
         upload_to='staffimages', 
         default='staffimages/default.jpg', 

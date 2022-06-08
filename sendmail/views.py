@@ -118,6 +118,7 @@ def index(request):
 
 
 
+# Staff List View
 class staffListView(ListView):
     model = staffDetails
     context_object_name = 'stafflist'   # your own name for the list as a template variable
@@ -132,17 +133,20 @@ class staffListView(ListView):
         context = super(staffListView, self).get_context_data(**kwargs)
         
         # Create any data and add it to the context
-        context['title'] = 'List of Staff'
+        context['title'] = 'List of all Staff'
         return context
     
 
 
 # Staff Detail View
 class staffDetailsView(DetailView):
-    model = staffDetails
+    # model = staffDetails
     context_object_name = 'staff'  # your own name for the list as a template variable
     template_name = 'staffdetails.html'
            
+    def get_queryset(self):        
+        return staffDetails.objects.all().distinct()
+    
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
         context = super(staffDetailsView, self).get_context_data(**kwargs)
@@ -158,7 +162,7 @@ class staffDetailsCreate(CreateView):
     model = staffDetails
     fields = [
         'first_name', 'middle_name', 'last_name', 'phone_number', 'email',
-        'image', 'birth_month', 'birth_day'
+        'staffimage', 'birth_month', 'birth_day'
     ]
     template_name = 'addstaff.html'
     
@@ -170,7 +174,7 @@ class staffDetailsUpdate(UpdateView):
     context_object_name = 'staff'
     fields = [
         'first_name', 'middle_name', 'last_name', 'phone_number', 'email', 
-        'image', 'birth_month', 'birth_day'
+        'staffimage', 'birth_month', 'birth_day'
     ]   
     template_name = 'updatestaff.html'
     

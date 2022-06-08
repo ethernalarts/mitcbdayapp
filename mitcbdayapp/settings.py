@@ -18,6 +18,14 @@ env = environ.Env()
 environ.Env.read_env()
 
 
+# Set the project base directory
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = env('EMAIL_PORT')
@@ -27,8 +35,8 @@ ADMIN_EMAIL = env('ADMIN_EMAIL')
 EMAIL_USE_TLS = True
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Set the project base directory
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -113,6 +121,8 @@ TEMPLATES = [
 # Location of static files
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 SENDMAIL_STATIC = os.path.join(BASE_DIR, "sendmail/templates/static/")
 THEME_STATIC = os.path.join(BASE_DIR, "theme/static/")
 STATICFILES_DIRS = [SENDMAIL_STATIC, THEME_STATIC]
@@ -120,8 +130,6 @@ STATICFILES_DIRS = [SENDMAIL_STATIC, THEME_STATIC]
 
 # Location of media files
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = [ MEDIA_ROOT ]
 
 
