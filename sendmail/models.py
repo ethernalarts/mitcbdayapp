@@ -1,4 +1,5 @@
 
+from email.policy import default
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from datetime import date
@@ -10,15 +11,20 @@ from django.urls import reverse  # To generate URLS by reversing URL patterns
 class staffDetails(models.Model):
     """ Staff Details """
     
-    first_name = models.CharField(verbose_name='First Name', max_length = 20)
-    middle_name = models.CharField(verbose_name='Middle Name', max_length = 20, null = True, blank = True)
+    first_name = models.CharField(verbose_name='First Name', max_length=20)
+    
+    middle_name = models.CharField(verbose_name='Middle Name', max_length=20, null=True, blank=True)
+    
     last_name = models.CharField(verbose_name='Last Name', max_length=20)
-    phone_number = PhoneNumberField(verbose_name='Phone Number', null = True, blank = True)
-    email = models.EmailField(verbose_name='Official Email', max_length = 254)    
+    
+    phone_number = PhoneNumberField(verbose_name='Phone Number', default='0801 234 5678')
+    
+    email = models.EmailField(verbose_name='Official Email', max_length = 254)   
+     
     position = models.CharField(verbose_name='Position', max_length=50, null=True, blank=True)
     
     staffimage = models.ImageField(
-        verbose_name="Staff's Image",
+        verbose_name="Profile Picture",
         upload_to='staffimages', 
         default='staffimages/default.jpg', 
         null=True, 
@@ -46,13 +52,20 @@ class staffDetails(models.Model):
         default = 1, 
         blank = False)
     
+    birth_day = models.IntegerField(verbose_name='Birth Day', blank=True, null=True)
+    
+    
+    class Meta:
+        db_table = 'sendmail_staffdetails'
+    
+    
     def birth_month_verbose(self):
         return dict(staffDetails.MONTHS)[self.birth_month]
     
-    birth_day = models.IntegerField(verbose_name='Birth Day', blank = True, null = True)
+        
+    def phone_number_default(self):
+        return staffDetails._meta.get_field('phone_number').get_default()
     
-    class Meta:        
-        db_table = 'sendmail_staffdetails'
         
     @property
     def BIRTHDAY_TODAY(self):
@@ -60,10 +73,12 @@ class staffDetails(models.Model):
             return True
         return False
     
+    
     # Staff Details Reverse URL
     def get_absolute_url(self):
         """Returns the url to access a particular staff instance."""
         return reverse('staffdetails', args=[str(self.id)])
+    
     
     # Update Staff Reverse URL
     def get_absolute_url_update_staff(self):

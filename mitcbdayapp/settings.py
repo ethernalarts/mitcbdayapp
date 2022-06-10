@@ -35,10 +35,6 @@ ADMIN_EMAIL = env('ADMIN_EMAIL')
 EMAIL_USE_TLS = True
 
 
-# Set the project base directory
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -113,7 +109,6 @@ TEMPLATES = [
 ]
 
 
-
 # Static files (CSS, JavaScript, Images etc)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
@@ -121,16 +116,17 @@ TEMPLATES = [
 # Location of static files
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-SENDMAIL_STATIC = os.path.join(BASE_DIR, "sendmail/templates/static/")
-THEME_STATIC = os.path.join(BASE_DIR, "theme/static/")
-STATICFILES_DIRS = [SENDMAIL_STATIC, THEME_STATIC]
 
 
 # Location of media files
-
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = [ MEDIA_ROOT ]
+
+
+SENDMAIL_STATIC = os.path.join(BASE_DIR, "sendmail/templates/static/")
+THEME_STATIC = os.path.join(BASE_DIR, "theme/static/")
+STATICFILES_DIRS = [SENDMAIL_STATIC, THEME_STATIC]
 
 
 WSGI_APPLICATION = 'mitcbdayapp.wsgi.application'
@@ -189,4 +185,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Phone Number 
 PHONENUMBER_DB_FORMAT = 'E164'
 PHONENUMBER_DEFAULT_REGION = 'NG'
-PHONENUMBER_DEFAULT_FORMAT = 'NATIONAL'
+PHONENUMBER_DEFAULT_FORMAT = 'E164'

@@ -140,7 +140,6 @@ class staffListView(ListView):
 
 # Staff Detail View
 class staffDetailsView(DetailView):
-    # model = staffDetails
     context_object_name = 'staff'  # your own name for the list as a template variable
     template_name = 'staffdetails.html'
            
@@ -153,6 +152,7 @@ class staffDetailsView(DetailView):
         
         # Create any data and add it to the context
         context['title'] = "Staff's Details"
+    
         return context
     
 
