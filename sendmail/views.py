@@ -5,6 +5,7 @@ from django.core import mail
 from django.http import HttpResponse
 from django.shortcuts import render
 from mitcbdayapp import settings
+from django.db.models import Q
 from sendmail.models import staffDetails
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
@@ -183,6 +184,30 @@ class staffDetailsUpdate(UpdateView):
 # Delete Staff View
 class staffDetailsDelete(DeleteView):
     model = staffDetails
-    #permission_required: 'catalog.can_renew'
     template_name = 'removestaff.html'
     success_url = reverse_lazy('books')
+    
+
+# Search
+class SearchResultView(ListView):
+    model = staffDetails
+    template_name = 'searchresult.html'
+    context_object_name = 'searchresult'
+    paginate_by = 5
+    
+    def get_queryset(self): 
+        query = self.request.GET.get("q")
+        
+        object_list = staffDetails.objects.filter(
+            Q(first_name__icontains=query) | Q(middle_name__icontains=query) | Q(last_name__icontains=query)
+        )
+        return object_list
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(SearchResultView, self).get_context_data(**kwargs)
+        
+        # Create any data and add it to the context
+        context['title'] = 'Search Results'
+        context['query'] = self.request.GET.get("q")
+        return context

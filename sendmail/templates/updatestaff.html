@@ -38,24 +38,40 @@
                         {% for field in form %}                                
                             <div>
                                 <p class="font-bold text-gray-600">{{ field.label }}</p> 
-                                {% render_field field class+="text-md lg:text-md font-medium relative block rounded-md w-full p-3 border bg-gray-100  placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}                                                                                              
+                                {% render_field field class+="text-md lg:text-md font-medium relative block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}
                             </div> 
                         {% endfor %}
-                    </div>        
+                    </div>   
         
-                    <!-- Submit Button -->
-                    <div class="mt-8">
-                        <button type="submit"
-                            class="group relative w-full flex justify-center mt-8 py-3 px-4 border border-transparent 
-                                text-md font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-600 focus:outline-none 
-                                focus:ring-2 focus:ring-indigo-500">
+                    <!-- Update Cancel Buttons -->
+                    <div class="flex items-center w-full space-x-4">
+
+                        <!-- Update Cancel -->
+                        <button type="submit" class="group relative w-full flex-auto py-3 px-4 border border-transparent 
+                                                    text-md font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-600 focus:outline-none 
+                                                    focus:ring-4 focus:ring-indigo-500 mt-6">
                             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                                <!-- Heroicon name: solid/lock-closed -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                  </svg>
+                                    <path
+                                        d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                </svg>
                             </span>
                             Update
+                        </button>
+
+                        <!-- Cancel Button -->
+                        <button type="button" onclick="history.back()"
+                                            class="w-full flex-auto mt-6 relative py-3 px-4 border border-red-700 text-md font-medium hover:border-red-600
+                                                    rounded-md text-white bg-red-700 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-500">
+                            <a href="{{ request.META.HTTP_REFERER }}">
+                                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                                    </svg>
+                                </span>
+                                Cancel
+                            </a>
                         </button>
                     </div>
                 </form>
@@ -65,7 +81,7 @@
 
                     <!-- Dashboard -->
                     <a href="{% url 'index' %}"
-                        class="inline-flex text-sm font-semibold text-gray-700 mt-8 mb-4 mr-1 px-4 py-2 border 
+                        class="inline-flex text-sm font-semibold text-gray-700 mt-6 mb-4 mr-1 px-4 py-2 border 
                             rounded-md border-gray-300 bg-white hover:bg-gray-50 focus:outline-none 
                             focus:ring-2 focus:ring-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -77,7 +93,7 @@
 
                     <!-- Staff List -->
                     <a href="{% url 'stafflist' %}"
-                        class="inline-flex text-sm font-semibold text-gray-700 mt-8 mb-4 ml-1 px-4 py-2 border 
+                        class="inline-flex text-sm font-semibold text-gray-700 mt-6 mb-4 ml-1 px-4 py-2 border 
                             rounded-md border-gray-300 bg-white hover:bg-gray-50 focus:outline-none 
                             focus:ring-2 focus:ring-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"

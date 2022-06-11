@@ -17,7 +17,7 @@ class staffDetails(models.Model):
     
     last_name = models.CharField(verbose_name='Last Name', max_length=20)
     
-    phone_number = PhoneNumberField(verbose_name='Phone Number', default='0801 234 5678')
+    phone_number = PhoneNumberField(verbose_name='Phone Number', default='')
     
     email = models.EmailField(verbose_name='Official Email', max_length = 254)   
      
