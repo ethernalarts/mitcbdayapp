@@ -1,63 +1,42 @@
-{% load static tailwind_tags %}
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-    <title>Django Tailwind</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		{% tailwind_css %}
-	</head>
-
-	<body class="bg-gray-50 font-sans">
-		<div class="container mx-auto">
-			<!-- Edit -->
-			<section class="flex items-center justify-center h-screen" role="group">
-				<!-- <h1 class="text-5xl">Django + Tailwind = ❤️</h1><br> -->
-				
-				<!-- Add a Staff -->
-				<a href="{% url 'addstaff' %}">
-					<button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm 
-											text-lg font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none 
-											focus:ring-4 focus:ring-gray-300">
-						<!-- Heroicon name: solid/pencil -->
-						<svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+{% block content %}
+	<!-- Body Container -->
+	<div class="container">
+	
+		<!-- Search bar -->
+		<div class="max-w-3xl rounded-lg mx-auto">
+	
+			<!-- Search form -->
+			<form action="{% url 'searchresult' %}" class="-mt-32 min-h-screen flex items-center" method="GET">
+	
+				<!-- Input -->
+				<div class="relative w-full">
+					<input type="text" id="simple-search" name="q" 
+								class="bg-white block font-medium border border-4 border-blue-600 text-gray-900 text-lg rounded-lg 
+										focus:ring-blue-500 focus:border-blue-600 block w-full p-4 md:p-6  
+										focus:ring-0 focus:outline-none focus:ring-blue-500
+										dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+										dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for a staff..."
+						required>
+				</div>
+	
+				<!-- Submit Query -->
+				<button type="submit" class="px-8 p-4 md:py-6 ml-2 text-lg font-bold text-white bg-blue-700 rounded-lg border
+											border-0 border-blue-700 hover:border-blue-800 hover:bg-blue-800 focus:ring-0 
+											focus:outline-none focus:ring-blue-300 
+											dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+					<span class="inline-flex items-center">
+						<svg class="w-7 h-7 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+							xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
 						</svg>
-							Add a Staff						
-					</button>				
-				</a>
-
-				<!-- Update -->
-				<a href="{% url 'stafflist' %}">
-					<button type="button" class="inline-flex items-center mx-4 px-4 py-2 border border-green-600 rounded-md shadow-sm 
-											text-lg font-medium text-white bg-green-600 hover:border-green-500 hover:bg-green-500 
-											focus:outline-none focus:ring-4 focus:ring-green-400">
-						<svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-							stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round"
-								d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-						</svg>
-						View All Staff
-					</button>
-				</a>
-				
-				<!-- Check for Birthday -->				
-				<a href="{% url 'birthday' %}" target="_blank">
-					<button type="button" class="inline-flex items-center px-4 py-2 border border-indigo-700 rounded-md shadow-sm 
-											text-lg font-medium text-white bg-indigo-700 hover:border-indigo-600 hover:bg-indigo-600 
-											focus:outline-none focus:ring-4 focus:ring-indigo-400">
-						<svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 text-white h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-							stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round"
-								d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
-						</svg>						
-						Check for Birthdays					
-					</button>
-				</a>
-			</section>
+					</span>
+				</button>
+			</form>
 		</div>
-	</body>
-</html>
+
+	</div>		
+{% endblock %}

@@ -153,6 +153,7 @@ class staffDetailsView(DetailView):
         
         # Create any data and add it to the context
         context['title'] = "Staff's Details"
+        context['phone_number_default'] = staffDetails._meta.get_field('phone_number').get_default()
     
         return context
     

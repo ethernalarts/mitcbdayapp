@@ -1,146 +1,124 @@
-{% load static tailwind_tags %}
+{% extends "base.html" %}
 {% load widget_tweaks %}
 {% load static %}
 
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-    <title>{{ title }}</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		{% tailwind_css %}
-	</head>
-
-    <body class="bg-gray-200 font-sans py-8 px-4">
-        
-        <!-- Search bar -->
-        <div class="max-w-3xl rounded-lg mx-auto mb-8">
-            
-            <!-- Search form -->
-            <form action="{% url 'searchresult' %}" class="flex items-center" method="GET">
-
-                <div class="relative w-full">
-
-                    <!-- Input -->
-                    <input type="text" id="simple-search" name="q"
-                        class="bg-white block font-medium border border-none text-gray-900 text-lg rounded-md 
-                                focus:ring-blue-500 focus:border-blue-500 block w-full p-4  
-                                focus:ring-2 focus:outline-none focus:ring-blue-500
-                                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-                                dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                        placeholder="Search for a staff..." required >
-                </div>
-
-                    <!-- Submit Query -->
-                    <button type="submit" 
-                                class="px-8 py-4 ml-2 text-md font-medium text-white bg-blue-700 rounded-md border
-                                    border-2 border-blue-700 hover:border-blue-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
-                                    dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </button>                   
-            </form>
-        </div>
-
-
-        <!-- Staff list -->
-        <div class="p-4 max-w-3xl bg-white rounded-lg border mx-auto shadow-md sm:p-10 min-h-full justify-center">
-            <div class="flex justify-between items-center mb-4">
-                <h5 class="text-3xl font-bold leading-none text-gray-900 dark:text-white">Staff List</h5>
-                
-                <!-- Return to Dashboard link -->
-                <a href="{% url 'index' %}"  class="hover:underline hover:underline-offset-2 mr-2">
-                    <span class="inline-flex items-center text-md font-bold text-indigo-600 hover:underline hover:underline-offset-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-6 w-6 hover:underline hover:underline-offset-2" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-                        </svg>
-                        Dashboard
-                    </span>
-                </a>
+{% block content %}
+    <!-- Search bar -->
+    <div class="max-w-3xl rounded-lg mx-auto mt-8 mb-8">
+    
+        <!-- Search form -->
+        <form action="{% url 'searchresult' %}" class="flex items-center" method="GET">
+    
+            <div class="relative w-full">
+    
+                <!-- Input -->
+                <input type="text" id="simple-search" name="q" 
+                class="bg-white block font-medium border border-none text-gray-900 text-lg rounded-md 
+                focus:border-blue-500 block w-full p-4  
+                focus:ring-2 focus:outline-none focus:ring-blue-500
+                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Search for a staff..." required>
             </div>
-            <div class="flow-root">
-                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                    {% for staff in stafflist %}
-                        <li class="py-3 sm:py-4">
-                            
-                            <!-- Profile Picture -->
-                            <div class="flex items-center space-x-4">
-                                <div class="flex-shrink-0">
-                                    <img class="w-14 h-14 rounded-full" src="{{ staff.staffimage.url }}"
-                                        alt="{{ staff.first_name }}'s' image">
-                                </div>
-                                
-                                <!-- Name and Email -->
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-lg font-medium text-gray-900 truncate dark:text-white">
-                                        {{ staff.first_name }} 
-                                        {% if staff.middle_name %}
-                                            {{ staff.middle_name }}                            
-                                            {% else %}
+    
+            <!-- Submit Query -->
+            <button type="submit" class="px-8 py-4 ml-2 text-md font-medium text-white bg-blue-700 rounded-md border
+                                            border-4 border-blue-700 hover:border-blue-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
+                                            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </button>
+        </form>
+    </div>
+    
+    
+    <!-- Staff list -->
+    <div class="p-6 lg:p-8 lg:pb-4 max-w-3xl bg-white rounded-lg border mx-auto shadow-md sm:p-10 min-h-full justify-center">
+        <div class="flex justify-between items-center mb-4">
+            <h5 class="text-3xl font-bold leading-none text-gray-900 dark:text-white">Staff List</h5>    
+        </div>
+        
+        <div class="flow-root">
+            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                {% for staff in stafflist %}
+                    <li class="py-3 sm:py-4">
+        
+                        <!-- Profile Picture -->
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <img class="w-14 h-14 rounded-full" src="{{ staff.staffimage.url }}"
+                                    alt="{{ staff.first_name }}'s' image">
+                            </div>
+        
+                            <!-- Name and Email -->
+                            <div class="flex-1 min-w-0">
+                                <p class="text-lg font-medium text-gray-900 truncate dark:text-white">
+                                    {{ staff.first_name }}
+                                    {% if staff.middle_name %}
+                                        {{ staff.middle_name }}
+                                        {% else %}
                                             <span></span>
-                                        {% endif %} 
-                                        {{ staff.last_name }}
-                                    </p>
-                                    <p class="text-lg text-gray-500 truncate dark:text-gray-400">
-                                        {{ staff.email }}
-                                    </p>
-                                </div>
-                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-
+                                    {% endif %}
+                                    {{ staff.last_name }}
+                                </p>
+                                <p class="text-lg text-gray-500 truncate dark:text-gray-400">
+                                    {{ staff.email }}
+                                </p>
+                            </div>
+                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+        
                                 <!-- View Profile Button -->
                                 <a href="{% url 'staffdetails' staff.id %}">
                                     <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm 
-                                                                text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none 
-                                                                focus:ring-2 focus:ring-gray-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24"
-                                            stroke="currentColor" stroke-width="2">
+                                                                            text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none 
+                                                                            focus:ring-2 focus:ring-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="currentColor"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                         </svg>
                                         View Profile
                                     </button>
                                 </a>
-                                </div>
                             </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>   
-
-        <!-- Pagination -->
-        {% block pagination %}
-            {% if is_paginated %}
-                <div class="container font-medium text-gray-500 text-md flex items-center justify-center mt-8 pagination ">
-                    <span class="page-links flex items-center justify-between">
-                        {% if page_obj.has_previous %}
-                            <a class="inline-flex items-center font-medium text-sm px-4 py-2 hover:bg-gray-50 
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Pagination -->
+    {% block pagination %}
+        {% if is_paginated %}
+            <div class="container font-medium text-gray-500 text-md flex items-center justify-center mb-28  mt-8 md:mb-28 pagination ">
+                <span class="page-links flex items-center justify-between">
+                    {% if page_obj.has_previous %}
+                        <a class="inline-flex items-center font-medium text-sm px-4 py-2 hover:bg-gray-50 
                                     bg-white text-gray-700 rounded-md border border-gray-300 focus:outline-none 
-                                    focus:ring-2 focus:ring-gray-400" 
-                                href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
-                                Previous
-                            </a>
-                        {% endif %}
-                        <span class="page-current mx-4">
-                            page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-                        </span>
-                        {% if page_obj.has_next %}
-                            <a class="inline-flex items-center font-medium text-sm px-4 py-2 bg-white hover:bg-gray-50 
-                                    text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50 focus:outline-none 
-                                    focus:ring-2 focus:ring-gray-400" 
-                                href="{{ request.path }}?page={{ page_obj.next_page_number }}">
-                                Next
-                            </a>
-                        {% endif %}
+                                    focus:ring-2 focus:ring-gray-400"
+                            href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
+                            Previous
+                        </a>
+                    {% endif %}
+                    <span class="page-current mx-4">
+                        page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                     </span>
-                </div>
-            {% endif %}
-        {% endblock %}
-    </body>
-</html>
+                    {% if page_obj.has_next %}
+                        <a class="inline-flex items-center font-medium text-sm px-4 py-2 bg-white hover:bg-gray-50 
+                                    text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50 focus:outline-none 
+                                    ocus:ring-2 focus:ring-gray-400"
+                            href="{{ request.path }}?page={{ page_obj.next_page_number }}">
+                            Next
+                        </a>
+                    {% endif %}
+                </span>
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}
 
