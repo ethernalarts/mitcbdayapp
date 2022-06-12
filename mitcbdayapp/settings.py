@@ -61,7 +61,8 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
-    'widget_tweaks'
+    'widget_tweaks',
+    'active_link'
 ]
 
 MIDDLEWARE = [

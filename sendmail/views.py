@@ -115,7 +115,8 @@ def sendmail(request, celebrants):
 
 # Index View
 def index(request):
-    return render (request, 'index.html')
+    context = {'title': 'Homepage'}
+    return render (request, 'index.html', context)
 
 
 
@@ -195,20 +196,27 @@ class SearchResultView(ListView):
     template_name = 'searchresult.html'
     context_object_name = 'searchresult'
     paginate_by = 5
+    ordering = ['id']
     
     def get_queryset(self): 
         query = self.request.GET.get("q")
         
-        object_list = staffDetails.objects.filter(
-            Q(first_name__icontains=query) | Q(middle_name__icontains=query) | Q(last_name__icontains=query)
-        )
-        return object_list
+        if query:
+            object_list = staffDetails.objects.filter(
+                Q(first_name__icontains=query) | Q(middle_name__icontains=query) | Q(last_name__icontains=query)
+            )            
+            return object_list.all()
     
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
         context = super(SearchResultView, self).get_context_data(**kwargs)
         
+        #paginator setup start
+        #paginator = Paginator(queryset,3)
+        
         # Create any data and add it to the context
         context['title'] = 'Search Results'
         context['query'] = self.request.GET.get("q")
+        context['count_query'] = self.get_queryset().count()
+        
         return context

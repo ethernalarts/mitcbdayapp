@@ -1,69 +1,24 @@
 {% extends "base.html" %}
 {% load static tailwind_tags %}
-{% load static %}
 {% load widget_tweaks %}
+{% load static %}
 
-<title>
-    {{ staff.first_name }}'s Profile
-</title>
+{% block title %}
+    <title>
+        {{ staff.first_name }}'s Profile
+    </title>
+{% endblock %}
 
 {% block content %}
-    <!-- Search bar -->
-    <div class="max-w-3xl rounded-lg mx-auto mt-8 mb-8">
-
-        <!-- Search form -->
-        <form action="{% url 'searchresult' %}" class="flex items-center" method="GET">
-
-            <div class="relative w-full">
-
-                <!-- Input -->
-                <input type="text" id="simple-search" name="q" class="bg-white block font-medium border border-none text-gray-900 text-lg rounded-md 
-                                        focus:border-blue-500 block w-full p-4  
-                                        focus:ring-2 focus:outline-none focus:ring-blue-500
-                                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-                                        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search for a staff..." required>
-            </div>
-
-            <!-- Submit Query -->
-            <button type="submit" class="px-8 py-4 ml-2 text-md font-medium text-white bg-blue-700 rounded-md border
-                                            border-2 border-blue-700 hover:border-blue-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
-                                            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-            </button>
-        </form>
-    </div>
-
     <!-- Profile card -->
-    <div class="min-h-full container mt-8 mb-28 md:mt-8 md:mb-32 mx-auto items-center max-w-lg w-full bg-white rounded-lg 
-                        border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-    
-        <!-- Back Arrow and Dropdown container -->
-        <div class="flex justify-end px-4 pt-4">
-            <!-- Back Arrow -->
-            <div class="flex-auto justify-start ">
-                <button type="button" onclick="history.back()" class="hover:bg-gray-100 rounded-lg focus:outline-none focus:ring-4 
-                                    focus:outline-none focus:ring-gray-200 z-10 p-2">
-                    <span
-                        class="inline-flex items-center float-left text-md font-bold text-gray-600 hover:underline hover:underline-offset-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                        </svg>
-                    </span>
-                </button>
-            </div>           
-        </div>
+    <div class="min-h-full container mt-8 mb-12 md:mt-8 md:mb-12 mx-auto items-center max-w-lg w-full bg-white rounded-lg 
+                        border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">       
     
         <!-- Staff Details -->
         <div class="flex flex-col items-center pb-10 sm:mt-3 space-y-4">
     
             <!-- Profile Picture -->
-            <img class="-mt-2 md:-mt-4 mb-3 w-32 h-32 rounded-full shadow-lg" src="{{ staff.staffimage.url }}"
+            <img class="md:mt-5 mt-8 mb-3 w-32 h-32 rounded-full shadow-lg" src="{{ staff.staffimage.url }}"
                 alt="{{ staff.first_name }} {{ staff.last_name }} image">
     
             <!-- Name -->
@@ -170,4 +125,33 @@
         </div>
     </div>
 
+    <!-- Search bar -->
+    <div class="max-w-3xl rounded-lg mx-auto mb-12">
+
+        <!-- Search form -->
+        <form action="{% url 'searchresult' %}" class="flex items-center" method="GET">
+
+            <div class="relative w-full">
+
+                <!-- Input -->
+                <input type="text" id="simple-search" name="q" class="bg-white block font-medium border border-none text-gray-900 text-lg rounded-md 
+                                        focus:border-blue-500 block w-full p-4  
+                                        focus:ring-2 focus:outline-none focus:ring-blue-500
+                                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                                        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Search for a staff..." required>
+            </div>
+
+            <!-- Submit Query -->
+            <button type="submit" class="px-8 py-4 ml-2 text-md font-medium text-white bg-blue-700 rounded-md border
+                                            border-2 border-blue-700 hover:border-blue-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
+                                            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </button>
+        </form>
+    </div>
 {% endblock %}

@@ -1,111 +1,98 @@
-{% load static tailwind_tags %}
+{% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
-
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-    <title>Update Staff</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		{% tailwind_css %}
-	</head>
-
-	<body class="bg-gray-300 font-sans">
-
-        <!-- Outer Container -->
-        <div class="min-h-full flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
-
-            <!-- Inner Container -->
-            <div class="max-w-2xl lg:max-w-lg w-full space-y-px bg-white shadow-md rounded-lg px-10 py-6">
-
-                <!-- Title -->
-                <div class="w-full">
-                    <h2 class="mb-8 text-center text-2xl font-extrabold text-gray-900">
-                        Update "<span class="underline underline-offset-2">{{ staff.first_name }} {{ staff.last_name }}</span>"
-                    </h2>
-                </div>
-                
-                <!-- Form -->
-                <form class="mt-8 space-y-4 max-w-1xl mx-auto" action="" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="hidden" name="remember" value="true">
-
-                    <!-- Form fields -->
-                    <div class="space-y-4">                        
-                        {% for field in form %}                                
-                            <div>
-                                <p class="font-bold text-gray-500">{{ field.label }}</p> 
-                                {% render_field field class+="text-md lg:text-md font-medium relative block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}
-                            </div> 
-                        {% endfor %}
-                    </div>   
-        
-                    <!-- Update / Cancel Buttons -->
-                    <div class="flex items-center w-full space-x-4">
-
-                        <!-- Update Cancel -->
-                        <button type="submit" class="group relative w-full flex-auto py-3 px-4 border border-transparent 
-                                                    text-md font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-600 focus:outline-none 
-                                                    focus:ring-4 focus:ring-indigo-500 mt-6">
-                            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                                    <path
-                                        d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                </svg>
-                            </span>
-                            Update
-                        </button>
-
-                        <!-- Cancel Button -->
-                        <button type="button" onclick="history.back()"
-                                            class="w-full flex-auto mt-6 relative py-3 px-4 border border-red-700 text-md font-medium hover:border-red-600
-                                                    rounded-md text-white bg-red-700 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-500">
-                            <a href="{{ request.META.HTTP_REFERER }}">
-                                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                                    </svg> -->
-                                </span>
-                                Cancel
-                            </a>
-                        </button>
-                    </div>
-                </form>
-                         
-                <!-- Back to Staff List -->
-                <div class="container inline-flex items-center justify-center">
-
-                    <!-- Dashboard -->
-                    <a href="{% url 'index' %}">                        
-                        <button type="button" class="inline-flex text-sm font-semibold text-gray-700 mt-6 mb-4 px-4 py-2 border 
-                                                    border-2 rounded-l-lg border-gray-300 bg-white hover:bg-gray-50 focus:outline-none 
-                                                    focus:ring-0 focus:ring-gray-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path
-                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                            </svg>
-                            Dashboard
-                        </button>
-                    </a>
-
-                    <!-- Staff List -->
-                    <a href="{% url 'stafflist' %}">                            
-                        <button type="button" class="inline-flex text-sm font-semibold text-gray-700 mt-6 mb-4 px-4 py-2 border 
-                                                    border-2 border-l-0 rounded-r-lg border-gray-300 bg-white hover:bg-gray-50 focus:outline-none 
-                                                    focus:ring-0 focus:ring-gray-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                            </svg>
-                            Stafflist
-                        </button>
-                    </a>
-                </div>
+{% block content %}
+    <!-- Outer Container -->
+    <div class="min-h-full flex items-center justify-center mb-8 py-8 sm:px-6 lg:px-8">
+    
+        <!-- Inner Container -->
+        <div class="max-w-2xl lg:max-w-lg w-full space-y-px bg-white shadow-md rounded-lg px-10 pb-10 py-6">
+    
+            <!-- Title -->
+            <div class="w-full">
+                <h2 class="mb-8 text-center text-2xl font-extrabold text-gray-900">
+                    Update "<span class="underline underline-offset-2">{{ staff.first_name }}'s</span>" Details
+                </h2>
             </div>
+    
+            <!-- Form -->
+            <form class="mt-8 space-y-4 max-w-1xl mx-auto" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="remember" value="true">
+    
+                <!-- Form fields -->
+                <div class="space-y-4">
+                    {% for field in form %}
+                        <div>
+                            <p class="font-bold text-gray-500">{{ field.label }}</p>
+                            {% render_field field class+="text-md lg:text-md font-medium relative block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}
+                        </div>
+                    {% endfor %}
+                </div>
+    
+                <!-- Update / Cancel Buttons -->
+                <div class="flex items-center w-full space-x-4">
+    
+                    <!-- Update Cancel -->
+                    <button type="submit" class="group relative w-full flex-auto py-3 px-4 border border-transparent 
+                                                        text-md font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-600 focus:outline-none 
+                                                        focus:ring-4 focus:ring-indigo-500 mt-6">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                            </svg>
+                        </span>
+                        Update
+                    </button>
+    
+                    <!-- Cancel Button -->
+                    <button type="button" 
+                                class="w-full flex-auto mt-6 relative py-3 px-4 border border-red-700 text-md font-medium hover:border-red-600
+                                        rounded-md text-white bg-red-700 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-500">
+                        <a href="{% url 'staffdetails' staff.id %}">
+                            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                                        </svg> -->
+                            </span>
+                            Back to Profile
+                        </a>
+                    </button>
+                </div>
+            </form>
         </div>
-	</body>
-</html>
+    </div>
+
+    <!-- Search bar -->
+    <div class="max-w-3xl rounded-lg mx-auto mb-12">
+
+        <!-- Search form -->
+        <form action="{% url 'searchresult' %}" class="flex items-center" method="GET">
+
+            <div class="relative w-full">
+
+                <!-- Input -->
+                <input type="text" id="simple-search" name="q" class="bg-white block font-medium border border-none text-gray-900 text-lg rounded-md 
+                                        focus:border-blue-500 block w-full p-4  
+                                        focus:ring-2 focus:outline-none focus:ring-blue-500
+                                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+                                        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Search for a staff..." required>
+            </div>
+
+            <!-- Submit Query -->
+            <button type="submit" class="px-8 py-4 ml-2 text-md font-medium text-white bg-blue-700 rounded-md border
+                                            border-2 border-blue-700 hover:border-blue-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
+                                            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </button>
+        </form>
+    </div>
+{% endblock %}

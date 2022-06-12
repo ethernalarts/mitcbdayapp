@@ -1,24 +1,36 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+
 {% block content %}
 	<!-- Body Container -->
 	<div class="container">
+
+		<!-- Subheader -->
+		<div class="w-96 md:w-[600px] mt-10 md:mt-20 mx-auto container overflow-visible">
+			<h1 class="text-4xl text-gray-700 font-extrabold text-center">
+				Ministry of Industry, Trade and Cooperatives's Staff Directory
+			</h1>
+		</div>
 	
 		<!-- Search bar -->
 		<div class="max-w-3xl rounded-lg mx-auto">
 	
 			<!-- Search form -->
-			<form action="{% url 'searchresult' %}" class="-mt-32 min-h-screen flex items-center" method="GET">
-	
+			<form action="{% url 'searchresult' %}" class="-mt-32 -mb-32 md:-mt-48 md:-mb-46 min-h-screen flex items-center" method="GET">
+
 				<!-- Input -->
 				<div class="relative w-full">
 					<input type="text" id="simple-search" name="q" 
-								class="bg-white block font-medium border border-4 border-blue-600 text-gray-900 text-lg rounded-lg 
+								class="bg-white block font-medium border border-4 border-blue-500 text-gray-900 text-lg rounded-lg 
 										focus:ring-blue-500 focus:border-blue-600 block w-full p-4 md:p-6  
-										focus:ring-0 focus:outline-none focus:ring-blue-500
+										focus:ring-2 focus:outline-none focus:ring-blue-600
 										dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-										dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for a staff..."
+										dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+								placeholder="Search for a staff..."
 						required>
 				</div>
 	
@@ -37,6 +49,5 @@
 				</button>
 			</form>
 		</div>
-
 	</div>		
 {% endblock %}
