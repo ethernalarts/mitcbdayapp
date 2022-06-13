@@ -164,9 +164,9 @@ class staffDetailsView(DetailView):
 class staffDetailsCreate(CreateView):
     model = staffDetails
     fields = [
-        'first_name', 'middle_name', 'last_name', 'phone_number', 'email',
-        'position', 'staffimage', 'birth_month', 'birth_day'
-    ]
+        'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'email', 
+        'cadre', 'level', 'step', 'staff_image', 'birth_month', 'birth_day'
+    ] 
     template_name = 'addstaff.html'
     
     
@@ -176,8 +176,8 @@ class staffDetailsUpdate(UpdateView):
     model = staffDetails
     context_object_name = 'staff'
     fields = [
-        'first_name', 'middle_name', 'last_name', 'phone_number', 'email', 
-        'position', 'staffimage', 'birth_month', 'birth_day'
+        'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'email', 
+        'cadre', 'level', 'step', 'staff_image', 'birth_month', 'birth_day'
     ]   
     template_name = 'updatestaff.html'
     

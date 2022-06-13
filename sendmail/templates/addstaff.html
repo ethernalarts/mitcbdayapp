@@ -2,54 +2,9 @@
 {% load static %}
 {% load widget_tweaks %}
 
-{% block content %}    
-    <!-- Outer Container -->
-    <div class="min-h-full flex items-center justify-center mb-8 py-8 sm:px-6 lg:px-8">
-    
-        <!-- Inner Container -->
-        <div class="max-w-2xl lg:max-w-lg w-full space-y-px bg-white shadow-md rounded-lg px-10 py-6 pb-10">
-    
-            <!-- Title -->
-            <div>
-                <h2 class="mb-6 text-center text-3xl font-extrabold text-gray-900">Add a Staff</h2>
-            </div>
-    
-            <!-- Form -->
-            <form class="space-y-4 max-w-1xl mx-auto" action="" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="hidden" name="remember" value="true">
-    
-                <!-- Form fields -->
-                <div class="space-y-4">
-                    {% for field in form %}
-                    <div>
-                        <!-- <p class="font-bold text-gray-600">{{ field.label }}</p> -->
-                        {% render_field field placeholder=field.label class+="text-md lg:text-md font-medium relative block rounded-md w-full p-3 border bg-gray-100 text-gray-600 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %}
-                    </div>
-                    {% endfor %}
-                </div>
-    
-                <!-- Submit Button -->
-                <div>
-                    <button type="submit" class="group relative w-full flex justify-center mt-8 py-3 px-4 border border-transparent 
-                                    text-md font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-600 focus:outline-none 
-                                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                            <!-- Heroicon name: user-plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
-                                <path
-                                    d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-                            </svg>
-                        </span>
-                        Add
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
+{% block content %}  
     <!-- Search bar -->
-    <div class="max-w-3xl rounded-lg mx-auto mb-12">
+    <div class="max-w-3xl rounded-lg mx-auto mt-8">
 
         <!-- Search form -->
         <form action="{% url 'searchresult' %}" class="flex items-center" method="GET">
@@ -76,5 +31,119 @@
                 </svg>
             </button>
         </form>
+    </div>  
+
+    <!-- Outer Container -->
+    <div class="min-h-full flex items-center justify-center mb-8 py-8 sm:px-6 lg:px-8">
+    
+        <!-- Inner Container -->
+        <div class="max-w-3xl w-full bg-white shadow-md rounded-lg px-10 py-6 pb-10">
+    
+            <!-- Title -->
+            <div>
+                <h2 class="mb-6 text-center text-3xl font-extrabold text-gray-900">Add a Staff</h2>
+            </div>
+    
+            <!-- Form -->
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="remember" value="true">
+    
+                <!-- Fields -->
+                <div class="grid gap-6 mt-4 md:mt-12 mb-6 lg:grid-cols-2">
+                    <input type="hidden" name="remember" value="true">
+
+                    <!-- First Name -->
+                    <div>
+                        <label for="first_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.first_name.label }}</label>
+                        {% render_field form.first_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+
+                    <!-- Middle Name -->
+                    <div>
+                        <label for="middle_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.middle_name.label }}</label>
+                        {% render_field form.middle_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+
+                    <!-- Last Name -->
+                    <div>
+                        <label for="last_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.last_name.label }}</label>
+                        {% render_field form.last_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+
+                    <!-- Gender -->
+                    <div>
+                        <label for="gender" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.gender.label }}</label>
+                        {% render_field form.gender class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+                    
+                    <!-- Phone Number -->
+                    <div>
+                        <label for="phone_number" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.phone_number.label }}</label>
+                        {% render_field form.phone_number class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+                    
+                    <!-- Official Email -->
+                    <div>
+                        <label for="email" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.email.label }}</label>
+                        {% render_field form.email class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+                    
+                    <!-- Cadre -->
+                    <div>
+                        <label for="cadre" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.cadre.label }}</label>
+                        {% render_field form.cadre class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+                    
+                    <!-- Level -->
+                    <div>
+                        <label for="level" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.level.label }}</label>
+                        {% render_field form.level class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+                    
+                    <!-- Step -->
+                    <div>
+                        <label for="step" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.step.label }}</label>
+                        {% render_field form.step class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+                    
+                    <!-- Birth Month -->
+                    <div>
+                        <label for="birth_month" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_month.label }}</label>
+                        {% render_field form.birth_month class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+                    
+                    <!-- Birth Day -->
+                    <div>
+                        <label for="birth_day" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_day.label }}</label>
+                        {% render_field form.birth_day class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+                        
+                    <!-- Profile Picture -->
+                    <div>
+                        <label for="staff_image" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.staff_image.label }}</label>
+                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full py-2 px-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or GIF (MAX. 800x800px).</p>
+                    </div>
+                </div>
+    
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" class="group relative w-full flex justify-center mt-8 py-4 px-4 border border-transparent 
+                                    text-md font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-600 focus:outline-none 
+                                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <!-- Heroicon name: user-plus -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+                            </svg>
+                        </span>
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
+
 {% endblock %}
