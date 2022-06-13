@@ -42,7 +42,7 @@ class staffDetails(models.Model):
         (3, 'Prefer not to say')
     )
     
-    gender = models.IntegerField('Gender', choices=GENDER, default=1, blank=False)
+    gender = models.IntegerField('Gender', choices=GENDER, default=1, null=False, blank=False)
     
     
     def gender_verbose(self):
