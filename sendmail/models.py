@@ -18,8 +18,6 @@ class staffDetails(models.Model):
     
     last_name = models.CharField(verbose_name='Last Name', max_length=20)
     
-    gender = models.CharField('Gender', max_length=10, default='Female')
-    
     phone_number = PhoneNumberField('Phone Number', default='0800 000 0000')
     
     email = models.EmailField(verbose_name='Official Email', max_length = 254)   
@@ -38,6 +36,18 @@ class staffDetails(models.Model):
         blank=True
     )
     
+    GENDER = (
+        (1, 'Male'),
+        (2, 'Female'),
+        (3, 'Prefer not to say')
+    )
+    
+    gender = models.IntegerField('Gender', choices=GENDER, default=1, blank=False)
+    
+    
+    def gender_verbose(self):
+        return dict(staffDetails.GENDER)[self.gender]
+    
     MONTHS = (
         (1, 'January'),
         (2, 'February'),
@@ -53,21 +63,17 @@ class staffDetails(models.Model):
         (12, 'December')
     )
     
-    birth_month = models.IntegerField(
-        'Birth Month', 
-        choices = MONTHS, 
-        default = 1, 
-        blank = False)
+    birth_month = models.IntegerField('Birth Month', choices=MONTHS, default=1, blank=False)
     
     birth_day = models.IntegerField(verbose_name='Birth Day', blank=True, null=True)
     
     
-    class Meta:
-        db_table = 'sendmail_staffdetails'
-    
-    
     def birth_month_verbose(self):
         return dict(staffDetails.MONTHS)[self.birth_month]
+    
+    
+    class Meta:
+        db_table = 'sendmail_staffdetails'
     
         
     def phone_number_default(self):
