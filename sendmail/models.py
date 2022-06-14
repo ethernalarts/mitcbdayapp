@@ -18,7 +18,7 @@ class staffDetails(models.Model):
     
     last_name = models.CharField(verbose_name='Last Name', max_length=20)
     
-    phone_number = PhoneNumberField('Phone Number', default='0800 000 0000')
+    phone_number = PhoneNumberField('Phone Number')
     
     email = models.EmailField(verbose_name='Official Email', max_length = 254)   
      
@@ -26,7 +26,7 @@ class staffDetails(models.Model):
     
     level = models.IntegerField('Level', default='1')
     
-    step = models.IntegerField('Step', default='2', null=True, blank=True)
+    step = models.IntegerField('Step', default='2')
     
     staff_image = models.ImageField(
         verbose_name="Profile Picture",
@@ -42,8 +42,7 @@ class staffDetails(models.Model):
         (3, 'Prefer not to say')
     )
     
-    gender = models.IntegerField('Gender', choices=GENDER, default=1, null=False, blank=False)
-    
+    gender = models.IntegerField('Gender', choices=GENDER, default=2)    
     
     def gender_verbose(self):
         return dict(staffDetails.GENDER)[self.gender]
