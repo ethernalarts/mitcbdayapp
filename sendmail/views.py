@@ -1,17 +1,17 @@
 
 # Create your views here.
+from multiprocessing import context
 from django.template import Template, Context, loader
 from django.core import mail
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import  (get_object_or_404, redirect, render, HttpResponseRedirect)
 from mitcbdayapp import settings
 from django.db.models import Q
 from sendmail.models import staffDetails
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.views.generic import DetailView
-from django.urls import reverse_lazy
-
+from django.urls import reverse, reverse_lazy
 
 
 # Birthday Check View
@@ -186,8 +186,44 @@ class staffDetailsUpdate(UpdateView):
 # Delete Staff View
 class staffDetailsDelete(DeleteView):
     model = staffDetails
-    template_name = 'removestaff.html'
-    success_url = reverse_lazy('books')
+    def get_success_url(self):
+        return reverse(
+            'staffdeleted',
+            kwargs={                
+                'first_name': self.object.first_name,
+                'middle_name': self.object.middle_name,
+                'last_name': self.object.last_name
+            }
+        )    
+
+
+# remove Staff
+def removeStaff(request, id):
+    # list to copy some data 
+    list = []
+    
+    # fetch the object related to passed id
+    obj = get_object_or_404(staffDetails, id=id)
+    
+    if request.method == "POST":
+        list.append(
+                first_name = obj.first_name,
+                middle_name = obj.middle_name,
+                last_name = obj.last_name
+        )
+        
+        # delete object
+        obj.delete()
+        
+        # after deletion, redirect...
+        t = loader.get_template('staffdeleted.html')
+        return HttpResponse(t.render(context = list))
+    
+    
+
+# Staff Removed Confirmation
+def staffDeleted(request):
+    return (request, 'staffdeleted.html')
     
 
 # Search
@@ -206,6 +242,7 @@ class SearchResultView(ListView):
                 Q(first_name__icontains=query) | Q(middle_name__icontains=query) | Q(last_name__icontains=query)
             )            
             return object_list.all()
+        
     
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context

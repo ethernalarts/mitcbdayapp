@@ -1,6 +1,7 @@
 
 from email.policy import default
 from enum import unique
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from datetime import date
@@ -18,7 +19,7 @@ class staffDetails(models.Model):
     
     last_name = models.CharField(verbose_name='Last Name', max_length=20)
     
-    phone_number = PhoneNumberField('Phone Number')
+    phone_number = PhoneNumberField('Phone Number', max_length=11)
     
     email = models.EmailField(verbose_name='Official Email', max_length = 254)   
      

@@ -53,13 +53,13 @@
             
             <!-- Name -->
             <h5 class="mb-4 text-3xl text-center font-extrabold text-gray-800 dark:text-white">
-                {{ staff.first_name }}
-                {% if staff.middle_name %}
-                    {{ staff.middle_name }}
+                {{ staff.first_name.title }}
+                {% if staff.middle_name.title %}
+                    {{ staff.middle_name.title }}
                     {% else %}
                         <span></span>
                 {% endif %}
-                {{ staff.last_name }}
+                {{ staff.last_name.title }}
             </h5>
 
             <!-- Cadre -->
@@ -187,11 +187,11 @@
                 </div> -->
 
             <!-- Update and Remove buttons -->
-            <div class="flex mt-4 mb-4 space-x-3 lg:mt-6">
+            <div class="flex mt-4 mb-2 space-x-3 lg:mt-6">
 
                 <!-- Update button -->
                 <a href="{% url 'updatestaff' staff.id %}">
-                    <button type="button" class="inline-flex items-center mr-1 ml-1 px-8 py-3 border border-blue-600 rounded-md shadow-sm 
+                    <button type="button" class="inline-flex items-center mr-1 ml-1 px-8 py-2 border border-blue-600 rounded-md shadow-sm 
                                                 text-md font-medium text-white bg-blue-700 hover:border-indigo-500 hover:bg-blue-800 
                                                 text-center focus:outline-none focus:ring-4 focus:ring-blue-400">
                         <span class="inline-flex items-center">
@@ -206,10 +206,9 @@
                 </a>
             
                 <!-- Remove -->
-                <button data-modal-toggle="popup-modal" type="button" class="inline-flex items-center ml-1 px-8 py-3 border border-red-600 rounded-md shadow-sm 
+                <button id="openmodal" type="button" class="inline-flex items-center ml-1 px-8 py-2 border border-red-600 rounded-md shadow-sm 
                                                             text-md font-medium text-white bg-red-600 hover:border-red-700 hover:bg-red-700 
-                                                            focus:outline-none focus:ring-4 focus:ring-red-400"
-                    data-modal-toggle="popup-modal">
+                                                            focus:outline-none focus:ring-4 focus:ring-red-400">
                     <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -218,51 +217,59 @@
                     Remove
                 </button>
 
-
                 <!-- Modal popup (Remove Staff) -->
-                <div  id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 
-                                                            right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
+                <div id="modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed md:top-0 top-0 
+                                                    md:mx-auto lg:mx-auto z-50 md:inset-0 h-modal lg:h-full">
                     <!-- Outer Container -->
-                    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-                        
+                    <div class="relative p-4 w-full max-w-lg h-full md:h-auto">
+                
                         <!-- Inner container -->
                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-
+                
                             <!-- X button -->
-                            <button type="button" data-modal-toggle="popup-modal"
-                                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
+                            <button id="closemodal1" type="button" data-modal-toggle="popup-modal"
+                                class="closemodal absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 
+                                        rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
                                         d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                         clip-rule="evenodd"></path>
                                 </svg>
                             </button>
-
+                
                             <div class="p-6 text-center">
-
+                
                                 <!-- Exclamation icon -->
-                                <svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor"
+                                <svg class="closemodal mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
-                                
+                
                                 <!-- Warning text -->
-                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                    Are you sure you want to remove this Staff? 
-                                    This action cannot be reversed
+                                <h3 class="mb-5 text-lg font-normal text-center text-gray-500 dark:text-gray-400">
+                                    Are you sure you want to remove <b>{{ staff.first_name }} {{ staff.last_name }}</b> from the Database?
+                                    This action cannot be reversed.
                                 </h3>
-
+                
                                 <!-- Yes, I'm sure -->
-                                <button data-modal-toggle="popup-modal" type="button"
-                                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                                    Yes, I'm sure
+                                <button type="button">
+                                    <form action="{% url 'removestaff' staff.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="submit" class="cursor-pointer text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none 
+                                                                    focus:ring-red-500 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex 
+                                                                    items-center px-5 py-2.5 text-center mr-2" 
+                                                            value="Yes, Remove">
+                                    </form>
                                 </button>
-
+                
                                 <!-- No, Cancel button -->
-                                <button data-modal-toggle="popup-modal" type="button"
-                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                                    No, cancel
+                                <button id="closemodal2" type="button" data-modal-toggle="popup-modal"
+                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none 
+                                            focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium 
+                                            px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 
+                                            dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                    No, Cancel
                                 </button>
                             </div>
                         </div>
@@ -271,63 +278,38 @@
 
                 <!-- JavaScript for Modal popup -->
                 <script>
-                    // set the modal menu element
-                    const targetEl = document.getElementById('popup-modal');
-
-                    // options with default values
-                    // const options = {
-                    //     placement: 'bottom-right',
-                    //     backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
-                    //     onHide: () => {
-                    //         console.log('modal is hidden');
-                    //     },
-                    //     onShow: () => {
-                    //         console.log('modal is shown');
-                    //     },
-                    //     onToggle: () => {
-                    //         console.log('modal has been toggled');
-                    //     }
-                    // };
-
-                    /*
-                    * targetEl: required
-                    * options: optional
-                    */
-                    const modal = new Modal(targetEl, options);
-
-                    // show the modal
-                    modal.show();
-
-                    // hide the modal
-                    modal.hide();
-
-                    // toggle the modal
-                    modal.toggle();
-
                     // Get the modal
-                    // var modal = document.getElementById("modal-remove");
-                    
-                    // // Get the button that opens the modal
-                    // var btn = document.getElementById("openmodal");
-                    
-                    // // Get the <button> element that closes the modal
-                    // var button = document.getElementsByClassName("absolute  ")[0];
-                    
-                    // // When the user clicks the button, open the modal 
-                    // btn.onclick = function() {
-                    //   modal.style.display = "block";
-                    // }
-                    
-                    // // When the user clicks on <button> (x), close the modal
-                    // button.onclick = function() {
-                    //   modal.style.display = "hidden";
-                    // }
-                    
-                    // // When the user clicks anywhere outside of the modal, close it
-                    // window.onclick = function(event) {
-                    //   if (event.target == modal) {
-                    //     modal.style.display = "hidden";
-                    //   }
+                    var modal = document.getElementById("modal");
+
+                    // Get the button that opens the modal
+                    var btn = document.getElementById("openmodal");
+
+                    // Get the X <button> element that closes the modal
+                    var button = document.getElementById("closemodal1");
+
+                    // Get the second <button> element, 'No, Cancel' that closes the modal
+                    var button2 = document.getElementById("closemodal2");
+
+                    // When the user clicks the button, open the modal 
+                    btn.onclick = function () {
+                        modal.style.display = "block";
+                    }
+
+                    // When the user clicks on <button> (x), close the modal
+                    button.onclick = function () {
+                        modal.style.display = "none";
+                    }
+
+                    // When the user clicks on 'No, Cancel' button, close the modal
+                        button2.onclick = function () {
+                        modal.style.display = "none";
+                    }
+
+                    // When the user clicks anywhere outside of the modal, close it
+                    // window.onclick = function (event) {
+                    //     if (event.target == modal) {
+                    //         modal.style.display = "none";
+                    //     }
                     // }
                 </script>
 
