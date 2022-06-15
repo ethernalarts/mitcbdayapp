@@ -197,7 +197,7 @@ class staffDetailsDelete(DeleteView):
         )    
 
 
-# remove Staff
+# removeStaff view
 def removeStaff(request, id):
     # list to copy some data 
     list = []
@@ -205,25 +205,28 @@ def removeStaff(request, id):
     # fetch the object related to passed id
     obj = get_object_or_404(staffDetails, id=id)
     
-    if request.method == "POST":
-        list.append(
-                first_name = obj.first_name,
-                middle_name = obj.middle_name,
-                last_name = obj.last_name
-        )
+    if request.method == "POST":        
+        
+        list.append(f"{obj.first_name}")
+        list.append(f"{obj.middle_name}")
+        list.append(f"{obj.last_name}")
         
         # delete object
         obj.delete()
         
         # after deletion, redirect...
         t = loader.get_template('staffdeleted.html')
-        return HttpResponse(t.render(context = list))
+        return HttpResponse(t.render(context={
+            'first_name': list[0],
+            'middle_name': list[1],
+            'last_name': list[2]
+        }))
     
     
 
 # Staff Removed Confirmation
-def staffDeleted(request):
-    return (request, 'staffdeleted.html')
+def staffDeleted(request, list):
+    return (request, 'staffdeleted.html', list)
     
 
 # Search

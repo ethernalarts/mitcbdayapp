@@ -49,13 +49,13 @@
             
             <!-- Name -->
             <h5 class="mb-4 text-3xl text-center font-extrabold text-gray-800 dark:text-white">
-                {{ first_name }}
+                {{ first_name.title }}
                 {% if middle_name %}
-                    {{ middle_name }}
+                    {{ middle_name.title }}
                     {% else %}
                         <span></span>
                 {% endif %}
-                {{ last_name }}
+                {{ last_name.title }}
             </h5>
 
             <!-- Report -->
@@ -68,7 +68,7 @@
             <div class="flex mt-4 mb-2 space-x-3 lg:mt-6">
 
                 <!-- Update button -->
-                <a href="{% url 'updatestaff' staff.id %}">
+                <a href="#">
                     <button type="button" class="inline-flex items-center mr-1 ml-1 px-8 py-2 border border-blue-600 rounded-md shadow-sm 
                                                 text-md font-medium text-white bg-blue-700 hover:border-indigo-500 hover:bg-blue-800 
                                                 text-center focus:outline-none focus:ring-4 focus:ring-blue-400">
@@ -94,95 +94,6 @@
                     </svg>
                     Remove
                 </button>
-
-                <!-- Modal popup (Remove Staff) -->
-                <div id="modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed md:top-0 top-0 
-                                                    md:mx-auto lg:mx-auto z-50 md:inset-0 h-modal lg:h-full">
-                    <!-- Outer Container -->
-                    <div class="relative p-4 w-full max-w-lg h-full md:h-auto">
-                
-                        <!-- Inner container -->
-                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                
-                            <!-- X button -->
-                            <button id="closemodal1" type="button" data-modal-toggle="popup-modal"
-                                class="closemodal absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                
-                            <div class="p-6 text-center">
-                
-                                <!-- Exclamation icon -->
-                                <svg class="closemodal mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                
-                                <!-- Warning text -->
-                                <h3 class="mb-5 text-lg font-normal text-center text-gray-500 dark:text-gray-400">
-                                    Are you sure you want to remove <b>{{ staff.first_name }} {{ staff.last_name }}</b> from the Database?
-                                    This action cannot be reversed.
-                                </h3>
-                
-                                <!-- Yes, I'm sure -->
-                                <button type="button">
-                                    <form action="{% url 'removestaff' staff.id %}" method="POST">
-                                        {% csrf_token %}
-                                        <input type="submit" class="cursor-pointer text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-500 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2" value="Yes, Remove">
-                                    </form>
-                                </button>
-                
-                                <!-- No, Cancel button -->
-                                <button id="closemodal2" type="button" data-modal-toggle="popup-modal"
-                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                                    No, Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- JavaScript for Modal popup -->
-                <script>
-                    // Get the modal
-                    var modal = document.getElementById("modal");
-
-                    // Get the button that opens the modal
-                    var btn = document.getElementById("openmodal");
-
-                    // Get the X <button> element that closes the modal
-                    var button = document.getElementById("closemodal1");
-
-                    // Get the second <button> element, 'No, Cancel' that closes the modal
-                    var button2 = document.getElementById("closemodal2");
-
-                    // When the user clicks the button, open the modal 
-                    btn.onclick = function () {
-                        modal.style.display = "block";
-                    }
-
-                    // When the user clicks on <button> (x), close the modal
-                    button.onclick = function () {
-                        modal.style.display = "none";
-                    }
-
-                    // When the user clicks on 'No, Cancel' button, close the modal
-                        button2.onclick = function () {
-                        modal.style.display = "none";
-                    }
-
-                    // When the user clicks anywhere outside of the modal, close it
-                    // window.onclick = function (event) {
-                    //     if (event.target == modal) {
-                    //         modal.style.display = "none";
-                    //     }
-                    // }
-                </script>
 
             <!-- End - Update and Remove buttons -->
             </div>

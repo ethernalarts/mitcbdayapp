@@ -19,7 +19,7 @@ class staffDetails(models.Model):
     
     last_name = models.CharField(verbose_name='Last Name', max_length=20)
     
-    phone_number = PhoneNumberField('Phone Number', max_length=11)
+    phone_number = PhoneNumberField('Phone Number')
     
     email = models.EmailField(verbose_name='Official Email', max_length = 254)   
      

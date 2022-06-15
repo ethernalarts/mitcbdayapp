@@ -62,19 +62,19 @@
                     <!-- First Name -->
                     <div>
                         <label for="first_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.first_name.label }}</label>
-                        {% render_field form.first_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        {% render_field form.first_name class+="text-md md:text-md font-medium block w-full p-3 rounded-md border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
 
                     <!-- Middle Name -->
                     <div>
                         <label for="middle_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.middle_name.label }}</label>
-                        {% render_field form.middle_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        {% render_field form.middle_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
 
                     <!-- Last Name -->
                     <div>
                         <label for="last_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.last_name.label }}</label>
-                        {% render_field form.last_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border bg-gray-100 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        {% render_field form.last_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
 
                     <!-- Gender -->
@@ -150,7 +150,7 @@
                     </button>
 
                     <!-- Clear form -->
-                    <button type="submit" class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 py-3 px-4 border border-red-600 
+                    <button type="button" class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 py-3 px-4 border border-red-600 
                                                 text-md font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none 
                                                  focus:ring-4 focus:ring-red-500 hover:border-red-300">
                         <span class="absolute left-0 inset-y-0 flex items-center pl-3">
