@@ -1,8 +1,8 @@
 
 from email.policy import default
 from enum import unique
-from unittest.util import _MAX_LENGTH
 from django.db import models
+from numpy import True_, require
 from phonenumber_field.modelfields import PhoneNumberField
 from datetime import date
 from django.urls import reverse  # To generate URLS by reversing URL patterns
@@ -13,28 +13,26 @@ from django.urls import reverse  # To generate URLS by reversing URL patterns
 class staffDetails(models.Model):
     """ Staff Details """
     
-    first_name = models.CharField(verbose_name='First Name', max_length=20)
+    first_name = models.CharField('First Name', max_length=20, default='John (default)')
     
-    middle_name = models.CharField(verbose_name='Middle Name', max_length=20, null=True, blank=True)
+    middle_name = models.CharField('Middle Name', max_length=20, null=True, blank=True)
     
-    last_name = models.CharField(verbose_name='Last Name', max_length=20)
+    last_name = models.CharField('Last Name', max_length=20, default='Doe (default)')
     
-    phone_number = PhoneNumberField('Phone Number')
+    phone_number = PhoneNumberField('Phone Number', default='0800 000 0000 (default)')
     
-    email = models.EmailField(verbose_name='Official Email', max_length = 254)   
+    email = models.EmailField('Official Email', max_length = 254, default='email@edostate.gov.ng (default)')   
      
-    cadre = models.CharField(verbose_name='Cadre', max_length=50, null=True, blank=True)
+    cadre = models.CharField('Cadre', max_length=50, default='Admin (default)')
     
-    level = models.IntegerField('Level', default='1')
+    level = models.IntegerField('Level', default=1)
     
-    step = models.IntegerField('Step', default='2')
+    step = models.IntegerField('Step', default=2)
     
     staff_image = models.ImageField(
         verbose_name="Profile Picture",
         upload_to='staffimages', 
-        default='staffimages/default.jpg', 
-        null=True, 
-        blank=True
+        default='staffimages/default.jpg'
     )
     
     GENDER = (
@@ -63,9 +61,9 @@ class staffDetails(models.Model):
         (12, 'December')
     )
     
-    birth_month = models.IntegerField('Birth Month', choices=MONTHS, default=1, blank=False)
+    birth_month = models.IntegerField('Birth Month', choices=MONTHS, default=1)
     
-    birth_day = models.IntegerField(verbose_name='Birth Day', blank=True, null=True)
+    birth_day = models.IntegerField('Birth Day', default=1)
     
     
     def birth_month_verbose(self):

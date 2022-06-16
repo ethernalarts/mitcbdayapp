@@ -216,12 +216,13 @@ def removeStaff(request, id):
         
         # after deletion, redirect...
         t = loader.get_template('staffdeleted.html')
-        return HttpResponse(t.render(context={
-            'first_name': list[0],
-            'middle_name': list[1],
-            'last_name': list[2]
-        }))
-    
+        return HttpResponse(t.render(
+            context={
+                'first_name': list[0],
+                'middle_name': list[1],
+                'last_name': list[2]
+            }))
+
     
 
 # Staff Removed Confirmation
