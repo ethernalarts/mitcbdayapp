@@ -153,7 +153,6 @@ class staffDetailsView(DetailView):
         context = super(staffDetailsView, self).get_context_data(**kwargs)
         
         # Create any data and add it to the context
-        context['title'] = "Staff's Details"
         context['phone_number_default'] = staffDetails._meta.get_field('phone_number').get_default()
     
         return context
@@ -225,11 +224,6 @@ def removeStaff(request, id):
 
     
 
-# Staff Removed Confirmation
-def staffDeleted(request, list):
-    return (request, 'staffdeleted.html', list)
-    
-
 # Search
 class SearchResultView(ListView):
     model = staffDetails
@@ -251,9 +245,6 @@ class SearchResultView(ListView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
         context = super(SearchResultView, self).get_context_data(**kwargs)
-        
-        #paginator setup start
-        #paginator = Paginator(queryset,3)
         
         # Create any data and add it to the context
         context['title'] = 'Search Results'
