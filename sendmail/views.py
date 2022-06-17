@@ -198,7 +198,7 @@ class staffDetailsDelete(DeleteView):
 
 # removeStaff view
 def removeStaff(request, id):
-    # list to copy some data 
+    # list to copy some data before deletion
     list = []
     
     # fetch the object related to passed id
@@ -206,49 +206,84 @@ def removeStaff(request, id):
     
     if request.method == "POST":        
         
+        # save first name for context
         list.append(f"{obj.first_name}")
-        list.append(f"{obj.middle_name}")
+        
+        # save middle name for context
+        if obj.middle_name:
+            list.append(f"{obj.middle_name}")
+        else:
+            list.append('')
+        
+        # save last name for context
         list.append(f"{obj.last_name}")
         
         # delete object
-        obj.delete()
+        obj.delete()       
         
         # after deletion, redirect...
         t = loader.get_template('staffdeleted.html')
-        return HttpResponse(t.render(
-            context={
-                'first_name': list[0],
-                'middle_name': list[1],
-                'last_name': list[2]
-            }))
+        return HttpResponse(t.render(context={
+                    'first_name': list[0],
+                    'middle_name': list[1],
+                    'last_name': list[2]
+                }))
 
     
+# removeStaff view
+def staffDeleted(request, list={}):
+    return (request, 'staffdeleted.html', list)
+
+
+# from django.core.paginator import Paginator
+
+# def searchQuery(request):
+#     obj = get_object_or_404( staffDetails)
+    
+#     if obj.request.GET.get('q'):
+#         query = obj.request.GET.get("q")
+#         search_results = obj.objects.filter(
+#                 Q(first_name__icontains=query) | 
+#                 Q(middle_name__icontains=query) | 
+#                 Q(last_name__icontains=query)
+#             )
+#     else:
+#         search_results = []
+    
+#     paginator = Paginator(search_results, 5) # Show 5 contacts per page
+
+#     page = request.GET.get('page')
+#     search_results = paginator.get_page(page)
+#     return render(request, 'list.html', {'searchresult': search_results})
+
 
 # Search
-class SearchResultView(ListView):
+class searchQueryView(ListView):
     model = staffDetails
     template_name = 'searchresult.html'
     context_object_name = 'searchresult'
-    paginate_by = 5
-    ordering = ['id']
-    
-    def get_queryset(self): 
+    paginate_by = 5            
+
+    def get_queryset(self):
         query = self.request.GET.get("q")
-        
         if query:
-            object_list = staffDetails.objects.filter(
-                Q(first_name__icontains=query) | Q(middle_name__icontains=query) | Q(last_name__icontains=query)
-            )            
-            return object_list.all()
+            object_list = self.model.objects.filter(
+                Q(first_name__icontains=query) |
+                Q(middle_name__icontains=query) |
+                Q(last_name__icontains=query)
+            )
+        else:
+            object_list = self.model.objects.none()
+        return object_list
         
-    
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
-        context = super(SearchResultView, self).get_context_data(**kwargs)
-        
+        context = super(searchQueryView, self).get_context_data(**kwargs)
+
         # Create any data and add it to the context
         context['title'] = 'Search Results'
         context['query'] = self.request.GET.get("q")
         context['count_query'] = self.get_queryset().count()
-        
+
         return context

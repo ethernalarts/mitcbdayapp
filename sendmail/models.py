@@ -13,17 +13,17 @@ from django.urls import reverse  # To generate URLS by reversing URL patterns
 class staffDetails(models.Model):
     """ Staff Details """
     
-    first_name = models.CharField('First Name', max_length=20, default='Jane (default)')
+    first_name = models.CharField('First Name', max_length=20, default='Jane')
     
     middle_name = models.CharField('Middle Name', max_length=20, null=True, blank=True)
     
-    last_name = models.CharField('Last Name', max_length=20, default='Doe (default)')
+    last_name = models.CharField('Last Name', max_length=20, default='Doe')
     
     phone_number = PhoneNumberField('Phone Number', default='0800 000 0000')
     
-    email = models.EmailField('Official Email', max_length = 254, default='email@edostate.gov.ng (default)')   
+    email = models.EmailField('Official Email', max_length = 254, default='email@edostate.gov.ng')   
      
-    cadre = models.CharField('Cadre', max_length=50, default='Admin (default)')
+    cadre = models.CharField('Cadre', max_length=50, default='Admin')
     
     level = models.IntegerField('Level', default=1)
     
