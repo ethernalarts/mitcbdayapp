@@ -1,16 +1,18 @@
 
 # Create your views here.
+
 from multiprocessing import context
+from operator import attrgetter
 from django.template import Template, Context, loader
 from django.core import mail
 from django.http import HttpResponse
 from django.shortcuts import  (get_object_or_404, redirect, render, HttpResponseRedirect)
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from mitcbdayapp import settings
 from django.db.models import Q
 from sendmail.models import staffDetails
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from django.views.generic import DetailView
 from django.urls import reverse, reverse_lazy
 
 
@@ -230,60 +232,71 @@ def removeStaff(request, id):
                 }))
 
     
-# removeStaff view
-def staffDeleted(request, list={}):
-    return (request, 'staffdeleted.html', list)
 
-
-# from django.core.paginator import Paginator
-
-# def searchQuery(request):
-#     obj = get_object_or_404( staffDetails)
+# search
+# def search_query_view(request):
+#     posts_list = staffDetails.objects.all()
+#     query = request.GET.get('q')
     
-#     if obj.request.GET.get('q'):
-#         query = obj.request.GET.get("q")
-#         search_results = obj.objects.filter(
-#                 Q(first_name__icontains=query) | 
-#                 Q(middle_name__icontains=query) | 
-#                 Q(last_name__icontains=query)
-#             )
-#     else:
-#         search_results = []
-    
-#     paginator = Paginator(search_results, 5) # Show 5 contacts per page
-
+#     if query:
+#         search_results = staffDetails.objects.filter(
+#                     Q(first_name__icontains=query) |
+#                     Q(middle_name__icontains=query) |
+#                     Q(last_name__icontains=query)
+#                 ).distinct()
+#     search_paginator = Paginator(search_results, 5) # 6 posts per page
 #     page = request.GET.get('page')
-#     search_results = paginator.get_page(page)
-#     return render(request, 'list.html', {'searchresult': search_results})
 
+#     try:
+#         posts = search_paginator.page(page)
+#     except PageNotAnInteger:
+#         posts = search_paginator.page(1)
+#     except EmptyPage:
+#         posts = search_paginator.page(search_paginator.num_pages)
+
+#     context = {
+#         'page_obj': posts,
+#         'searchresult': search_results
+#     }
+#     return render(request, "searchresult.html", context)
+    
 
 # Search
 class searchQueryView(ListView):
     model = staffDetails
     template_name = 'searchresult.html'
     context_object_name = 'searchresult'
-    paginate_by = 5            
+    paginate_by = 5
+    ordering = ['-first_name']    
 
-    def get_queryset(self):
-        query = self.request.GET.get("q")
-        if query:
-            object_list = self.model.objects.filter(
-                Q(first_name__icontains=query) |
-                Q(middle_name__icontains=query) |
-                Q(last_name__icontains=query)
-            )
-        else:
-            object_list = self.model.objects.none()
-        return object_list
+    # get search query object
+    def get_queryset(self, query=None):
+        query = ''            
         
+        if self.request.GET.get("q"):
+            query = self.request.GET.get("q", None)
+            
+        queryset = []
+        queries = query.split(" ") # python install 2019 = [python, install, 2019]
+        for q in queries:
+            results = staffDetails.objects.filter(
+                   Q(first_name__icontains=q) |
+                    Q(middle_name__icontains=q) |
+                    Q(last_name__icontains=q)
+                ).distinct()
 
+            for result in results:
+                queryset.append(result)
+
+        return sorted(list(set(queryset)), key=attrgetter('first_name'), reverse=True)
+    
+    # context data
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
         context = super(searchQueryView, self).get_context_data(**kwargs)
 
         # Create any data and add it to the context
-        context['title'] = 'Search Results'
-        context['query'] = self.request.GET.get("q")
-        context['count_query'] = self.get_queryset().count()
+        context['query'] = str(self.request.GET.get("q"))
+        context['count_query'] = len(self.get_queryset())
 
         return context

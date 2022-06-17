@@ -36,7 +36,7 @@ urlpatterns += [
     re_path(r'^staff/(?P<pk>\d+)$', views.staffDetailsView.as_view(), name='staffdetails'),
     re_path(r'^staff/(?P<pk>\d+)/update/$', views.staffDetailsUpdate.as_view(), name='updatestaff'),
     re_path(r'^staff/(?P<id>\d+)/delete/$', views.removeStaff, name='removestaff'),
-    re_path(r'^staff/staffdeleted/$', views.staffDeleted, name='staffdeleted')
+    #re_path(r'^staff/staffdeleted/$', views.staffDeleted, name='staffdeleted')
 ]
 
 
