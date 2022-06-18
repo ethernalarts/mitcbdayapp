@@ -117,8 +117,7 @@ def sendmail(request, celebrants):
 
 # Index View
 def index(request):
-    context = {'title': 'Homepage'}
-    return render (request, 'index.html', context)
+    return render (request, 'index.html')
 
 
 
@@ -184,27 +183,13 @@ class staffDetailsUpdate(UpdateView):
     
 
 
-# Delete Staff View
-class staffDetailsDelete(DeleteView):
-    model = staffDetails
-    def get_success_url(self):
-        return reverse(
-            'staffdeleted',
-            kwargs={                
-                'first_name': self.object.first_name,
-                'middle_name': self.object.middle_name,
-                'last_name': self.object.last_name
-            }
-        )    
-
-
 # removeStaff view
-def removeStaff(request, id):
+def removeStaff(request, pk):
     # list to copy some data before deletion
     list = []
     
     # fetch the object related to passed id
-    obj = get_object_or_404(staffDetails, id=id)
+    obj = get_object_or_404(staffDetails, id=pk)
     
     if request.method == "POST":        
         
@@ -223,51 +208,24 @@ def removeStaff(request, id):
         # delete object
         obj.delete()       
         
-        # after deletion, redirect...
+        # after deletion, redirect
         t = loader.get_template('staffdeleted.html')
         return HttpResponse(t.render(context={
                     'first_name': list[0],
                     'middle_name': list[1],
                     'last_name': list[2]
-                }))
+                }
+                    )
+                        )
 
-    
+  
 
-# search
-# def search_query_view(request):
-#     posts_list = staffDetails.objects.all()
-#     query = request.GET.get('q')
-    
-#     if query:
-#         search_results = staffDetails.objects.filter(
-#                     Q(first_name__icontains=query) |
-#                     Q(middle_name__icontains=query) |
-#                     Q(last_name__icontains=query)
-#                 ).distinct()
-#     search_paginator = Paginator(search_results, 5) # 6 posts per page
-#     page = request.GET.get('page')
-
-#     try:
-#         posts = search_paginator.page(page)
-#     except PageNotAnInteger:
-#         posts = search_paginator.page(1)
-#     except EmptyPage:
-#         posts = search_paginator.page(search_paginator.num_pages)
-
-#     context = {
-#         'page_obj': posts,
-#         'searchresult': search_results
-#     }
-#     return render(request, "searchresult.html", context)
-    
-
-# Search
+# Search view
 class searchQueryView(ListView):
     model = staffDetails
     template_name = 'searchresult.html'
     context_object_name = 'searchresult'
     paginate_by = 5
-    ordering = ['-first_name']    
 
     # get search query object
     def get_queryset(self, query=None):
@@ -277,7 +235,7 @@ class searchQueryView(ListView):
             query = self.request.GET.get("q", None)
             
         queryset = []
-        queries = query.split(" ") # python install 2019 = [python, install, 2019]
+        queries = query.split(" ")
         for q in queries:
             results = staffDetails.objects.filter(
                    Q(first_name__icontains=q) |
