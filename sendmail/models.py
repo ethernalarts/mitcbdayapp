@@ -13,21 +13,23 @@ from django.urls import reverse  # To generate URLS by reversing URL patterns
 class staffDetails(models.Model):
     """ Staff Details """
     
-    first_name = models.CharField('First Name', max_length=20, default='Jane')
+    first_name = models.CharField('First Name', max_length=20, null=False)
     
     middle_name = models.CharField('Middle Name', max_length=20, null=True, blank=True)
     
-    last_name = models.CharField('Last Name', max_length=20, default='Doe')
+    last_name = models.CharField('Last Name', max_length=20, null=False)
     
     phone_number = PhoneNumberField('Phone Number', default='0800 000 0000')
     
-    email = models.EmailField('Official Email', max_length = 254, default='email@edostate.gov.ng')   
+    email = models.EmailField('Official Email', max_length = 254, null=False)   
      
-    cadre = models.CharField('Cadre', max_length=50, default='Admin')
+    cadre = models.CharField('Cadre', max_length=50, null=False)
     
-    level = models.IntegerField('Level', default=1)
+    department = models.CharField('Department', max_length=100, null=False, default='Admin Dept (default)')
     
-    step = models.IntegerField('Step', default=2)
+    level = models.IntegerField('Level', null=False)
+    
+    step = models.IntegerField('Step', null=False)
     
     staff_image = models.ImageField(
         verbose_name="Profile Picture",
@@ -63,7 +65,7 @@ class staffDetails(models.Model):
     
     birth_month = models.IntegerField('Birth Month', choices=MONTHS, default=1)
     
-    birth_day = models.IntegerField('Birth Day', default=1)
+    birth_day = models.IntegerField('Birth Day', null=False)
     
     
     def birth_month_verbose(self):

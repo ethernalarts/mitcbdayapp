@@ -48,11 +48,11 @@
         <div class="flex flex-col items-center py-8">
 
             <!-- Profile Image -->
-            <img class="mb-4 w-32 h-32 rounded-full shadow-lg" src="{{ staff.staff_image.url }}"
+            <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{{ staff.staff_image.url }}"
                 alt="{{ staff.first_name }} {{ staff.last_name }} image">
             
             <!-- Name -->
-            <h5 class="mb-4 text-3xl text-center font-extrabold text-gray-800 dark:text-white">
+            <h5 class="mb-4 text-3xl text-center mx-auto font-extrabold text-gray-800 dark:text-white">
                 {{ staff.first_name.title }}
                 {% if staff.middle_name.title %}
                     {{ staff.middle_name.title }}
@@ -63,18 +63,38 @@
             </h5>
 
             <!-- Cadre -->
-            {% if staff.cadre %}
-                <span class="mb-8 md:mb-8 lg:mb-4 text-lg font-bold text-center text-gray-500">
-                    {{ staff.cadre }}
+            <div class="flex flex-row items-center justify-center mb-4">
+                <span class="inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 text-gray-500 h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    {% if staff.cadre %}
+                    <p class="items-center text-lg font-bold text-gray-500 dark:text-gray-400">{{ staff.cadre }}</p>
+                        {% else %}
+                            <p class="-mt-1 text-lg font-bold text-gray-500 dark:text-gray-400"><em>cadre not given</em></p>
+                    {% endif %}
                 </span>
-                {% else %}
-                    <span class="mb-8 md:mb-8 lg:mb-4 text-lg font-bold text-center text-gray-500">
-                        Cadre not given
-                    </span>
-            {% endif %}
+            </div>            
+
+            <!-- Department -->
+            <div class="flex flex-row items-center justify-center mb-8 md:mb-4">
+                <span class="text-center">
+                    {% if staff.department %}
+                        {% if staff.first_name == 'Abieyuwa' %}
+                            <p class="text-lg font-bold text-gray-500 dark:text-gray-400"><em>{{ staff.department }}</em></p>
+                            {% else %}
+                                <p class="text-lg font-bold text-gray-500 dark:text-gray-400"><em>Department of {{ staff.department }}</em></p>  
+                        {% endif %}
+                        {% else %}
+                            <p class="-mt-1 text-lg font-bold text-gray-500 dark:text-gray-400"><em>department not given</em></p>
+                    {% endif %}
+                </span>
+            </div>
 
             <!-- Horizontal line -->
-		    <hr class="mb-4 border border-1 border-gray-300 w-full mx-auto dark:border-gray-700 lg:my-8">
+		    <hr class="mb-4 md:mb-2 border border-1 border-gray-300 w-full mx-auto dark:border-gray-700 lg:my-8">
             
             <!-- Below the hr line/Other fields -->
             <div class="grid gap-6 mt-4 md:mt-4 mb-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
@@ -156,34 +176,21 @@
             
                 <!-- Birthday -->
                 <div class="flex flex-row items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
-                    </svg>
-                    {% if staff.birth_day %}
-                        <p class="text-lg font-bold text-gray-500 dark:text-gray-400">{{ staff.birth_month_verbose }} {{ staff.birth_day }}</p>
-                        {% else %}
-                            <span class="text-lg font-bold text-gray-500 dark:text-gray-400"><em>birthday</em></span>
-                    {% endif %}
-                </div>
-            </div>
-            
-                <!-- Cadre -->
-                <!-- <div class="flex-row items-center justify-center">
-                    <span class="inline-flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="flex-nowrap mt-1 -ml-1 mr-2 text-gray-500 h-6 w-6" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <span class="inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
                         </svg>
-                        {% if staff.cadre %}
-                            <p class="items-center text-lg font-bold text-gray-500 dark:text-gray-400">{{ staff.cadre }}</p>
+                        {% if staff.birth_day %}
+                            <p class="text-lg font-bold text-gray-500 dark:text-gray-400">{{ staff.birth_month_verbose }} {{ staff.birth_day }}</p>
                             {% else %}
-                                <p class="-mt-1 text-lg font-bold text-gray-500 dark:text-gray-400"><em>Cadre not given</em></p>
+                                <span class="text-lg font-bold text-gray-500 dark:text-gray-400"><em>birthday</em></span>
                         {% endif %}
                     </span>
-                </div> -->
+                </div>
+            </div>            
+            
 
             <!-- Update and Remove buttons -->
             <div class="flex mt-4 mb-2 space-x-3 lg:mt-6">
