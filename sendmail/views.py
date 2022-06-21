@@ -55,8 +55,8 @@ def bdaycheck(request):
                 print(f'{key}: {value}')
             print('')            
         
-        # t = loader.get_template('emailsent.html')
-        # return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
+        t = loader.get_template('emailsent.html')
+        return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
         return sendmail(request, celebrants)
 
 
@@ -70,7 +70,7 @@ def sendmail(request, celebrants):
 
     print("Sending Birthday felicitation(s)...\n")
 
-    with open(f'sendmail/templates/bmsg.html') as bmsg:
+    with open(f'sendmail/templates/bmessage_1.html') as bmsg:
             contents = bmsg.read()
             
     for celebrant in celebrants:    
@@ -137,6 +137,7 @@ class staffListView(ListView):
         
         # Create any data and add it to the context
         context['title'] = 'List of all Staff'
+        context['total_staff'] = staffDetails.objects.all().count()
         return context
     
 

@@ -1,122 +1,103 @@
-{% load static tailwind_tags %}
+{% extends "base.html" %}
+{% load widget_tweaks %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
+{% block title %}
     <title>Birthday Today</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		{% tailwind_css %}
-	</head>
+{% endblock %}
 
-	<body class="bg-gray-200 font-sans">
-		<div class="container mx-auto">
-			<!-- Edit -->
-			<section class="flex items-center justify-center lg:h-screen" role="group">
-                <div class="grid flex-col p-4 gap-y-14">
-
-                    <!-- Subheader -->
-                    <div class="w-full overflow-visible">
-                        <h1 class="text-3xl text-gray-700 font-bold text-center w-full">
-                            The following Staff have Birthdays today.<br>
-                            Birthday Felicitations have been sent to them
-                        </h1>
-                    </div>
-            
-                    <!-- Table -->
-                    <div class="grid flex justify-center overflow-x-auto border border-b shadow-md sm:square-lg">
-                        <table class="w-full text-md p-8 text-center text-gray-500 overflow-x-auto">
-
-                            <!-- Table Header -->
-                            <thead class="text-xs text-white uppercase bg-green-400">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        Database ID
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        First Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Middle Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Last Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Email
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Phone
-                                    </th>
+{% block content %}
+    <div class="container mx-auto">
+        <!-- Edit -->
+        <section class="grid place-items-center h-auto">
+            <div class="grid place-items-center p-4 gap-y-14"> 
+    
+                <!-- Subheader -->
+                <div class="mx-auto mt-10 md:mt-12 overflow-visible">
+                    <h1 class="text-3xl text-gray-700 font-bold text-center w-full md:w-[600px]">
+                        The following Staff have Birthdays today.
+                        Birthday Felicitations have been sent to them
+                    </h1>
+                </div>
+    
+                <!-- Table -->
+                <div class="flex container overflow-x-auto border border-b shadow-md sm:square-lg">
+                    <table class="w-full text-md p-8 text-center text-gray-500 overflow-x-auto">
+    
+                        <!-- Table Header -->
+                        <thead class="text-xs text-white uppercase bg-green-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Database ID
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    First Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Middle Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Last Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Email
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Phone
+                                </th>
+                            </tr>
+                        </thead>
+    
+                        <!-- Table Body -->
+                        <tbody>
+                            {% for celebrant in celebrants %}
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <!-- Database ID -->
+                                    <td class="px-6 py-4">
+                                        {{ celebrant.databaseid }}
+                                    </td>
+        
+                                    <!-- First Name -->
+                                    <td class="px-6 py-4">
+                                        {{ celebrant.firstname }}
+                                    </td>
+        
+                                    <!-- Middle Name -->
+                                    <td class="px-6 py-4">
+                                        {% if celebrant.middlename %}
+                                        {{ celebrant.middlename }}
+                                        {% else %}
+                                        <span></span>
+                                        {% endif %}
+                                    </td>
+        
+                                    <!-- Last Name -->
+                                    <td class="px-6 py-4">
+                                        {{ celebrant.lastname }}
+                                    </td>
+        
+                                    <!-- Email -->
+                                    <td class="px-6 py-4">
+                                        {{ celebrant.email }}
+                                    </td>
+        
+                                    <!-- Phone Number -->
+                                    <td class="px-6 py-4">
+                                        {{ celebrant.phonenumber }}
+                                    </td>
                                 </tr>
-                            </thead>
-
-                            <!-- Table Body -->
-                            <tbody>
-                                {% for celebrant in celebrants %}
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <!-- Database ID -->
-                                        <td class="px-6 py-4">
-                                            {{ celebrant.databaseid }}
-                                        </td>
-                                        
-                                        <!-- First Name -->
-                                        <td class="px-6 py-4">
-                                            {{ celebrant.firstname }}
-                                        </td>
-                                        
-                                        <!-- Middle Name -->
-                                        <td class="px-6 py-4">
-                                            {% if celebrant.middlename %}
-                                                {{ celebrant.middlename }}
-                                                {% else %}
-                                                <span></span>
-                                            {% endif %}
-                                        </td>
-
-                                        <!-- Last Name -->
-                                        <td class="px-6 py-4">
-                                            {{ celebrant.lastname }}
-                                        </td>
-                                        
-                                        <!-- Email -->
-                                        <td class="px-6 py-4">
-                                            {{ celebrant.email }}
-                                        </td>
-
-                                        <!-- Phone Number -->
-                                        <td class="px-6 py-4">
-                                            {{ celebrant.phonenumber }}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-            
-                    <!-- Hip Hurray -->
-                    <div class="flex justify-center">
-                        <h1 class="text-2xl text-gray-700 font-bold text-center">
-                            Hip Hip Hip Hurray!!
-                        </h1>
-                    </div>
-                           
-                <!-- Back to Home page -->
-                <div class="container flex items-center">
-                    <a href="{% url 'index' %}"
-                        class="inline-flex text-sm font-medium mx-auto text-gray-700 mt-8 px-4 py-2 border 
-                            rounded-md border-gray-300 bg-white hover:bg-gray-50 focus:outline-none 
-                            focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                            </svg>
-                            Dashboard
-                    </a>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
+    
+                <!-- Hip Hurray -->
+                <div class="flex justify-center md:mb-4">
+                    <h1 class="text-2xl text-gray-700 font-bold text-center">
+                        Hip Hip Hip Hurray!!
+                    </h1>
                 </div>
-			</section>
-		</div>
-	</body>
-</html>
+            </div>
+        </section>
+    </div>
+{% endblock %}

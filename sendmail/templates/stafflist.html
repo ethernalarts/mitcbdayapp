@@ -18,8 +18,8 @@
                 <!-- Input -->
                 <input type="text" id="simple-search" name="q" 
                 class="bg-white block font-medium border border-none text-gray-900 text-lg rounded-md 
-                focus:border-blue-500 block w-full p-4  
-                focus:ring-2 focus:outline-none focus:ring-blue-500
+                focus:border-blue-600 block w-full p-4  
+                focus:ring-2 focus:outline-none focus:ring-blue-600
                 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
                 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Search for a staff..." required>
@@ -45,6 +45,7 @@
             <h5 class="text-3xl font-bold leading-none text-gray-900 dark:text-white">Staff List</h5>    
         </div>
         
+        <!-- Staff list -->
         <div class="flow-root">
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                 {% for staff in stafflist %}
@@ -93,68 +94,173 @@
                 {% endfor %}
             </ul>
         </div>
-    </div>
-    
-    <!-- Pagination -->
-    {% block pagination %}
-        {% if is_paginated %}
-            <div class="container font-medium text-gray-500 text-md md:text-lg flex flex-col 
-                        space-y-4 items-center justify-center mt-8 md:mt-8 pagination">
-                <!-- Help text -->
-                <span class="text-gray-700 page-current mx-4">
-                    Showing Page <span>{{ page_obj.number }}</span>
-                      of <span>{{ page_obj.paginator.num_pages }}</span> Pages
-                </span>
+        <!-- End of Staff list -->
 
-                <!-- Buttons -->
-                <div class="inline-flex mt-2 xs:mt-0">
-                    <!-- Previous Button -->
-                    {% if page_obj.has_previous %}
-                        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
-                            <button class="inline-flex items-center py-2 px-4 text-sm font-medium text-white bg-blue-600 
-                                            rounded-l hover:bg-blue-500 dark:bg-gray-800 dark:border-gray-700 
-                                            dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                    <span class="inline-flex items-center">
-                                        <svg class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                        Prev
-                                    </span>
-                            </button> 
-                        </a>                   
-                    {% endif %}
+        <!-- Pagination -->
+        <div class="bg-white pt-6 md:pb-4 flex items-center justify-between border-t border-gray-200">
+            {% block pagination %}
+                {% if is_paginated %}
+            
+                    <!-- Previous and Next buttons for mobile menu -->
+                    <div class="flex-1 flex justify-between sm:hidden">
 
-                    {% for i in paginator.page_range %}
-                        {% if page_obj.number == i %}
-                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                        {% else %}
-                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        <!-- Previous button -->
+                        {% if page_obj.has_previous %}                    
+                            <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
+                                <button type="button"
+                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 
+                                            text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Previous
+                                </button>
+                            </a>
+                            {% else %}                   
+                                <a>
+                                    <button type="button" disabled
+                                        class="relative inline-flex items-center px-4 py-2 border border-gray-300 
+                                               text-sm font-medium rounded-md text-gray-400 bg-white">
+                                        Previous
+                                    </button>
+                                </a>
                         {% endif %}
-                    {% endfor %}
-                    
-                    <!-- Next Button -->
-                    {% if page_obj.has_next %}
-                        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">
-                            <button class="py-2 px-4 text-sm font-medium text-white 
-                                            bg-blue-600 rounded-r border-0 border-l border-blue-600 hover:bg-blue-500 
-                                            dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 
-                                            dark:hover:text-white">
-                                    <span class="inline-flex items-center">
+                        
+                        <!-- Next button -->
+                        {% if page_obj.has_next %}                    
+                            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" 
+                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 
+                                            text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                Next
+                            </a>
+                            {% else %}                   
+                                <a>
+                                    <button type="button" disabled
+                                        class="relative inline-flex items-center px-4 py-2 border border-gray-300 
+                                                text-sm font-medium rounded-md text-gray-400 bg-white">
                                         Next
-                                        <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </span>
-                            </button>
-                        </a>                  
-                    {% endif %}
-                </div>                
-            </div>
-        {% endif %}
-    {% endblock %}
-{% endblock %}
+                                    </button>
+                                </a>
+                        {% endif %}
+                    </div>
+                
+                    <!-- Desktop view buttons -->
+                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        
+                        <!-- Showing 1 to 10... -->
+                        <div>
+                            <p class="text-md text-gray-700">
+                                Showing
+                                <span class="font-medium">1</span>
+                                to
+                                <span class="font-medium">10</span>
+                                of
+                                <span class="font-medium">{{ total_staff }}</span>
+                                results
+                            </p>
+                        </div>
+                        
+                        <!-- Pages -->
+                        <div>                            
+                            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                {% if page_obj.has_previous %}
+                                    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
+                                        <button type="button" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 
+                                                                    bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <span class="sr-only">Previous</span>
+                                            <!-- Heroicon name: solid/chevron-left -->
+                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </a>
+                                    {% else %}
+                                        <a>
+                                            <button type="button" disabled class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 
+                                                                                bg-white text-sm font-medium text-gray-400">
+                                                <span class="sr-only">Previous</span>
+                                                <!-- Heroicon name: solid/chevron-left -->
+                                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+                                        </a>
+                                {% endif %}
+                                
+                                <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+                                <!-- Pages -->
+                                {% for i in page_obj.paginator.page_range %}
+                                    {% if blog_posts.number == i %}
+                                        <a class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex 
+                                                    items-center px-4 py-2 border text-sm font-medium">
+                                            {{ i }}
+                                        </a>
+                                        {% else %}
+                                            <a class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex 
+                                            items-center px-4 py-2 border text-sm font-medium" href="?{% if query %}q={{query}}&{% endif %}page={{ i }}">{{ i }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                                <span
+                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 
+                                            bg-white text-sm font-medium text-gray-700">... </span>
+                                <a href="#"
+                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex 
+                                            relative items-center px-4 py-2 border text-sm font-medium">8 </a>
+                                <a href="#"
+                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex 
+                                            items-center px-4 py-2 border text-sm font-medium">
+                                    9 </a>
+                                <a href="#"
+                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                    10 </a>
+                                {% if page_obj.has_next %}
+                                    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">
+                                        <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white 
+                                                        text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <span class="sr-only">Next</span>
+                                            <!-- Heroicon name: solid/chevron-right -->
+                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                                aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </a>
+                                    {% else %}
+                                        <a>
+                                            <button type="button" disabled class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white 
+                                                            text-sm font-medium text-gray-400">
+                                                <span class="sr-only">Next</span>
+                                                <!-- Heroicon name: solid/chevron-right -->
+                                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+                                        </a>                                
+                                {% endif %}
+                            </nav>
+                            <!-- End of pages -->
 
+                        </div>
+                        <!-- End pages -->
+
+                    </div>
+                    <!-- End Desktop view buttons -->
+                    
+                {% endif %}
+            {% endblock %}
+        </div>
+        <!-- End of Pagination -->
+
+    </div>
+    <!-- End of Staff list -->    
+
+{% endblock %}
+<!-- End of block content -->
