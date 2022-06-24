@@ -31,7 +31,7 @@
 				<!-- Mobile Menu -->
 				<button data-collapse-toggle="mobile-menu" type="button" onclick="myFunction()"
 					class="inline-flex items-center p-2 ml-3 text-md text-gray-500 border border-2 border-transparent md:hidden
-							hover:text-white hover:bg-blue-700 rounded-md focus:outline-none"
+							hover:text-gray-500 hover:border-gray-200 rounded-md focus:outline-none"
 					aria-controls="mobile-menu" aria-expanded="false">
 					<span class="sr-only">Open main menu</span>
 					<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +54,7 @@
 	
 						<!-- Home -->
 						<li>
-							<a href="{% url 'index' %}" class="{% active_link 'index' strict=True css_class='text-blue-700 hover:md:border-transparent' %} 
+							<a href="{% url 'index' %}" class="{% active_link 'index' strict=True css_class='text-blue-700 hover:md:border-b-transparent' %} 
 																block py-2 pr-4 pl-3 text-gray-600 border-b border-gray-100 
 																md:border-b-2 md:border-transparent md:hover:text-blue-700 md:hover:border-blue-700
 																hover:bg-gray-50 md:hover:bg-transparent md:border-0 
@@ -74,7 +74,7 @@
 						<!-- Add a Staff -->
 						<li>
 							<a href="{% url 'addstaff' %}" 
-									class="{% active_link 'addstaff' css_class='text-blue-700 hover:md:border-transparent' %} 
+									class="{% active_link 'addstaff' css_class='text-blue-700 hover:md:border-b-transparent' %} 
 											border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 
 											md:border-b-2 md:border-transparent md:hover:text-blue-700 md:hover:border-blue-700
 											md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white 
@@ -93,7 +93,7 @@
 	
 						<!-- Staff list -->
 						<li>
-							<a href="{% url 'stafflist' %}" class="{% active_link 'stafflist' css_class='text-blue-700 hover:md:border-transparent' %} 
+							<a href="{% url 'stafflist' %}" class="{% active_link 'stafflist' css_class='text-blue-700 hover:md:border-b-transparent' %} 
 																	block py-2 pr-4 pl-3 text-gray-600 border-b border-gray-100 
 																	hover:bg-gray-50 md:hover:bg-transparent md:border-0 
 																	md:border-b-2 md:border-transparent md:hover:text-blue-700 md:hover:border-blue-700
@@ -151,7 +151,7 @@
 		<div class="flex md:flex-row md:justify-between items-center flex-col space-y-8 md:space-y-px justify-between">
 			
 			<!-- Copyright section -->
-			<span class="block text-md text-gray-500 sm:text-center dark:text-gray-400">© 2022 
+			<span class="block text-md text-gray-500 text-center dark:text-gray-400">Copyright © 2022 
                 <a href="https://wcce.org.ng" target="_blank"
 					class="hover:underline">MITC Staff Directory™
                 </a>. All Rights Reserved.
