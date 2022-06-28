@@ -13,7 +13,8 @@
                     <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
                         <button type="button"
                             class="relative inline-flex items-center px-4 py-2 border border-gray-300 
-                                    text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100">
+                                    text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100
+                                    focus:ring-gray-300 focus:ring-2">
                             Previous
                         </button>
                     </a>
@@ -31,7 +32,8 @@
                 {% if page_obj.has_next %}                    
                     <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" 
                             class="relative inline-flex items-center px-4 py-2 border border-gray-300 
-                                    text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100">
+                                    text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100
+                                    focus:ring-gray-300 focus:ring-2">
                         Next
                     </a>
                     {% else %}                   
@@ -119,9 +121,9 @@
                         <!-- Pages --> 
                         {% for num in page_obj.paginator.page_range %}
                             {% if page_obj.number == num %}
-                                <a href="?page={{ num }}" class="bg-white border-gray-300 text-gray-500 hover:bg-blue-500 hidden md:inline-flex 
-                                                                hover:text-white relative items-center px-4 py-2 border text-sm font-medium
-                                                                hover:border-blue-500">
+                                <a  class="bg-blue-500 border-blue-500 text-white hover:bg-blue-500 hidden md:inline-flex 
+                                           hover:text-white relative items-center px-4 py-2 border text-sm font-medium
+                                           hover:border-blue-500">
                                     {{ num }}
                                 </a>
                             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}

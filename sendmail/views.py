@@ -55,8 +55,8 @@ def bdaycheck(request):
                 print(f'{key}: {value}')
             print('')            
         
-        t = loader.get_template('emailsent.html')
-        return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
+        # t = loader.get_template('emailsent.html')
+        # return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
         return sendmail(request, celebrants)
 
 
