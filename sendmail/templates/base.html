@@ -10,6 +10,8 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>	
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
 		{% tailwind_css %}
 	</head>
 
@@ -55,11 +57,11 @@
 						<!-- Home -->
 						<li>
 							<a href="{% url 'index' %}" class="{% active_link 'index' strict=True css_class='text-blue-700 hover:md:border-b-transparent' %} 
-																block py-2 pr-4 pl-3 text-gray-600 border-b border-gray-100 
-																md:border-b-2 md:border-transparent md:hover:text-blue-700 md:hover:border-blue-700
-																hover:bg-gray-50 md:hover:bg-transparent md:border-0 
-																md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white 
-																dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+																block py-2 pr-4 pl-3 text-gray-600 border-b border-gray-100 md:border-b-2
+																md:border-transparent md:hover:text-blue-700 md:hover:border-blue-700
+																hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700
+																md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 
+																dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
 								<span class="inline-flex items-center">
 									<svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor"
 										stroke-width="2">
@@ -94,11 +96,11 @@
 						<!-- Staff list -->
 						<li>
 							<a href="{% url 'stafflist' %}" class="{% active_link 'stafflist' css_class='text-blue-700 hover:md:border-b-transparent' %} 
-																	block py-2 pr-4 pl-3 text-gray-600 border-b border-gray-100 
-																	hover:bg-gray-50 md:hover:bg-transparent md:border-0 
-																	md:border-b-2 md:border-transparent md:hover:text-blue-700 md:hover:border-blue-700
-																	md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white 
-																	dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+																	block py-2 pr-4 pl-3 text-gray-600 border-b border-gray-100 md:border-b-2
+																	hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:border-transparent
+																	md:hover:border-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white
+																	md:hover:text-blue-700 dark:hover:bg-gray-700 dark:hover:text-white 
+																	md:dark:hover:bg-transparent dark:border-gray-700">
 								<span class="inline-flex items-center">
 	
 									<!-- Staff list icon -->
@@ -115,11 +117,10 @@
 						<!-- Birthdays -->
 						<li>
 							<a href="{% url 'birthday' %}" target="_blank" class="{% active_link 'birthday' css_class='text-blue-700 hover:md:border-transparent' %} 
-																					block py-2 pr-4 pl-3 text-gray-600 border-b border-gray-100 
-																					hover:bg-gray-50 md:hover:bg-transparent md:border-0 
-																					md:border-b-2 md:border-transparent md:hover:text-blue-700 md:hover:border-blue-700
-																					md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white 
-																					dark:hover:bg-gray-700 dark:hover:text-white 
+																					block py-2 pr-4 pl-3 text-gray-600 border-b border-gray-100 hover:bg-gray-50
+																					md:hover:bg-transparent md:border-0 md:border-b-2 md:border-transparent
+																					md:hover:text-blue-700 md:hover:border-blue-700 md:p-0 dark:text-gray-400
+																					md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white 
 																					md:dark:hover:bg-transparent dark:border-gray-700">
 								<span class="inline-flex items-center">
 									<svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-6 w-6" fill="none"
