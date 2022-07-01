@@ -10,34 +10,7 @@
 
 {% block content %} 
     <!-- Search bar -->
-    <div class="max-w-3xl rounded-lg mx-auto mt-8">
-
-        <!-- Search form -->
-        <form action="{% url 'searchresult' %}" class="flex items-center" method="GET">            
-            {% csrf_token %}
-            <div class="relative w-full">
-
-                <!-- Input -->
-                <input type="text" id="simple-search" name="q" class="bg-white block font-medium border border-none text-gray-900 text-lg rounded-md 
-                                        focus:border-blue-500 block w-full p-4  
-                                        focus:ring-2 focus:outline-none focus:ring-blue-500
-                                        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-                                        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search for a staff..." required>
-            </div>
-
-            <!-- Submit Query -->
-            <button type="submit" class="px-8 py-4 ml-2 text-md font-medium text-white bg-blue-700 rounded-md border
-                                            border-2 border-blue-700 hover:border-blue-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
-                                            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-            </button>
-        </form>
-    </div>  
+    {% include 'snippets/searchbar.html' %}  
 
     <!-- Outer Container -->
     <div class="max-w-3xl min-h-full flex items-center justify-center mx-auto mb-20 py-8 sm:px-6 md:px-0 lg:px-0">
@@ -137,7 +110,7 @@
                     <!-- Profile Picture -->
                     <div>
                         <label for="staff_image" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.staff_image.label }}<span class="ml-1 text-2xl"></span></label>
-                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
                     </div>
                 </div>
                 
@@ -147,7 +120,7 @@
                     <!-- Update -->
                     <button type="submit" class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 py-3 px-4 border border-transparent 
                                                 text-md font-medium rounded-md text-white bg-blue-700 hover:bg-blue-600 focus:outline-none 
-                                                 focus:ring-4 focus:ring-blue-400">
+                                                 focus:ring-4 focus:ring-offset-2 focus:ring-blue-500">
                         <span class="absolute left-0 inset-y-0 flex items-center pl-3 inline-flex items-center">
                             <svg class="-ml-1 mr-2 h-7 w-7 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                 fill="currentColor" aria-hidden="true">
@@ -162,7 +135,7 @@
                     <a href="{% url 'staffdetails' staff.id %}" class="w-full">
                         <button type="button" class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 py-3 px-4 border border-red-700 
                                                 text-md font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none 
-                                                 focus:ring-4 focus:ring-red-400 hover:border-red-600">
+                                                 focus:ring-4 focus:ring-offset-2 focus:ring-red-500 hover:border-red-600">
                             Cancel
                         </button>
                     </a>

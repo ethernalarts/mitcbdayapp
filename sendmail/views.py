@@ -1,63 +1,52 @@
 
 # Create your views here.
 
+import pathlib
 from multiprocessing import context
 from operator import attrgetter
 from django.template import Template, Context, loader
 from django.core import mail
 from django.http import HttpResponse
 from django.shortcuts import  (get_object_or_404, redirect, render, HttpResponseRedirect)
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from mitcbdayapp import settings
 from django.db.models import Q
 from sendmail.models import staffDetails
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, DetailView
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 
 
 # Birthday Check View
 def bdaycheck(request):  
-    celebrants = []  
     data = staffDetails.objects.all()
-    
+
     print("\nChecking...\n")
 
-    # iterate over the QuerySet "data" to look for any record with "birth_month" 
-    # and "birth_day" fields that matches "current_month" and "current_day"
-    for record in data:
-        if record.BIRTHDAY_TODAY:
-
-            celebrants.append(
-                {
-                    'databaseid': record.id,
-                    'firstname': record.first_name,
-                    'middlename': record.middle_name,
-                    'lastname': record.last_name,
-                    'email': record.email,
-                    'phonenumber': record.phone_number
-                }
-            )
-
-    # no birthdays today
-    if (len(celebrants) == 0):    
-            
-        print("No birthdays today \n")        
-        t = loader.get_template('nobirthday.html')        
-        return HttpResponse(t.render())    
-    
-    # there is one or more birthdays today
-    else:
+    if celebrants := [
+            {
+                'databaseid': record.id,
+                'firstname': record.first_name,
+                'middlename': record.middle_name,
+                'lastname': record.last_name,
+                'email': record.email,
+                'phonenumber': record.phone_number
+            } 
+            for record in data if record.BIRTHDAY_TODAY
+        ]:
         print("We have birthday(s) today: \n")
-                
+
         for celebrant in celebrants:
             for key, value in celebrant.items():
                 print(f'{key}: {value}')
             print('')            
-        
+
         # t = loader.get_template('emailsent.html')
         # return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
         return sendmail(request, celebrants)
+    else:
+        print("No birthdays today \n")
+        t = loader.get_template('nobirthday.html')
+        return HttpResponse(t.render())
 
 
 
@@ -70,10 +59,8 @@ def sendmail(request, celebrants):
 
     print("Sending Birthday felicitation(s)...\n")
 
-    with open(f'sendmail/templates/bmessage_1.html') as bmsg:
-            contents = bmsg.read()
-            
-    for celebrant in celebrants:    
+    contents = pathlib.Path('sendmail/templates/bmessage_1.html').read_text()
+    for celebrant in celebrants:
         # convert 'contents' to a template object
         template = Template(contents)
         context = Context({"NAME": f"{celebrant.get('firstname')} {celebrant.get('lastname')}"})
@@ -90,28 +77,22 @@ def sendmail(request, celebrants):
         try:
             # this means the email was sent
             if payload == 1:
-                
+
                 # keeps count of the number of emails sent
                 mail_count = mail_count + payload
-                
-                print(f"Birthday felicitation sent to {celebrant.get('email')} \n")
-                
-        except Exception as e:
-            
-            print(f"Birthday felicitation not sent to {celebrant.get('email')}. Reason: {e} \n")            
-            failed.append(celebrant)            
-            pass
 
+                print(f"Birthday felicitation sent to {celebrant.get('email')} \n")
+
+        except Exception as e:
+            print(f"Birthday felicitation not sent to {celebrant.get('email')}. Reason: {e} \n")
+
+            failed.append(celebrant)
     connection.close()
 
-    # all emails were sent
-    if mail_count == len(celebrants):
-        t = loader.get_template('emailsent.html')
-        return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))
-    
-    # one or more messages failed to send
-    else:   
+    if mail_count != len(celebrants):
         return HttpResponse(render(request, 'emailerror.html', context = {'failed_msgs': failed}))
+    t = loader.get_template('emailsent.html')
+    return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))
 
 
 
@@ -185,30 +166,27 @@ class staffDetailsUpdate(UpdateView):
 
 
 # removeStaff view
-def removeStaff(request, pk):
-    # list to copy some data before deletion
-    list = []
-    
+def removeStaff(request, pk):  # sourcery skip: avoid-builtin-shadow
     # fetch the object related to passed id
     obj = get_object_or_404(staffDetails, id=pk)
-    
-    if request.method == "POST":        
+
+    if request.method == "POST":    
         
-        # save first name for context
-        list.append(f"{obj.first_name}")
-        
+        # list to copy some data before deletion
+        list = [f"{obj.first_name}"]
+
         # save middle name for context
         if obj.middle_name:
             list.append(f"{obj.middle_name}")
         else:
             list.append('')
-        
+
         # save last name for context
         list.append(f"{obj.last_name}")
-        
+
         # delete object
         obj.delete()       
-        
+
         # after deletion, redirect
         t = loader.get_template('staffdeleted.html')
         return HttpResponse(t.render(context={
@@ -230,11 +208,7 @@ class searchQueryView(ListView):
 
     # get search query object
     def get_queryset(self, query=None):
-        query = ''            
-        
-        if self.request.GET.get("q"):
-            query = self.request.GET.get("q", None)
-            
+        query = self.request.GET.get("q", None) if self.request.GET.get("q") else ''
         queryset = []
         queries = query.split(" ")
         for q in queries:
@@ -244,9 +218,7 @@ class searchQueryView(ListView):
                     Q(last_name__icontains=q)
                 ).distinct()
 
-            for result in results:
-                queryset.append(result)
-
+            queryset.extend(iter(results))
         return sorted(list(set(queryset)), key=attrgetter('first_name'), reverse=True)
     
     # context data
@@ -257,5 +229,6 @@ class searchQueryView(ListView):
         # Create any data and add it to the context
         context['query'] = str(self.request.GET.get("q"))
         context['count_query'] = len(self.get_queryset())
+        context['staffdata'] = staffDetails.objects.all()
 
         return context
