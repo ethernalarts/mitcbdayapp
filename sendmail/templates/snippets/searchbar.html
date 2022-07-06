@@ -1,21 +1,60 @@
 
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js" />
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+<!-- Search Autocomplete -->
+<script>
+    $(function () {
+        var availableTags = [
+            "ActionScript",
+            "AppleScript",
+            "Asp",
+            "BASIC",
+            "C",
+            "C++",
+            "Clojure",
+            "COBOL",
+            "ColdFusion",
+            "Erlang",
+            "Fortran",
+            "Groovy",
+            "Haskell",
+            "Java",
+            "JavaScript",
+            "Lisp",
+            "Perl",
+            "PHP",
+            "Python",
+            "Ruby",
+            "Scala",
+            "Scheme"
+        ];
+        $("#tags").sendmail.apps.SendmailConfig({
+            source: availableTags
+        });
+    });
+</script>
+
 <!-- Search bar -->
-<div class="max-w-3xl rounded-lg mx-auto mt-8 mb-8">
+<div class="max-w-3xl rounded-lg mx-auto mt-8 mb-4">
 
     <!-- Search form -->
     <form action="{% url 'searchresult' %}" class="flex items-center" method="GET">
         <div class="relative w-full">
 
             <!-- Input -->
-            <input type="text" id="simple-search" name="q" 
+            <input type="text" id="tags" name="q" 
                     class="bg-white block font-medium border border-none text-gray-900 text-lg rounded-md 
                             focus:border-blue-500 block w-full p-4  
                             focus:ring-4 focus:outline-none focus:ring-blue-600
                             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
                             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search for a staff..." required>
-            
+                    placeholder="Search for a staff..." required>            
         </div>
+        
 
         <!-- Submit Query -->
         <button type="submit" class="px-8 py-4 ml-2 text-md font-medium text-white bg-blue-700 rounded-md border
@@ -30,50 +69,36 @@
     </form>
     
     <!-- Search autocomplete -->
-    <script>
-    $(function () {
-            var availableTags = [
-                {% for staff in staffdata %}
-                                "{{ staff.first_name }} {{ staff.middle_name}} {{ staff.last_name }}",
-            {% endfor %}
-                        ];
+    <!-- <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 
-        $("#tags").sendmail({
-            source: availableTags
-        });
-                    });
-    </script>
-
-<script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>
-    var name; // global variable that keeps the name
-    new Autocomplete('#autocomplete', {
-        search: input => {
-            const url = `/search/?name=${input}`;
-            return new Promise(resolve => {
-                fetch(url).then(response => response.json()).then(data => {
-                    resolve(data.name);
+    <!-- <script>
+        var name; // global variable that keeps the name
+        new Autocomplete('#autocomplete', {
+            search: input => {
+                const url = `/search/?name=${input}`;
+                return new Promise(resolve => {
+                    fetch(url).then(response => response.json()).then(data => {
+                        resolve(data.name);
+                    })
                 })
-            })
-        },
-
-        onSubmit: result => {
-            name = result; //pass clicked result to global
-        }
-    })
-    $('#ull').click(function (e) {
-        $.ajax({
-            url: '',
-            type: 'GET',
-            data: {
-                valname: name,
             },
-            success: function (response) {
-                window.location = response.urlLink;
+
+            onSubmit: result => {
+                name = result; //pass clicked result to global
             }
         })
-
-    })
-</script>
+        $('#ull').click(function (e) {
+            $.ajax({
+                url: '',
+                type: 'GET',
+                data: {
+                    valname: name,
+                },
+                success: function (response) {
+                    window.location = response.urlLink;
+                }
+            })
+        })
+    </script> -->
 </div>

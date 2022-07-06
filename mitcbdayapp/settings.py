@@ -56,13 +56,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jquery',
     'sendmail.apps.SendmailConfig',
     'phonenumber_field',
-    'tailwind',
-    'theme',
     'django_browser_reload',
     'widget_tweaks',
-    'active_link'
+    'active_link',
+    'tailwind',
+    'theme'
 ]
 
 MIDDLEWARE = [

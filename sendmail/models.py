@@ -27,7 +27,7 @@ class staffDetails(models.Model):
     
     department = models.CharField('Department', max_length=100, null=False, default='Admin Dept (default)')
     
-    level = models.IntegerField('Level', null=False)
+    level = models.IntegerField('Grade Level', null=False)
     
     step = models.IntegerField('Step', null=False)
     

@@ -10,9 +10,44 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>	
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
-		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  		<link rel="stylesheet" href="/resources/demos/style.css">
+		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js" />
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+		<!-- Search Autocomplete -->
+        <script>
+			$( function() {
+				var availableTags = [
+				"ActionScript",
+				"AppleScript",
+				"Asp",
+				"BASIC",
+				"C",
+				"C++",
+				"Clojure",
+				"COBOL",
+				"ColdFusion",
+				"Erlang",
+				"Fortran",
+				"Groovy",
+				"Haskell",
+				"Java",
+				"JavaScript",
+				"Lisp",
+				"Perl",
+				"PHP",
+				"Python",
+				"Ruby",
+				"Scala",
+				"Scheme"
+				];
+				$( "#tags" ).sendmail.apps.SendmailConfig({
+				source: availableTags
+				});
+			} );
+		</script>
 		{% tailwind_css %}
 	</head>
 
@@ -156,7 +191,7 @@
 			
 			<!-- Copyright section -->
 			<span class="block text-md text-gray-500 text-center dark:text-gray-400">Copyright © 2022 
-                <a href="https://wcce.org.ng" target="_blank"
+                <a href="https://mitc.edostate.gov.ng" target="_blank"
 					class="hover:underline">MITC Staff Directory™
                 </a>. All Rights Reserved.
 			</span>

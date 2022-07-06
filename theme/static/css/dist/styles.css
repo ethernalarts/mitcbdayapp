@@ -1650,10 +1650,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(59 130 246 / var(--tw-border-opacity));
 }
 
-.focus\:underline-offset-2:focus {
-  text-underline-offset: 2px;
-}
-
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -1682,14 +1678,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity));
 }
 
-.focus\:ring-blue-400:focus {
+.focus\:ring-blue-500:focus {
   --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(96 165 250 / var(--tw-ring-opacity));
+  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
 }
 
-.focus\:ring-red-400:focus {
+.focus\:ring-red-500:focus {
   --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(248 113 113 / var(--tw-ring-opacity));
+  --tw-ring-color: rgb(239 68 68 / var(--tw-ring-opacity));
 }
 
 .focus\:ring-blue-600:focus {
@@ -1702,9 +1698,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-ring-color: rgb(147 197 253 / var(--tw-ring-opacity));
 }
 
-.focus\:ring-blue-500:focus {
+.focus\:ring-blue-400:focus {
   --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
+  --tw-ring-color: rgb(96 165 250 / var(--tw-ring-opacity));
+}
+
+.focus\:ring-red-400:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(248 113 113 / var(--tw-ring-opacity));
 }
 
 .focus\:ring-gray-300:focus {
@@ -1720,11 +1721,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .focus\:ring-red-300:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(252 165 165 / var(--tw-ring-opacity));
-}
-
-.focus\:ring-red-500:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(239 68 68 / var(--tw-ring-opacity));
 }
 
 .focus\:ring-offset-2:focus {
@@ -1983,6 +1979,22 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 100%;
   }
 
+  .md\:w-\[300px\] {
+    width: 300px;
+  }
+
+  .md\:w-\[200px\] {
+    width: 200px;
+  }
+
+  .md\:w-\[400px\] {
+    width: 400px;
+  }
+
+  .md\:w-\[450px\] {
+    width: 450px;
+  }
+
   .md\:max-w-lg {
     max-width: 32rem;
   }
@@ -2061,6 +2073,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:pb-4 {
     padding-bottom: 1rem;
+  }
+
+  .md\:text-center {
+    text-align: center;
   }
 
   .md\:text-3xl {

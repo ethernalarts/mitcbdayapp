@@ -8,7 +8,8 @@
     </title>
 {% endblock %}
 
-{% block content %} 
+{% block content %}
+
     <!-- Search bar -->
     {% include 'snippets/searchbar.html' %}  
 
@@ -19,7 +20,7 @@
         <div class="w-full bg-white shadow-md rounded-lg px-10 py-8">
     
             <!-- Form itle -->
-            <div class="w-full mb-6 md:w-auto">
+            <div class="w-full mb-6 md:w-[450px] md:mx-auto">
                 <h2 class="text-center text-3xl font-extrabold text-gray-900">
                     Update: <span class="underline underline-offset-4">{{ staff.first_name }} {{ staff.last_name }}</span>
                 </h2>
@@ -110,7 +111,7 @@
                     <!-- Profile Picture -->
                     <div>
                         <label for="staff_image" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.staff_image.label }}<span class="ml-1 text-2xl"></span></label>
-                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
+                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md md:w-full w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
                     </div>
                 </div>
                 
