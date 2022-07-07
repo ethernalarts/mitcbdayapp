@@ -1,4 +1,5 @@
 {% load active_link_tags %}
+{% load mathfilters %}
 
 <!-- Pagination -->
 <div class="bg-white pt-6 md:pb-4 flex items-center justify-between border-t border-gray-200">
@@ -56,9 +57,23 @@
                 <div>
                     <p class="text-md text-gray-700">
                         Showing
-                        <span class="font-medium">1</span>
+                        <span class="font-medium">
+                            {% with items = 5 %}
+                                {% if page_obj.number == 1 %}
+                                    1
+                                    {% else %}                                    
+                                        {{ items|add:1 }}
+                                {% endif %}
+                            {% endwith %}
+                        </span>
                         to
-                        <span class="font-medium">10</span>
+                        <span class="font-medium">
+                            {% if page_obj.number == 1 %}
+                                {{ searchresult|length }}
+                                {% else %}
+                                    {{ searchresult|length }} + 1
+                            {% endif %}
+                        </span>
                         of
                         <span class="font-medium">{{ count_query }}</span>
                         results

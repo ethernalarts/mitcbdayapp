@@ -63,7 +63,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'active_link',
     'tailwind',
-    'theme'
+    'theme',
+    'mathfilters'
 ]
 
 MIDDLEWARE = [
