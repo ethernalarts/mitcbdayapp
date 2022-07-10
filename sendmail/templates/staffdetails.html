@@ -15,7 +15,7 @@
     {% include 'snippets/searchbar.html' %}
     
     <!-- Profile Card -->
-    <div class="max-w-3xl mx-auto px-8 mt-8 mb-32 bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">   
+    <div class="max-w-3xl mx-auto px-8 mt-8 mb-28 bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">   
 
         <!-- Container -->
         <div class="flex flex-col items-center py-8">
@@ -133,8 +133,8 @@
             
                 <!-- Email -->
                 <div class="flex flex-row items-center justify-center">
-                    <span class="inline-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 mt-1 text-gray-500 h-6 w-6" fill="none"
+                    <span class="inline-flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 text-gray-500 h-6 w-6" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -149,7 +149,7 @@
             
                 <!-- Birthday -->
                 <div class="flex flex-row items-center justify-center">
-                    <span class="inline-flex">
+                    <span class="inline-flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -165,24 +165,24 @@
             </div>                      
             
             <!-- First Appointment -->
-            <div class="flex flex-row items-center justify-center mb-4">
+            <div class="flex flex-row items-center justify-center">
                 <span class="inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 -mt-1 text-gray-500 h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 mt-[0.5] text-gray-500 h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     {% if staff.first_appointment %}
-                    <p class="items-center text-lg font-bold text-gray-500 dark:text-gray-400">{{ staff.first_appointment }}</p>
-                    {% else %}
-                    <p class="-mt-1 text-lg font-bold text-gray-500 dark:text-gray-400"><em>01/01/2000</em></p>
+                        <p class="items-center text-lg font-bold text-gray-500 dark:text-gray-400">Employed on {{ staff.first_appointment }}</p>
+                        {% else %}
+                            <p class="-mt-1 text-lg font-bold text-gray-500 dark:text-gray-400"><em>Employed on Jan. 01, 2001</em></p>
                     {% endif %}
                 </span>
             </div>
             
 
             <!-- Update and Remove buttons -->
-            <div class="flex mt-4 mb-2 space-x-3 lg:mt-6">
+            <div class="flex mt-10 mb-2 space-x-3 md:mt-10">
 
                 <!-- Update button -->
                 <a href="{% url 'updatestaff' staff.id %}">

@@ -14,6 +14,7 @@ from sendmail.models import staffDetails
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.urls import reverse
+from .forms import staffDetailsUpdateForm
 
 
 # Birthday Check View
@@ -157,12 +158,8 @@ class staffDetailsCreate(CreateView):
 # Update Staff View
 class staffDetailsUpdate(UpdateView):
     model = staffDetails
-    context_object_name = 'staff'
-    fields = [
-        'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'email', 
-        'cadre', 'first_appointment', 'department', 'level', 'step', 'staff_image', 
-        'birth_month', 'birth_day'
-    ]   
+    form_class = staffDetailsUpdateForm  
+    context_object_name = 'staff' 
     template_name = 'updatestaff.html'
     
 

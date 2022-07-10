@@ -18,22 +18,28 @@
     
         <!-- Inner Container -->
         <div class="w-full bg-white -mt-4 shadow-md rounded-lg px-10 py-8">
-    
-            <!-- Form itle -->
-            <div class="w-full mb-6 md:w-[450px] md:mx-auto">
-                <h2 class="text-center text-3xl font-extrabold text-gray-900">
-                    Update: <span class="underline underline-offset-4">{{ staff.first_name }} {{ staff.last_name }}</span>
-                </h2>
-            </div>
-
-            <p class="text-md mt-10 font-medium text-red-600"><em>Fields marked with <span class="text-lg font-medium text-red-600">*</span> are required</em></p>
 
             <!-- Form -->
             <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                        
+                <!-- Profile Picture -->
+                <div class="mb-4 flex flex-col items-center">
+                    <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{{ staff.staff_image.url }}"
+                        alt="{{ staff.first_name }} {{ staff.last_name }} image">
+                </div>
+    
+                <!-- Form itle -->
+                <div class="w-full mb-6 md:w-[450px] md:mx-auto">
+                    <h2 class="text-center text-3xl font-extrabold text-gray-900">
+                        Update: <span class="underline underline-offset-4"><em>{{ staff.first_name }} {{ staff.last_name }}</em></span>
+                    </h2>
+                </div>
+
+                <p class="text-md mt-10 font-medium text-red-600"><em>Fields marked with <span class="text-lg font-medium text-red-600">*</span> are required</em></p>
 
                 <!-- Fields -->
-                <div class="grid gap-6 mt-10 md:mt-8 mb-6 lg:grid-cols-2">
+                <div class="grid gap-6 mt-8 md:mt-8 mb-6 lg:grid-cols-2">
                     <input type="hidden" name="remember" value="true">
 
                     <!-- First Name -->
@@ -113,11 +119,11 @@
                         <label for="birth_day" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_day.label }}<span class="ml-1 text-2xl font-medium text-red-600"><em>*</em></span></label>
                         {% render_field form.birth_day class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
-                        
+
                     <!-- Profile Picture -->
                     <div>
                         <label for="staff_image" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.staff_image.label }}<span class="ml-1 text-2xl"></span></label>
-                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md md:w-full w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
+                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md md:w-full w-full px-3 py-2 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
                     </div>
                 </div>
                 
