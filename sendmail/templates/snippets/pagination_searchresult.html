@@ -1,4 +1,3 @@
-{% load active_link_tags %}
 {% load mathfilters %}
 
 <!-- Pagination -->
@@ -57,26 +56,26 @@
                 <div>
                     <p class="text-md text-gray-700">
                         Showing
-                        <span class="font-medium">
-                            {% with items = 5 %}
+                        {% with pagination=5 %}
+                            <span class="font-medium">
                                 {% if page_obj.number == 1 %}
                                     1
                                     {% else %}                                    
-                                        {{ items|add:1 }}
+                                        {{ pagination|add:1 }}
                                 {% endif %}
-                            {% endwith %}
-                        </span>
-                        to
-                        <span class="font-medium">
-                            {% if page_obj.number == 1 %}
-                                {{ searchresult|length }}
-                                {% else %}
-                                    {{ searchresult|length }} + 1
-                            {% endif %}
-                        </span>
-                        of
-                        <span class="font-medium">{{ count_query }}</span>
-                        results
+                            </span>
+                            to
+                            <span class="font-medium">
+                                {% if page_obj.number == 1 %}
+                                    {{ searchresult|length }}
+                                    {% else %}
+                                        8
+                                {% endif %}
+                            </span>
+                            of
+                            <span class="font-medium">{{ count_query }}</span>
+                            results
+                        {% endwith %}
                     </p>
                 </div>
                 

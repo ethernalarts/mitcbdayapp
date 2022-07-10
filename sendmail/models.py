@@ -25,6 +25,8 @@ class staffDetails(models.Model):
      
     cadre = models.CharField('Cadre', max_length=50, null=False)
     
+    first_appointment = models.DateField('Date of First Appointment', null=True, blank=True)
+    
     department = models.CharField('Department', max_length=100, null=False, default='Admin Dept (default)')
     
     level = models.IntegerField('Grade Level', null=False)

@@ -10,7 +10,14 @@
 
 {% block content %}  
     <!-- Search bar -->
-    {% include 'snippets/searchbar.html' %}  
+    {% include 'snippets/searchbar.html' %}
+
+    <!-- Date Picker -->
+	<!-- <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script> -->
 
     <!-- Outer Container -->
     <div class="min-h-full flex items-center justify-center mb-8 py-8 sm:px-6 lg:px-8">
@@ -74,6 +81,12 @@
                     <div>
                         <label for="cadre" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.cadre.label }}<span class="ml-1 text-2xl font-medium text-red-600"><em>*</em></span></label>
                         {% render_field form.cadre class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                    </div>
+
+                    <!-- First Appointment -->
+                    <div>
+                        <label for="department" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.first_appointment.label }}<span class="ml-1 text-2xl font-medium text-red-600"><em>*</em></span></label>
+                        {% render_field form.first_appointment id="datepicker" type=text class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Department -->
