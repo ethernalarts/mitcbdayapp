@@ -15,8 +15,6 @@ class staffDetailsUpdateForm(forms.ModelForm):
             'birth_month', 'birth_day'
         ]   
     
-    # first_name = forms.CharField(label='First Name', required=True)
-    # last_name = forms.CharField(label='Last Name', required=True)
     # subject = forms.CharField(label='Subject', max_length=100)
     # from_ = forms.EmailField(label='Email', required=True)    
     # message = forms.CharField(widget=forms.Textarea)
