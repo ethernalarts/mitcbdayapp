@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jquery',
     'sendmail.apps.SendmailConfig',
+    'staffapp.apps.StaffappConfig',
     'phonenumber_field',
     'django_browser_reload',
     'widget_tweaks',
@@ -65,7 +66,8 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'mathfilters',
-    'django_cleanup.apps.CleanupConfig'
+    'django_cleanup.apps.CleanupConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
