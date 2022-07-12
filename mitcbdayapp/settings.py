@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import environ, os
-from pathlib import Path
 
 
 env = environ.Env()
@@ -95,12 +94,13 @@ NPM_BIN_PATH = r"C:/Program Files/nodejs/npm.cmd"
 # Template Directories
 ROOT = os.path.join(BASE_DIR, 'templates')
 SENDMAIL = os.path.join(BASE_DIR, 'sendmail/templates/')
+STAFFAPP = os.path.join(BASE_DIR, 'staffapp/templates/')
 THEME = os.path.join(BASE_DIR, 'theme/templates/')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ROOT, SENDMAIL, THEME],
+        'DIRS': [ROOT, SENDMAIL, STAFFAPP, THEME],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,8 +131,9 @@ STATICFILES_DIRS = [ MEDIA_ROOT ]
 
 
 SENDMAIL_STATIC = os.path.join(BASE_DIR, "sendmail/templates/static/")
+STAFFAPP_STATIC = os.path.join(BASE_DIR, "staffapp/templates/static/")
 THEME_STATIC = os.path.join(BASE_DIR, "theme/static/")
-STATICFILES_DIRS = [SENDMAIL_STATIC, THEME_STATIC]
+STATICFILES_DIRS = [SENDMAIL_STATIC, STAFFAPP_STATIC, THEME_STATIC]
 
 
 WSGI_APPLICATION = 'mitcbdayapp.wsgi.application'

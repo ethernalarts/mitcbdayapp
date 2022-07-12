@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+    <!-- Content Grid-->
+    <div class="grid flex-col px-4 items-center h-screen justify-center">
+
+        <!-- Subheader -->
+        <div class="w-full overflow-hidden">
+            <h1 class="text-3xl text-white font-semibold text-center w-auto">
+                The following Staff have Birthdays today.<br>
+                Birthday Felicitations have been sent to them
+            </h1>
+        </div>
+
+        <!-- Table -->
+        <div class="grid flex justify-center -mt-28 -mb-2 overflow-x-auto border border-b shadow-md sm:square-lg">
+            <table class="w-100 text-md p-8 text-center text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Database ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            First Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Last Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Email
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Phone
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for celebrant in celebrants %}
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">
+                            {{ celebrant.databaseid }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ celebrant.firstname }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ celebrant.lastname }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ celebrant.email }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ celebrant.phonenumber }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Hip Hurray -->
+        <!-- <div class="flex justify-center -mt-32">
+            <h1 class="text-3xl text-white font-semibold text-center">
+                Hip Hip Hip Hurray!!
+            </h1>
+        </div> -->
+    </div>
+{% endblock %}

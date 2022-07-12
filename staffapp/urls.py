@@ -18,12 +18,29 @@ from django.contrib import admin
 from django.urls import include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
 
 
 urlpatterns = [
-    re_path(r'^admin/', admin.site.urls),
-    re_path(r'^', include('staffapp.urls')),
-    re_path(r'^birthday/', include('sendmail.urls'))
+    re_path(r'^admin/', admin.site.urls), 
+    re_path(r"^__reload__/", include("django_browser_reload.urls"))
+]
+
+
+# Staff
+urlpatterns += [
+    re_path(r'^$', views.index, name='index'),
+    re_path(r'^staff/$', views.staffListView.as_view(), name='stafflist'),
+    re_path(r'^add/$', views.staffDetailsCreate.as_view(), name = 'addstaff'),
+    re_path(r'^staff/(?P<pk>\d+)$', views.staffDetailsView.as_view(), name='staffdetails'),
+    re_path(r'^staff/(?P<pk>\d+)/update/$', views.staffDetailsUpdate.as_view(), name='updatestaff'),
+    re_path(r'^staff/(?P<pk>\d+)/delete/$', views.removeStaff, name='removestaff')
+]
+
+
+# Search
+urlpatterns += [
+    re_path(r'^search/$', views.searchQueryView.as_view(), name='searchresult')
 ]
 
 
