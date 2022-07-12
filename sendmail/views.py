@@ -203,7 +203,7 @@ class searchQueryView(ListView):
     model = staffDetails
     template_name = 'searchresult.html'
     context_object_name = 'searchresult'
-    paginate_by = 5
+    paginate_by = 8
 
     # get search query object
     def get_queryset(self, query=None):

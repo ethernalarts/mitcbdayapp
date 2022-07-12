@@ -58,19 +58,11 @@
                         Showing
                         {% with pagination=5 %}
                             <span class="font-medium">
-                                {% if page_obj.number == 1 %}
-                                    1
-                                    {% else %}                                    
-                                        {{ pagination|add:1 }}
-                                {% endif %}
+                                {{ page_obj.start_index }}
                             </span>
                             to
                             <span class="font-medium">
-                                {% if page_obj.number == 1 %}
-                                    {{ searchresult|length }}
-                                    {% else %}
-                                        8
-                                {% endif %}
+                                {{ page_obj.end_index }}
                             </span>
                             of
                             <span class="font-medium">{{ count_query }}</span>

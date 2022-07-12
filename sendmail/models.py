@@ -1,4 +1,5 @@
 
+import datetime
 from email.policy import default
 from enum import unique
 from django.db import models
@@ -19,13 +20,13 @@ class staffDetails(models.Model):
     
     last_name = models.CharField('Last Name', max_length=20, null=False)
     
-    phone_number = PhoneNumberField('Phone Number', default='0800 000 0000')
+    phone_number = PhoneNumberField(('Phone Number'), default='08012345678')
     
     email = models.EmailField('Official Email', max_length = 254, null=False)   
      
     cadre = models.CharField('Cadre', max_length=50, null=False)
     
-    first_appointment = models.DateField('Date of First Appointment', null=True, blank=True)
+    first_appointment = models.DateField(("Date of First Appointment"), default=datetime.date.today, null=False, blank=False)
     
     department = models.CharField('Department', max_length=100, null=False, default='Admin Dept (default)')
     
@@ -36,7 +37,7 @@ class staffDetails(models.Model):
     staff_image = models.ImageField(
         verbose_name="Profile Picture",
         upload_to='staffimages', 
-        default='staffimages/default.jpg'
+        default='staffimages/default-female.jpg'
     )
     
     GENDER = (
