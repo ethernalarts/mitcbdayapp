@@ -24,10 +24,10 @@
             {% if staff.staff_image %}
                 <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{{ staff.staff_image.url }}"
                     alt="{{ staff.first_name }} {{ staff.last_name }} image">
-                {% elif staff.gender_verbose == Female %}
+                {% elif staff.gender_verbose==Female %}
                     <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{% static 'img/default-female.jpg' %}"
                         alt="default female image">
-                {% elif staff.gender_verbose == Male %}
+                {% elif staff.gender_verbose==Male %}
                     <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{% static 'img/default-male.jpg' %}"
                         alt="default male image">
             {% endif %}
