@@ -36,8 +36,8 @@ class staffDetails(models.Model):
     
     staff_image = models.ImageField(
         verbose_name="Profile Picture",
-        upload_to='staffimages', 
-        default='staffimages/default-female.jpg'
+        upload_to='staffimages',
+        default='staffimages/default.jpg'
     )
     
     GENDER = (

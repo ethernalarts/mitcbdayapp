@@ -64,7 +64,8 @@ INSTALLED_APPS = [
     'active_link',
     'tailwind',
     'theme',
-    'mathfilters'
+    'mathfilters',
+    'django_cleanup.apps.CleanupConfig'
 ]
 
 MIDDLEWARE = [
