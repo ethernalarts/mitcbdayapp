@@ -7,7 +7,7 @@ from operator import attrgetter
 from django.template import Template, Context, loader
 from django.core import mail
 from django.http import HttpResponse
-from django.shortcuts import  (get_object_or_404, redirect, render, HttpResponseRedirect)
+from django.shortcuts import  (get_object_or_404, redirect, render)
 from mitcbdayapp import settings
 from django.db.models import Q
 from sendmail.models import staffDetails
@@ -15,6 +15,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.urls import reverse
 from .forms import staffDetailsUpdateForm
+from rest_framework.decorators import api_view
 
 
 # Birthday Check View
@@ -231,3 +232,8 @@ class searchQueryView(ListView):
         context['staffdata'] = staffDetails.objects.all()
 
         return context
+
+
+# First API
+@api_view
+def 
