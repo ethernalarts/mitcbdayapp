@@ -28,7 +28,7 @@
                         <thead class="text-xs text-white uppercase bg-green-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Database ID
+                                    PROFILE PICTURE
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     First Name
@@ -43,7 +43,7 @@
                                     Email
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Phone
+                                    DEPARTMENT
                                 </th>
                             </tr>
                         </thead>
@@ -53,8 +53,9 @@
                             {% for celebrant in celebrants %}
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <!-- Database ID -->
-                                    <td class="px-6 py-4">
-                                        {{ celebrant.databaseid }}
+                                    <td class="px-4 md:px-6 py-4">
+                                        <img class="w-16 h-16 rounded-full shadow-lg" src="{{ celebrant.profileimage.url }}"
+                                            alt="{{ celebrant.first_name }} {{ celebrant.last_name }} image">
                                     </td>
         
                                     <!-- First Name -->
@@ -66,8 +67,8 @@
                                     <td class="px-6 py-4">
                                         {% if celebrant.middlename %}
                                         {{ celebrant.middlename }}
-                                        {% else %}
-                                        <span></span>
+                                            {% else %}
+                                                <span></span>
                                         {% endif %}
                                     </td>
         
@@ -83,7 +84,7 @@
         
                                     <!-- Phone Number -->
                                     <td class="px-6 py-4">
-                                        {{ celebrant.phonenumber }}
+                                        {{ celebrant.department }}
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -92,7 +93,7 @@
                 </div>
     
                 <!-- Hip Hurray -->
-                <div class="flex justify-center md:mb-4">
+                <div class="flex justify-center -mb-6">
                     <h1 class="text-2xl text-gray-700 font-bold text-center">
                         Hip Hip Hip Hurray!!
                     </h1>
