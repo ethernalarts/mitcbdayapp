@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import include, re_path
+from django.urls import include, path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views
+from . import views, api_views
 
 
 urlpatterns = [ 
@@ -39,6 +39,12 @@ urlpatterns += [
 # Search
 urlpatterns += [
     re_path(r'^search/$', views.searchQueryView.as_view(), name='searchresult')
+]
+
+
+# APIs
+urlpatterns += [
+    path('api/first_api_view/', api_views.all_staff)
 ]
 
 

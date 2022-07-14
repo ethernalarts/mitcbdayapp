@@ -10,6 +10,7 @@ module.exports = {
         '.././templates/**/*.html',
         '../.././templates/**/*.html',
         '../.././sendmail/**/*.html',
+        '../.././staffapp/**/*.html'
     ],
     presets: [],
     darkMode: 'class', // or 'media'

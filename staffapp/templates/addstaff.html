@@ -25,17 +25,23 @@
         <!-- Inner Container -->
         <div class="max-w-3xl -mt-4 w-full bg-white shadow-md rounded-lg px-10 py-8">
     
-            <!-- Title -->
-            <div>
-                <h2 class="mb-6 text-center text-3xl font-extrabold underline underline-offset-2 text-gray-900">Add a Staff</h2>
-            </div>
-
-            <p class="text-md mt-10 font-medium text-red-600"><em>Fields marked with <span class="text-lg font-medium text-red-600"><em>*</em></span> are required</em></p>
-    
             <!-- Form -->
             <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="remember" value="true">
+                        
+                <!-- Profile Picture -->
+                <div class="mb-4 flex flex-col items-center">
+                    <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{% static 'img/default-male.jpg' %}"
+                        alt="{{ staff.first_name }} {{ staff.last_name }} image">
+                </div>
+    
+                <!-- Form Title -->
+                <div>
+                    <h2 class="mb-6 text-center text-3xl font-extrabold underline underline-offset-2 text-gray-900">Add a Staff</h2>
+                </div>
+
+                <p class="text-md mt-10 font-medium text-red-600"><em>Fields marked with <span class="text-lg font-medium text-red-600"><em>*</em></span> are required</em></p>
     
                 <!-- Fields -->
                 <div class="grid gap-6 mt-10 md:mt-8 mb-6 lg:grid-cols-2">
