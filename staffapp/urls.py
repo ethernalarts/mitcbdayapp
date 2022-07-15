@@ -44,7 +44,7 @@ urlpatterns += [
 
 # APIs
 urlpatterns += [
-    path('api/first_api_view/', api_views.all_staff)
+    path('api/all_staff/', api_views.AllStaff.as_view(), name='all-staff-api')
 ]
 
 

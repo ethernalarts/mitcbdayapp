@@ -22,8 +22,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
+    re_path(r'^birthday/', include('sendmail.urls')),
     re_path(r'^', include('staffapp.urls')),
-    re_path(r'^birthday/', include('sendmail.urls'))
+    re_path(r'^api/', include('staffapp.urls'))
 ]
 
 

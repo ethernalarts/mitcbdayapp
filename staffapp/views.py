@@ -56,7 +56,7 @@ class staffDetailsView(DetailView):
         context = super(staffDetailsView, self).get_context_data(**kwargs)
         
         # Create any data and add it to the context
-        context['phone_number_default'] = staffDetails._meta.get_field('phone_number').get_default()
+        #context['phone_number_default'] = staffDetails._meta.get_field('phone_number').get_default()
     
         return context
     
@@ -66,7 +66,7 @@ class staffDetailsView(DetailView):
 class staffDetailsCreate(CreateView):
     model = staffDetails
     fields = [
-        'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'email', 
+        'first_name', 'middle_name', 'last_name', 'sex', 'phone_number', 'email', 
         'cadre', 'first_appointment', 'department', 'level', 'step', 'staff_image', 
         'birth_month', 'birth_day'
     ] 
@@ -151,6 +151,3 @@ class searchQueryView(ListView):
 
         return context
 
-
-# First API
-# @api_view

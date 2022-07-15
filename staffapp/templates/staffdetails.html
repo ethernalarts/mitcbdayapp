@@ -68,8 +68,6 @@
                             {% else %}
                                 <p class="text-lg font-bold text-gray-500 dark:text-gray-400"><em>Department of {{ staff.department }}</em></p>  
                         {% endif %}
-                        {% else %}
-                            <p class="-mt-1 text-lg font-bold text-gray-500 dark:text-gray-400"><em>department not given</em></p>
                     {% endif %}
                 </span>
             </div>
@@ -88,7 +86,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <p class="text-lg font-bold text-gray-500 text-center dark:text-gray-400">{{ staff.gender_verbose }}</p>
+                        <p class="text-lg font-bold text-gray-500 text-center dark:text-gray-400">{{ staff.gender_text }}</p>
                     </span>
                 </div>            
             

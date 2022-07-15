@@ -48,7 +48,7 @@ class staffDetails(models.Model):
     
     gender = models.IntegerField('Gender', choices=GENDER, default=2)    
     
-    def gender_verbose(self):
+    def gender_text(self):
         return dict(staffDetails.GENDER)[self.gender]
     
     MONTHS = (

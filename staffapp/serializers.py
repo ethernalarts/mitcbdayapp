@@ -1,15 +1,13 @@
 
 from rest_framework import serializers
+from sendmail.models import staffDetails
 
 
-class StaffDetailsSerializer(serializers.Serializer):
-    staff_image = serializers.ImageField()
-    first_name = serializers.CharField()
-    middle_name = serializers.CharField()
-    last_name = serializers.CharField()
-    gender = serializers.IntegerField()
-    level = serializers.IntegerField()
-    step = serializers.IntegerField()
-    email = serializers.EmailField()
-    cadre = serializers.CharField()
-    department = serializers.CharField()
+class StaffDetailsSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = staffDetails
+        fields = [
+            'staff_image', 'first_name', 'middle_name', 'last_name', 
+            'gender_text', 'level', 'step', 'email', 'cadre', 'department'
+            ]
