@@ -56,17 +56,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jquery',
-    'sendmail.apps.SendmailConfig',
+    'birthday.apps.BirthdayConfig',
     'staffapp.apps.StaffappConfig',
     'phonenumber_field',
     'django_browser_reload',
     'widget_tweaks',
     'active_link',
     'tailwind',
+    'django_rename_app',
     'theme',
     'mathfilters',
     'django_cleanup.apps.CleanupConfig',
-    'rest_framework'
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -93,14 +94,14 @@ NPM_BIN_PATH = r"C:/Program Files/nodejs/npm.cmd"
 
 # Template Directories
 ROOT = os.path.join(BASE_DIR, 'templates')
-SENDMAIL = os.path.join(BASE_DIR, 'sendmail/templates/')
+BIRTHDAY = os.path.join(BASE_DIR, 'birthday/templates/')
 STAFFAPP = os.path.join(BASE_DIR, 'staffapp/templates/')
 THEME = os.path.join(BASE_DIR, 'theme/templates/')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ROOT, SENDMAIL, STAFFAPP, THEME],
+        'DIRS': [ROOT, BIRTHDAY, STAFFAPP, THEME],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,10 +131,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = [ MEDIA_ROOT ]
 
 
-SENDMAIL_STATIC = os.path.join(BASE_DIR, "sendmail/templates/static/")
+BIRTHDAY_STATIC = os.path.join(BASE_DIR, "birthday/templates/static/")
 STAFFAPP_STATIC = os.path.join(BASE_DIR, "staffapp/templates/static/")
 THEME_STATIC = os.path.join(BASE_DIR, "theme/static/")
-STATICFILES_DIRS = [SENDMAIL_STATIC, STAFFAPP_STATIC, THEME_STATIC]
+STATICFILES_DIRS = [BIRTHDAY_STATIC, STAFFAPP_STATIC, THEME_STATIC]
 
 
 WSGI_APPLICATION = 'mitcbdayapp.wsgi.application'
@@ -143,11 +144,20 @@ WSGI_APPLICATION = 'mitcbdayapp.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR,  'db.sqlite3'),
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR,  'db.sqlite3'),
     
-    'OPTIONS': {'timeout': 20}    
+    # 'OPTIONS': {'timeout': 20}    
+    # },
+    
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mitcdb',
+        'USER': 'postgres',
+        'PASSWORD': env('DB_SERVER_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

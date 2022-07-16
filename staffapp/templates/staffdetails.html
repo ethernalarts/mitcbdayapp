@@ -24,10 +24,10 @@
             {% if staff.staff_image %}
                 <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{{ staff.staff_image.url }}"
                     alt="{{ staff.first_name }} {{ staff.last_name }} image">
-                {% elif staff.gender_verbose == 'Female' %}
+                {% elif staff.gender_text == 'Female' %}
                     <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{% static 'img/default-female.jpg' %}"
                         alt="default female image">
-                {% elif staff.gender_verbose == 'Male' %}
+                {% elif staff.gender_text == 'Male' %}
                     <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{% static 'img/default-male.jpg' %}"
                         alt="default male image">
             {% endif %}
@@ -51,11 +51,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    {% if staff.cadre %}
                     <p class="items-center text-lg font-bold text-gray-500 dark:text-gray-400">{{ staff.cadre }}</p>
-                        {% else %}
-                            <p class="-mt-1 text-lg font-bold text-gray-500 dark:text-gray-400"><em>cadre not given</em></p>
-                    {% endif %}
                 </span>
             </div> 
 

@@ -9,7 +9,7 @@ module.exports = {
     content: [
         '.././templates/**/*.html',
         '../.././templates/**/*.html',
-        '../.././sendmail/**/*.html',
+        '../.././birthday/**/*.html',
         '../.././staffapp/**/*.html'
     ],
     presets: [],

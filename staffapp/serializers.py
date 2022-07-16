@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from sendmail.models import staffDetails
+from birthday.models import staffDetails
 
 
 class StaffDetailsSerializer(serializers.ModelSerializer):

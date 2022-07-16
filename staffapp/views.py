@@ -7,7 +7,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import  (get_object_or_404, redirect, render)
 from django.db.models import Q
-from sendmail.models import staffDetails
+from birthday.models import staffDetails
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.urls import reverse
@@ -56,7 +56,7 @@ class staffDetailsView(DetailView):
         context = super(staffDetailsView, self).get_context_data(**kwargs)
         
         # Create any data and add it to the context
-        #context['phone_number_default'] = staffDetails._meta.get_field('phone_number').get_default()
+        context['phone_number_default'] = staffDetails._meta.get_field('phone_number').get_default()
     
         return context
     
@@ -66,7 +66,7 @@ class staffDetailsView(DetailView):
 class staffDetailsCreate(CreateView):
     model = staffDetails
     fields = [
-        'first_name', 'middle_name', 'last_name', 'sex', 'phone_number', 'email', 
+        'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'email', 
         'cadre', 'first_appointment', 'department', 'level', 'step', 'staff_image', 
         'birth_month', 'birth_day'
     ] 
