@@ -3,13 +3,14 @@
 
 from multiprocessing import context
 from operator import attrgetter
+import os
 from django.template import loader
 from django.http import HttpResponse
-from django.shortcuts import  (get_object_or_404, redirect, render)
+from django.shortcuts import  (get_object_or_404, redirect,	render,	HttpResponseRedirect)
 from django.db.models import Q
 from birthday.models import staffDetails
-from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.urls import reverse
 from .forms import staffDetailsUpdateForm
 from rest_framework.decorators import api_view
@@ -30,7 +31,7 @@ class staffListView(ListView):
     paginate_by = 10
     
     def get_queryset(self):        
-        return staffDetails.objects.all()
+        return staffDetails.objects.all().order_by('first_name')
     
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
@@ -76,10 +77,78 @@ class staffDetailsCreate(CreateView):
 
 # Update Staff View
 class staffDetailsUpdate(UpdateView):
-    model = staffDetails
     form_class = staffDetailsUpdateForm  
     context_object_name = 'staff' 
-    template_name = 'updatestaff.html'
+    template_name = 'updatestaff.html' 
+    
+    def get_queryset(self):
+        return staffDetails.objects.all()
+
+    def get_success_url(self):
+        return reverse('staffdetails', kwargs={'pk': self.object.id})
+    
+    # def form_valid(self, form, *args, **kwargs):
+    #     """If the form is valid, save the associated model."""
+    #     if form.is_valid:
+    #         profile_image = form.cleaned_data.get('delete_image')
+            
+    #         if profile_image:
+    #             obj = staffDetailsView.objects.get(id=self.object.id)
+    #             obj.staff_image.delete(save=True)
+    #             obj.staff_image = 'staffapp/static/img/default-male.jpg'
+                
+    #             obj.delete(staffDetails)
+        
+    #     self.object = form.save()
+    #     return super().form_valid(form)
+    
+    
+
+# def redirect_to(self, obj):
+#     return reverse('staffdetails', args=[obj.id,])
+    
+    
+
+# update view for details
+def staffDetailsUpdates(request, pk):
+    # dictionary for initial data with
+    # field names as keys
+    context = {}
+ 
+    # fetch the object related to passed id
+    obj = get_object_or_404(staffDetails, id = pk)
+ 
+    # pass the object as instance in form
+    form = staffDetailsUpdateForm(request.POST or None, instance = obj)
+ 
+    # save the data from the form and
+    # redirect to detail_view
+    if form.is_valid():
+        
+        delete_image = form.cleaned_data['delete_image']
+        
+        if delete_image:
+            obj.RemoveProfileImage(staffDetails.objects.get(id=pk))
+            # obj.staff_image.delete(save = True)
+            # obj.staff_image = 'staffapp/static/img/default-male.jpg' # set default image
+            #image = obj.staff_image
+            
+            # delete image path
+            # if len(image) > 0:
+            #     os.remove(image.path)
+                
+        #     # # delete image from the database
+        #     # image.delete()
+        #     pass
+            
+        form.save()
+        return redirect('staffdetails', pk = obj.id) 
+ 
+    # add form dictionary to context
+    context["form"] = form
+    context["staff"] = obj
+ 
+    return render(request, "updatestaff.html", context)
     
 
 
@@ -104,6 +173,9 @@ def removeStaff(request, pk):  # sourcery skip: avoid-builtin-shadow
 
         # delete object
         obj.delete()       
+        
+        if len(obj.staff_image) > 0:
+                os.remove(obj.staff_image.path)
 
         # after deletion, redirect
         t = loader.get_template('staffdeleted.html')
