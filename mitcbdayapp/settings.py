@@ -157,7 +157,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': env('DB_SERVER_PASSWORD'),
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': env('DB_PORT'),
     }
 }
 

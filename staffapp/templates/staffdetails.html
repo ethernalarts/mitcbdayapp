@@ -21,16 +21,8 @@
         <div class="flex flex-col items-center py-8">
 
             <!-- Profile Image -->
-            {% if staff.staff_image %}
                 <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{{ staff.staff_image.url }}"
                     alt="{{ staff.first_name }} {{ staff.last_name }} image">
-                {% elif staff.gender_text == 'Female' %}
-                    <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{% static 'img/default-female.jpg' %}"
-                        alt="default female image">
-                {% elif staff.gender_text == 'Male' %}
-                    <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-lg" src="{% static 'img/default-male.jpg' %}"
-                        alt="default male image">
-            {% endif %}
             
             <!-- Name -->
             <h5 class="mb-4 text-3xl text-center mx-auto font-extrabold text-gray-800 dark:text-white">

@@ -1,10 +1,8 @@
 
 import os
 import datetime
-from email.policy import default
 from enum import unique
 from django.db import models
-from numpy import True_, require
 from phonenumber_field.modelfields import PhoneNumberField
 from datetime import date
 from django.urls import reverse  # To generate URLS by reversing URL patterns
@@ -23,17 +21,17 @@ class staffDetails(models.Model):
     first_appointment = models.DateField(("Date of First Appointment"), default=datetime.date.today, null=False, blank=False)    
     department = models.CharField('Department', max_length=100, null=False, default='Adminstration')    
     level = models.IntegerField('Grade Level', null=False)    
-    step = models.IntegerField('Step', null=False)  
+    step = models.IntegerField('Step', null=False)     
+    staff_image = models.ImageField(("Profile Picture"), upload_to='staffimages', default='staffimages/default.jpg')
+    delete_image = models.BooleanField('Delete Profile Picture', default=0)    
     
-    def default_profile_pic(self):
+    # set default profile picture    
+    def default_profile_picture(self):
         if self.gender_text=='Female':
             default = 'static/img/default-female.jpg'
         elif self.gender_text=='Male':
             default = 'static/img/default-male.jpg'
-        return default
-    
-    staff_image = models.ImageField(("Profile Picture"), upload_to='staffimages', default='staffimages/default.jpg')
-    delete_image = models.BooleanField('Delete Profile Picture', default=0)    
+        return default    
     
     # def deleteProfilePicture(self,*args,**kwargs):
     #     if os.path.isfile(self.staff_image.path):
@@ -41,9 +39,9 @@ class staffDetails(models.Model):
 
     #     super(staffDetails, self).delete(*args,**kwargs)
     
-    def delete(self, using=None, keep_parents=False):
-        self.staff_image.storage.delete(self.staff_image.first_name)
-        super().delete()
+    # def delete(self, using=None, keep_parents=False):
+    #     self.staff_image.storage.delete(self.staff_image.first_name)
+    #     super().delete()
         
     GENDER = (
         (1, 'Male'),

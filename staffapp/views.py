@@ -1,6 +1,7 @@
 
 # Create your views here.
 
+from email.policy import default
 from multiprocessing import context
 from operator import attrgetter
 import os
@@ -12,7 +13,7 @@ from birthday.models import staffDetails
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView, DetailView, UpdateView
 from django.urls import reverse
-from .forms import staffDetailsUpdateForm
+from .forms import *
 from rest_framework.decorators import api_view
 
 
@@ -66,11 +67,8 @@ class staffDetailsView(DetailView):
 # Add Staff View
 class staffDetailsCreate(CreateView):
     model = staffDetails
-    fields = [
-        'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'email', 
-        'cadre', 'first_appointment', 'department', 'level', 'step', 'staff_image', 
-        'birth_month', 'birth_day'
-    ] 
+    form_class = staffDetailsCreateForm
+    context_object_name = 'staff'
     template_name = 'addstaff.html'
     
     
