@@ -6,8 +6,8 @@ from birthday.models import staffDetails
 
 
 # Add Staff form
-class staffDetailsCreateForm(forms.ModelForm):       
-    staff_image = forms.ImageField(label='Profile Picture') 
+class staffDetailsCreateForm(forms.ModelForm):      
+    staff_image = forms.ImageField(label='Profile Picture', required=False) 
     
     class Meta: 
         model = staffDetails 

@@ -5,6 +5,7 @@ from email.policy import default
 from multiprocessing import context
 from operator import attrgetter
 import os
+import pathlib
 from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import  (get_object_or_404, redirect,	render,	HttpResponseRedirect)
@@ -70,6 +71,28 @@ class staffDetailsCreate(CreateView):
     form_class = staffDetailsCreateForm
     context_object_name = 'staff'
     template_name = 'addstaff.html'
+    
+    # def get_form(self, form_class=None):
+    #     form = super().get_form(form_class=form_class)
+    #     form.fields['owner'].widget = forms.HiddenInput()
+    #     return form
+    
+    def form_valid(self, form):
+        
+        fs = FileSystemStorage()       
+            
+        if form.instance.staff_image is None:
+            if form.instance.gender == 2:
+                form.instance.staff_image = pathlib.Path('/staffimages/default-male.png')
+                #self.object.filter(id=self.id).update(staff_image = pathlib.Path('/media/staffimages/default.png'))
+                form.save()
+            
+            elif form.instance.gender == 1:
+                #self.object.filter(id=self.id).update(staff_image = pathlib.Path('/media/staffimages/default-male.png'))
+                form.instance.staff_image = os.path('/staffimages/default-male.png')
+                form.save()
+                   
+        return super().form_valid(form)
     
     
 

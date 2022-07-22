@@ -15,14 +15,14 @@ class staffDetails(models.Model):
     first_name = models.CharField('First Name', max_length=20, null=False)    
     middle_name = models.CharField('Middle Name', max_length=20, null=True, blank=True)    
     last_name = models.CharField('Last Name', max_length=20, null=False)    
-    phone_number = PhoneNumberField(('Phone Number'), default='08012345678')    
+    phone_number = PhoneNumberField('Phone Number', null=False)    
     email = models.EmailField('Official Email', max_length = 254, null=False)        
     cadre = models.CharField(("Cadre"), max_length=50, null=False, default='Admin Officer')    
     first_appointment = models.DateField(("Date of First Appointment"), default=datetime.date.today, null=False, blank=False)    
     department = models.CharField('Department', max_length=100, null=False, default='Adminstration')    
     level = models.IntegerField('Grade Level', null=False)    
     step = models.IntegerField('Step', null=False)     
-    staff_image = models.ImageField(("Profile Picture"), upload_to='staffimages', default='staffimages/default.jpg')
+    staff_image = models.ImageField("Profile Picture", upload_to='staffimages', null=True, blank=True)
     delete_image = models.BooleanField('Delete Profile Picture', default=0)    
     
     # set default profile picture    
@@ -31,25 +31,21 @@ class staffDetails(models.Model):
             default = 'static/img/default-female.jpg'
         elif self.gender_text=='Male':
             default = 'static/img/default-male.jpg'
-        return default    
+        return default  
     
-    # def deleteProfilePicture(self,*args,**kwargs):
-    #     if os.path.isfile(self.staff_image.path):
-    #         os.remove(self.staff_image.path)
-
-    #     super(staffDetails, self).delete(*args,**kwargs)
     
     # def delete(self, using=None, keep_parents=False):
     #     self.staff_image.storage.delete(self.staff_image.first_name)
     #     super().delete()
         
     GENDER = (
-        (1, 'Male'),
-        (2, 'Female'),
-        (3, 'Prefer not to say')
+        (None, ('Select your gender')),
+        ('Male', ('Male')),
+        ('Female', ('Female')),
+        ('Prefer not to say', ('Prefer not to say'))
     )
         
-    gender = models.IntegerField('Gender', choices=GENDER, default=2)    
+    gender = models.CharField('Gender', choices=GENDER, max_length=30, null=False, default='Male')    
     
     def gender_text(self):
         return dict(staffDetails.GENDER)[self.gender]
@@ -95,7 +91,7 @@ class staffDetails(models.Model):
     # Update Staff Reverse URL
     def get_absolute_url_update_staff(self):
         """Returns the url to update a particular staff instance."""
-        return reverse('updatestaff', args=[str(self.id)])    
+        return reverse('updatestaff', kwargs={'pk': self.id})  
     
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
