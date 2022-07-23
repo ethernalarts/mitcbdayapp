@@ -1,4 +1,5 @@
 
+from email.policy import default
 import os
 import datetime
 from enum import unique
@@ -25,13 +26,18 @@ class staffDetails(models.Model):
     staff_image = models.ImageField("Profile Picture", upload_to='staffimages', null=True, blank=True)
     delete_image = models.BooleanField('Delete Profile Picture', default=0)    
     
-    # set default profile picture    
-    def default_profile_picture(self):
-        if self.gender_text=='Female':
-            default = 'static/img/default-female.jpg'
-        elif self.gender_text=='Male':
-            default = 'static/img/default-male.jpg'
-        return default  
+    # get profile picture    
+    @property
+    def profile_picture(self):
+        if self.staff_image == '':
+            if (self.gender == 'Female') or (self.gender == 2):
+                self.staff_image = 'staffimages/default-female.jpg'
+            elif (self.gender == 'Male') or (self.gender == 1):
+                self.staff_image = 'staffimages/default-male.png'
+            return self.staff_image
+        
+        else:
+          return self.staff_image
     
     
     # def delete(self, using=None, keep_parents=False):
@@ -39,13 +45,11 @@ class staffDetails(models.Model):
     #     super().delete()
         
     GENDER = (
-        (None, ('Select your gender')),
         ('Male', ('Male')),
-        ('Female', ('Female')),
-        ('Prefer not to say', ('Prefer not to say'))
+        ('Female', ('Female'))
     )
         
-    gender = models.CharField('Gender', choices=GENDER, max_length=30, null=False, default='Male')    
+    gender = models.CharField('Gender', choices=GENDER, max_length=30, null=True, default='Male')    
     
     def gender_text(self):
         return dict(staffDetails.GENDER)[self.gender]

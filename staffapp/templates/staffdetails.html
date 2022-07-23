@@ -21,7 +21,7 @@
         <div class="flex flex-col items-center py-8">
 
             <!-- Profile Image -->
-                <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-sm" src="{{ staff.staff_image.url }}"
+                <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-sm" src="{{ staff.profile_picture.url }}"
                     alt="{{ staff.first_name }} {{ staff.last_name }} image">
             
             <!-- Name -->
@@ -74,7 +74,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <p class="text-lg font-bold text-gray-500 text-center dark:text-gray-400">{{ staff.gender_text }}</p>
+                        <p class="text-lg font-bold text-gray-500 text-center dark:text-gray-400">{{ staff.gender }}</p>
                     </span>
                 </div>            
             
@@ -255,10 +255,11 @@
                                     <button type="button">
                                         <form action="{% url 'removestaff' staff.id %}" method="POST">
                                             {% csrf_token %}
-                                            <input type="submit" class="cursor-pointer text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none 
-                                                                        focus:ring-red-400 dark:focus:ring-red-800 font-medium rounded-lg text-md 
-                                                                        items-center px-5 py-2.5 text-center" 
-                                                                value="Yes, Remove">
+                                            <input type="submit" 
+                                                class="cursor-pointer text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none 
+                                                        focus:ring-red-400 dark:focus:ring-red-800 font-medium rounded-lg text-md 
+                                                        items-center px-5 py-2.5 text-center" 
+                                                value="Yes, Remove">
                                         </form>
                                     </button>
                     

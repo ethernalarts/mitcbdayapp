@@ -72,28 +72,6 @@ class staffDetailsCreate(CreateView):
     context_object_name = 'staff'
     template_name = 'addstaff.html'
     
-    # def get_form(self, form_class=None):
-    #     form = super().get_form(form_class=form_class)
-    #     form.fields['owner'].widget = forms.HiddenInput()
-    #     return form
-    
-    def form_valid(self, form):
-        
-        fs = FileSystemStorage()       
-            
-        if form.instance.staff_image is None:
-            if form.instance.gender == 2:
-                form.instance.staff_image = pathlib.Path('/staffimages/default-male.png')
-                #self.object.filter(id=self.id).update(staff_image = pathlib.Path('/media/staffimages/default.png'))
-                form.save()
-            
-            elif form.instance.gender == 1:
-                #self.object.filter(id=self.id).update(staff_image = pathlib.Path('/media/staffimages/default-male.png'))
-                form.instance.staff_image = os.path('/staffimages/default-male.png')
-                form.save()
-                   
-        return super().form_valid(form)
-    
     
 
 # Update Staff View
@@ -122,11 +100,6 @@ class staffDetailsUpdate(UpdateView):
         
     #     self.object = form.save()
     #     return super().form_valid(form)
-    
-    
-
-# def redirect_to(self, obj):
-#     return reverse('staffdetails', args=[obj.id,])
     
     
 
@@ -194,10 +167,7 @@ def removeStaff(request, pk):  # sourcery skip: avoid-builtin-shadow
 
         # delete object
         obj.delete()       
-        
-        if len(obj.staff_image) > 0:
-                os.remove(obj.staff_image.path)
-
+                
         # after deletion, redirect
         t = loader.get_template('staffdeleted.html')
         return HttpResponse(t.render(context={
