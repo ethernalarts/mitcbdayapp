@@ -5,41 +5,60 @@ import datetime
 from enum import unique
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
-from phone_field import PhoneField
 from datetime import date
 from django.urls import reverse  # To generate URLS by reversing URL patterns
 
 
 # Create your models here.
 
+
 class staffDetails(models.Model):
     
     first_name = models.CharField('First Name', max_length=20, null=False)    
     middle_name = models.CharField('Middle Name', max_length=20, null=True, blank=True)    
     last_name = models.CharField('Last Name', max_length=20, null=False)    
-    phone_number = PhoneNumberField('Phone Number')    
+    phone_number = PhoneNumberField('Phone Number', default='09123456789')    
     email = models.EmailField('Official Email', max_length = 254, null=False)        
     cadre = models.CharField(("Cadre"), max_length=50, null=False, default='Admin Officer')    
     first_appointment = models.DateField(("Date of First Appointment"), default=datetime.date.today, null=False, blank=False)    
     department = models.CharField('Department', max_length=100, null=False, default='Adminstration')    
-    level = models.IntegerField('Grade Level', null=False)    
-    step = models.IntegerField('Step', null=False)     
+    level = models.IntegerField('Grade Level', null=False, default=6)    
+    step = models.IntegerField('Step', null=False, default=2)     
     staff_image = models.ImageField("Profile Picture", upload_to='staffimages', null=True, blank=True)
     delete_image = models.BooleanField('Delete Profile Picture', default=0)    
     
-    # get profile picture    
     @property
     def profile_picture(self):
+        
+        # Create
         if self.staff_image == '':
             if (self.gender == 2):
                 self.staff_image = 'staffimages/default-female.png'
             elif (self.gender == 1):
                 self.staff_image = 'staffimages/default-male.png'
-            return self.staff_image       
-        
-        else:
-          return self.staff_image
+        return self.staff_image
     
+    @property
+    def update_profile_picture(self):
+        
+        # Update
+        if (self.staff_image == '/media/staffimages/default-female.png') and (self.gender == 2):            
+            obj = self.__class__.objects.get(id=self.id)
+            obj.staff_image = '/media/staffimages/default-female.png'
+            obj.save(update_fields=['staff_image'])
+            
+            #self.objects.filter(id=self.id).update(staff_image='staffimages/default-female.png')
+            #self.staff_image = 'staffimages/default-female.png'
+            return self.staff_image
+            
+        if (self.staff_image == '/media/staffimages/default-male.png') and (self.gender == 1):    
+            # image = self.__class__.objects.get(id=self.id)
+            # image.staff_image = '/media/staffimages/default-male.png'
+            # image.save(update_fields=['staff_image'])
+            
+            self.__class__.filter(id=self.id).update(staff_image='/media/staffimages/default-male.png')        
+            #self.staff_image = 'staffimages/default-male.png'
+            return self.staff_image
     
     # def delete(self, using=None, keep_parents=False):
     #     self.staff_image.storage.delete(self.staff_image.first_name)

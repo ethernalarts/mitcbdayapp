@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'birthday.apps.BirthdayConfig',
     'staffapp.apps.StaffappConfig',
     'phonenumber_field',
-    'phone_field',
     'django_browser_reload',
     'widget_tweaks',
     'active_link',

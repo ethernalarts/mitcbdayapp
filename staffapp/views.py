@@ -86,6 +86,30 @@ class staffDetailsUpdate(UpdateView):
     def get_success_url(self):
         return reverse('staffdetails', kwargs={'pk': self.object.id})
     
+    # def update_profile_pic(self):
+    #     if self.staff_image in [('/media/staffimages/default-female.png'), ('/media/staffimages/default-male.png')]:            
+    #         if self.gender == 1:                
+    #             self.objects.filter(id=self.id).update(staff_image='/media/staffimages/default-male.png')
+    #             # obj = self.objects.get(id=self.id)
+    #             # obj.staff_image = '/media/staffimages/default-male.png'
+    #             # obj.refresh_from_db()
+    #             #obj.save(update_fields=['staff_image'])
+
+    #             #self.objects.filter(id=self.id).update(staff_image='staffimages/default-female.png')
+    #             #self.staff_image = 'staffimages/default-female.png'
+    #             return reverse('staffdetails', kwargs={'pk': self.object.id})
+
+    #         elif self.gender == 2:    
+    #             self.objects.filter(id=self.id).update(staff_image=('/media/staffimages/default-female.png'))  
+    #             # obj = self.objects.get(id=self.id)
+    #             # obj.staff_image = '/media/staffimages/default-female.png'
+    #             # obj.refresh_from_db()
+    #             #obj.save(update_fields=['staff_image'])
+
+    #             #self.objects.filter(id=self.id).update(staff_image='staffimages/default-male.png')        
+    #             #self.staff_image = 'staffimages/default-male.png'
+    #             return reverse('staffdetails', kwargs={'pk': self.object.id})
+    
     # def form_valid(self, form, *args, **kwargs):
     #     """If the form is valid, save the associated model."""
     #     if form.is_valid:
