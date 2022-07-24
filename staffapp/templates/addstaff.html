@@ -32,7 +32,7 @@
                         
                 <!-- Profile Picture -->
                 <div class="mb-4 flex flex-col items-center">
-                    <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-sm" src="{% static 'img/default-female.png' %}"
+                    <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-sm" src="{% static 'img/default.png' %}"
                         alt="{{ staff.first_name }} {{ staff.last_name }} image">
                 </div>
     
@@ -74,13 +74,13 @@
                     <!-- Phone Number -->
                     <div>
                         <label for="phone_number" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.phone_number.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.phone_number class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.phone_number placeholder='e.g. 0902 345 6789 ' class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Official Email -->
                     <div>
                         <label for="email" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.email.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.email class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.email placeholder='e.g. jondoe@edostate.gov.ng' class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Cadre -->

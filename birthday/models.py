@@ -5,6 +5,7 @@ import datetime
 from enum import unique
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from phone_field import PhoneField
 from datetime import date
 from django.urls import reverse  # To generate URLS by reversing URL patterns
 
@@ -16,7 +17,7 @@ class staffDetails(models.Model):
     first_name = models.CharField('First Name', max_length=20, null=False)    
     middle_name = models.CharField('Middle Name', max_length=20, null=True, blank=True)    
     last_name = models.CharField('Last Name', max_length=20, null=False)    
-    phone_number = PhoneNumberField('Phone Number', null=True, default='09000000000')    
+    phone_number = PhoneNumberField('Phone Number')    
     email = models.EmailField('Official Email', max_length = 254, null=False)        
     cadre = models.CharField(("Cadre"), max_length=50, null=False, default='Admin Officer')    
     first_appointment = models.DateField(("Date of First Appointment"), default=datetime.date.today, null=False, blank=False)    
