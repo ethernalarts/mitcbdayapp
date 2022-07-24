@@ -16,7 +16,7 @@ class staffDetails(models.Model):
     first_name = models.CharField('First Name', max_length=20, null=False)    
     middle_name = models.CharField('Middle Name', max_length=20, null=True, blank=True)    
     last_name = models.CharField('Last Name', max_length=20, null=False)    
-    phone_number = PhoneNumberField('Phone Number', null=False)    
+    phone_number = PhoneNumberField('Phone Number', null=True, default='09000000000')    
     email = models.EmailField('Official Email', max_length = 254, null=False)        
     cadre = models.CharField(("Cadre"), max_length=50, null=False, default='Admin Officer')    
     first_appointment = models.DateField(("Date of First Appointment"), default=datetime.date.today, null=False, blank=False)    
@@ -30,11 +30,11 @@ class staffDetails(models.Model):
     @property
     def profile_picture(self):
         if self.staff_image == '':
-            if (self.gender == 'Female') or (self.gender == 2):
-                self.staff_image = 'staffimages/default-female.jpg'
-            elif (self.gender == 'Male') or (self.gender == 1):
+            if (self.gender == 2):
+                self.staff_image = 'staffimages/default-female.png'
+            elif (self.gender == 1):
                 self.staff_image = 'staffimages/default-male.png'
-            return self.staff_image
+            return self.staff_image       
         
         else:
           return self.staff_image
@@ -45,11 +45,11 @@ class staffDetails(models.Model):
     #     super().delete()
         
     GENDER = (
-        ('Male', ('Male')),
-        ('Female', ('Female'))
+        (1, 'Male'),
+        (2, 'Female')
     )
         
-    gender = models.CharField('Gender', choices=GENDER, max_length=30, null=True, default='Male')    
+    gender = models.IntegerField('Gender', choices=GENDER, default=2)    
     
     def gender_text(self):
         return dict(staffDetails.GENDER)[self.gender]
