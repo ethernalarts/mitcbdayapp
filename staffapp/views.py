@@ -86,29 +86,8 @@ class staffDetailsUpdate(UpdateView):
     def get_success_url(self):
         return reverse('staffdetails', kwargs={'pk': self.object.id})
     
-    # def update_profile_pic(self):
-    #     if self.staff_image in [('/media/staffimages/default-female.png'), ('/media/staffimages/default-male.png')]:            
-    #         if self.gender == 1:                
-    #             self.objects.filter(id=self.id).update(staff_image='/media/staffimages/default-male.png')
-    #             # obj = self.objects.get(id=self.id)
-    #             # obj.staff_image = '/media/staffimages/default-male.png'
-    #             # obj.refresh_from_db()
-    #             #obj.save(update_fields=['staff_image'])
-
-    #             #self.objects.filter(id=self.id).update(staff_image='staffimages/default-female.png')
-    #             #self.staff_image = 'staffimages/default-female.png'
-    #             return reverse('staffdetails', kwargs={'pk': self.object.id})
-
-    #         elif self.gender == 2:    
-    #             self.objects.filter(id=self.id).update(staff_image=('/media/staffimages/default-female.png'))  
-    #             # obj = self.objects.get(id=self.id)
-    #             # obj.staff_image = '/media/staffimages/default-female.png'
-    #             # obj.refresh_from_db()
-    #             #obj.save(update_fields=['staff_image'])
-
-    #             #self.objects.filter(id=self.id).update(staff_image='staffimages/default-male.png')        
-    #             #self.staff_image = 'staffimages/default-male.png'
-    #             return reverse('staffdetails', kwargs={'pk': self.object.id})
+    # def redirect_to(self, obj):
+    #     return reverse('staffdetails', args=[obj.id, obj.staff_image])
     
     # def form_valid(self, form, *args, **kwargs):
     #     """If the form is valid, save the associated model."""
@@ -129,43 +108,26 @@ class staffDetailsUpdate(UpdateView):
 
 # update view for details
 def staffDetailsUpdates(request, pk):
-    # dictionary for initial data with
-    # field names as keys
-    context = {}
- 
     # fetch the object related to passed id
     obj = get_object_or_404(staffDetails, id = pk)
- 
+
     # pass the object as instance in form
     form = staffDetailsUpdateForm(request.POST or None, instance = obj)
- 
+
     # save the data from the form and
     # redirect to detail_view
     if form.is_valid():
-        
-        delete_image = form.cleaned_data['delete_image']
-        
-        if delete_image:
+
+        if delete_image := form.cleaned_data['delete_image']:
             obj.RemoveProfileImage(staffDetails.objects.get(id=pk))
-            # obj.staff_image.delete(save = True)
-            # obj.staff_image = 'staffapp/static/img/default-male.jpg' # set default image
-            #image = obj.staff_image
-            
-            # delete image path
-            # if len(image) > 0:
-            #     os.remove(image.path)
-                
         #     # # delete image from the database
         #     # image.delete()
         #     pass
-            
+
         form.save()
         return redirect('staffdetails', pk = obj.id) 
- 
-    # add form dictionary to context
-    context["form"] = form
-    context["staff"] = obj
- 
+
+    context = {"form": form, "staff": obj}
     return render(request, "updatestaff.html", context)
     
 

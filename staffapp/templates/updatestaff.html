@@ -14,10 +14,10 @@
     {% include 'snippets/searchbar.html' %}  
 
     <!-- Outer Container -->
-    <div class="max-w-3xl min-h-full flex items-center justify-center mx-auto py-8 sm:px-6 md:px-0 lg:px-0">
+    <div class="max-w-3xl min-h-full flex items-center justify-center mx-auto py-8 px-6 md:px-0 lg:px-0">
     
         <!-- Inner Container -->
-        <div class="w-full bg-white -mt-4 -mb-8 md:-mb-4 shadow-md rounded-lg px-10 py-8">
+        <div class="w-full bg-white -mt-4 -mb-8 lg:-mb-10 shadow-md rounded-lg px-10 py-8">
 
             <!-- Form -->
             <form action="" method="POST" enctype="multipart/form-data">
@@ -25,7 +25,7 @@
                         
                 <!-- Profile Picture -->
                 <div class="mb-4 flex flex-col items-center">
-                    <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-sm" src="{{ staff.update_profile_picture.url }}"
+                    <img class="mb-4 mt-1 w-32 h-32 rounded-full shadow-sm" src="{{ staff.staff_image.url }}"
                         alt="{{ staff.first_name }} {{ staff.last_name }} image">
                 </div>
     
@@ -45,90 +45,90 @@
                     <!-- First Name -->
                     <div>
                         <label for="first_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.first_name.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.first_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.first_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
 
                     <!-- Middle Name -->
                     <div>
                         <label for="middle_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.middle_name.label }}<span class="ml-1 text-1xl"></span></label>
-                        {% render_field form.middle_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        {% render_field form.middle_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
 
                     <!-- Last Name -->
                     <div>
                         <label for="last_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.last_name.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.last_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.last_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
 
                     <!-- Gender -->
                     <div>
                         <label for="gender" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.gender.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.gender class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.gender class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Phone Number -->
                     <div>
                         <label for="phone_number" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.phone_number.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.phone_number class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.phone_number class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Official Email -->
                     <div>
                         <label for="email" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.email.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.email class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.email class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Cadre -->
                     <div>
                         <label for="cadre" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.cadre.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.cadre class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.cadre class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
 
                     <!-- First Appointment -->
                     <div>
                         <label for="department" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.first_appointment.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.first_appointment id="datepicker" type=text class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.first_appointment id="datepicker" type=text class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Department -->
                     <div>
                         <label for="department" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.department.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.department class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.department class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Level -->
                     <div>
                         <label for="level" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.level.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.level class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.level class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Step -->
                     <div>
                         <label for="step" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.step.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.step class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        {% render_field form.step class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
                     
                     <!-- Birth Month -->
                     <div>
                         <label for="birth_month" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_month.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.birth_month class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        {% render_field form.birth_month class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
                     
                     <!-- Birth Day -->
                     <div>
                         <label for="birth_day" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_day.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.birth_day class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.birth_day class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
 
                     <!-- Profile Picture -->
                     <div>
                         <label for="staff_image" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.staff_image.label }}<span class="ml-1 text-1xl"></span></label>
-                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md md:w-full w-full px-3 py-2 border border-2 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
+                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md md:w-full w-full px-3 py-2 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or GIF (MAX. 1500x1500px).</p>
                         
                         <!-- Delete Remove Profile Picture -->
                         <div class="flex items-center">                            
-                            {% render_field form.delete_image value="" id="checked-checkbox" type="checkbox" class+="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 rounded border-2 border-gray-300 focus:ring-blue-500 focus:ring-2" %}                        
+                            {% render_field form.delete_image value="" id="checked-checkbox" type="checkbox" class+="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border border-4 border-gray-300 focus:ring-blue-500 focus:ring-2" %}                        
                             <label for="checked-checkbox" class="cursor-pointer ml-2 text-md font-medium text-gray-700">{{ form.delete_image.label }}</label>
                         </div>
                     </div>

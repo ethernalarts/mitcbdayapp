@@ -1,6 +1,6 @@
 
+from dataclasses import fields
 from email.policy import default
-import os
 import datetime
 from enum import unique
 from django.db import models
@@ -24,50 +24,29 @@ class staffDetails(models.Model):
     department = models.CharField('Department', max_length=100, null=False, default='Adminstration')    
     level = models.IntegerField('Grade Level', null=False, default=6)    
     step = models.IntegerField('Step', null=False, default=2)     
-    staff_image = models.ImageField("Profile Picture", upload_to='staffimages', null=True, blank=True)
+    staff_image = models.ImageField("Profile Picture", upload_to='staffimages', default='staffimages/default.png')
     delete_image = models.BooleanField('Delete Profile Picture', default=0)    
     
+    # get profile picture
     @property
     def profile_picture(self):
-        
-        # Create
         if self.staff_image == '':
-            if (self.gender == 2):
-                self.staff_image = 'staffimages/default-female.png'
-            elif (self.gender == 1):
-                self.staff_image = 'staffimages/default-male.png'
-        return self.staff_image
+            if self.gender == 2:
+                obj = self.__class__.objects.get(id=self.id)
+                obj.staff_image = 'staffimages/default-female.png'
+                obj.save()
+            elif self.gender == 1:
+                obj = self.__class__.objects.get(id=self.id)
+                obj.staff_image = 'staffimages/default-male.png'
+                obj.save()
+        return self.staff_image    
     
-    @property
-    def update_profile_picture(self):
-        
-        # Update
-        if (self.staff_image == '/media/staffimages/default-female.png') and (self.gender == 2):            
-            obj = self.__class__.objects.get(id=self.id)
-            obj.staff_image = '/media/staffimages/default-female.png'
-            obj.save(update_fields=['staff_image'])
-            
-            #self.objects.filter(id=self.id).update(staff_image='staffimages/default-female.png')
-            #self.staff_image = 'staffimages/default-female.png'
-            return self.staff_image
-            
-        if (self.staff_image == '/media/staffimages/default-male.png') and (self.gender == 1):    
-            # image = self.__class__.objects.get(id=self.id)
-            # image.staff_image = '/media/staffimages/default-male.png'
-            # image.save(update_fields=['staff_image'])
-            
-            self.__class__.filter(id=self.id).update(staff_image='/media/staffimages/default-male.png')        
-            #self.staff_image = 'staffimages/default-male.png'
-            return self.staff_image
     
     # def delete(self, using=None, keep_parents=False):
     #     self.staff_image.storage.delete(self.staff_image.first_name)
     #     super().delete()
         
-    GENDER = (
-        (1, 'Male'),
-        (2, 'Female')
-    )
+    GENDER = ((1, 'Male'), (2, 'Female'))
         
     gender = models.IntegerField('Gender', choices=GENDER, default=2)    
     
@@ -103,9 +82,7 @@ class staffDetails(models.Model):
         
     @property
     def BIRTHDAY_TODAY(self):
-        if (self.birth_month, self.birth_day) == (date.today().month, date.today().day):
-            return True
-        return False    
+        return (self.birth_month, self.birth_day) == (date.today().month, date.today().day)    
     
     # Staff Details Reverse URL
     def get_absolute_url(self):
@@ -118,5 +95,5 @@ class staffDetails(models.Model):
         return reverse('updatestaff', kwargs={'pk': self.id})  
     
     def __str__(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return f"{self.first_name} {self.last_name}"
     
