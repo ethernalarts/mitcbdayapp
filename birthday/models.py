@@ -21,7 +21,20 @@ class staffDetails(models.Model):
     email = models.EmailField('Official Email', max_length = 254, null=False)        
     cadre = models.CharField(("Cadre"), max_length=50, null=False, default='Admin Officer')    
     first_appointment = models.DateField(("Date of First Appointment"), default=datetime.date.today, null=False, blank=False)    
-    department = models.CharField('Department', max_length=100, null=False, default='Adminstration')    
+    
+    DEPARTMENTS = (
+        ('Administration & Supply', ('Administration &d Supply')),
+        ('Accounts', ('Accounts')),
+        ('Business Premises', ('Business Premises')),
+        ('Cooperatives', ('Cooperatives')),
+        ('Industry', ('Industry')),
+        ('MSMEs', ('MSMEs')),
+        ('Policy Formulation', ('Policy Formulation')),
+        ('Planning, Research and Statistics', ('Planning, Research and Statistics')),
+        ('Trade Promotions and Marketing', ('Trade Promotions and Marketing'))
+    )        
+        
+    department = models.CharField('Department', choices=DEPARTMENTS, max_length=100, null=False, default='Administration & Supply')    
     level = models.IntegerField('Grade Level', null=False, default=6)    
     step = models.IntegerField('Step', null=False, default=2)     
     staff_image = models.ImageField("Profile Picture", upload_to='staffimages', default='staffimages/default.png')
@@ -41,6 +54,14 @@ class staffDetails(models.Model):
                 obj.save()
         return self.staff_image    
     
+    # update profile picture
+    @property
+    def profile_picture(self): 
+        if (self.staff_image == 'staffimages/default-male.png') and (self.gender == 2):
+            self.staff_image = 'staffimages/default-female.png'
+        if (self.staff_image == 'staffimages/default-female.png') and (self.gender == 1):
+            self.staff_image = 'staffimages/default-male.png'
+        return self.staff_image
     
     # def delete(self, using=None, keep_parents=False):
     #     self.staff_image.storage.delete(self.staff_image.first_name)

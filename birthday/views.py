@@ -55,7 +55,7 @@ def sendmail(request, celebrants):
 
     print("Sending Birthday felicitation(s)...\n")
 
-    contents = pathlib.Path('sendmail/templates/bmessage_1.html').read_text()
+    contents = pathlib.Path('birthday/templates/bmessage_1.html').read_text()
     for celebrant in celebrants:
         # convert 'contents' to a template object
         template = Template(contents)

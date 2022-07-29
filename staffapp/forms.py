@@ -15,6 +15,15 @@ class staffDetailsCreateForm(forms.ModelForm):
             'cadre', 'first_appointment', 'department', 'level', 'step', 'staff_image', 
             'birth_month', 'birth_day'
         ]
+    
+    # validate email domain name
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        domain = data.split('@')[1]
+        domain_list = ["edostate.gov.ng",]
+        if domain not in domain_list:
+            raise forms.ValidationError("Please enter an Email Address with a valid domain")
+        return data
         
         
 # Update Staff form
@@ -28,3 +37,12 @@ class staffDetailsUpdateForm(forms.ModelForm):
             'cadre', 'first_appointment', 'department', 'level', 'step', 'staff_image', 
             'birth_month', 'birth_day', 'delete_image'
         ]   
+    
+    # validate email domain name
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        domain = data.split('@')[1]
+        domain_list = ["edostate.gov.ng",]
+        if domain not in domain_list:
+            raise forms.ValidationError("Please enter an Email Address with a valid domain")
+        return data

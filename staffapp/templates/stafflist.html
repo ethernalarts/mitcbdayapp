@@ -12,7 +12,9 @@
     
     
     <!-- Staff list -->
-    <div class="p-6 md:pb-4 mt-8 max-w-3xl mb-20 md:mb-24 bg-white rounded-lg border mx-auto shadow-md sm:p-10 min-h-full justify-center">
+    <div class="p-6 md:pb-4 mt-8 max-w-3xl mb-10 md:mb-8 bg-white rounded-lg border mx-auto shadow-md sm:p-10 min-h-full justify-center">
+        
+        {% comment %} STAFF LIST HEADING {% endcomment %}
         <div class="flex justify-between items-center mb-4">
             <h5 class="text-3xl font-bold leading-none text-gray-900 dark:text-white">Staff List</h5>    
         </div>
@@ -26,7 +28,7 @@
                         <!-- Profile Picture -->
                         <div class="flex items-center space-x-4">
                             <div class="flex-shrink-0">
-                                <img class="w-14 h-14 rounded-full" src="{{ staff.staff_image.url }}"
+                                <img class="w-14 h-14 rounded-full" src="{{ staff.profile_picture.url }}"
                                     alt="{{ staff.first_name }}'s' image">
                             </div>
         
