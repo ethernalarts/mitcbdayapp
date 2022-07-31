@@ -109,10 +109,10 @@ class staffDetailsUpdate(UpdateView):
 # update view for details
 def staffDetailsUpdates(request, pk):
     # fetch the object related to passed id
-    obj = get_object_or_404(staffDetails, id = pk)
+    obj = get_object_or_404(staffDetails, id=pk)
 
     # pass the object as instance in form
-    form = staffDetailsUpdateForm(request.POST or None, instance = obj)
+    form = staffDetailsUpdateForm(request.POST or None, instance=obj)
 
     # save the data from the form and
     # redirect to detail_view
@@ -125,7 +125,7 @@ def staffDetailsUpdates(request, pk):
         #     pass
 
         form.save()
-        return redirect('staffdetails', pk = obj.id) 
+        return redirect('staffdetails', pk=obj.id) 
 
     context = {"form": form, "staff": obj}
     return render(request, "updatestaff.html", context)

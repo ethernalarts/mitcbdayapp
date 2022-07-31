@@ -15,10 +15,10 @@
     {% include 'snippets/searchbar.html' %}
     
     <!-- Profile Card -->
-    <div class="max-w-3xl mx-auto px-12 mt-8 -mb-4 bg-white rounded-lg border border-gray-200 shadow-lg">   
+    <div class="max-w-3xl mx-auto mt-8 -mb-4 bg-white rounded-lg border border-gray-200 shadow-lg">   
 
         <!-- Container -->
-        <div class="flex flex-col items-center py-8">
+        <div class="flex flex-col items-center px-10 py-8">
 
             <!-- Profile Image -->
                 <img class="mt-1 w-32 h-32 rounded-full shadow-sm" src="{{ staff.profile_picture.url }}"
@@ -235,8 +235,7 @@
                                             {% csrf_token %}
                                             <input type="submit" 
                                                 class="cursor-pointer text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none 
-                                                        focus:ring-red-400 dark:focus:ring-red-800 font-medium rounded-lg text-md 
-                                                        items-center px-5 py-2.5 text-center" 
+                                                        focus:ring-red-400 font-medium rounded-lg text-md items-center px-5 py-2.5 text-center" 
                                                 value="Yes, Remove">
                                         </form>
                                     </button>
@@ -244,8 +243,8 @@
                                     <!-- No, Cancel button -->
                                     <button id="closemodal2" type="button" data-modal-toggle="popup-modal"
                                         class="text-gray-500 text-md bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none 
-                                                focus:ring-gray-300 rounded-lg border font-medium 
-                                                px-5 py-2 hover:text-gray-600 focus:z-10 ">
+                                                focus:ring-gray-300 rounded-lg border font-medium px-5 py-2 
+                                                hover:text-gray-600 focus:z-10 ">
                                         No, Cancel
                                     </button>
                                 </div>

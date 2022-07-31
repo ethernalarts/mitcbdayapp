@@ -20,10 +20,11 @@ class staffDetailsCreateForm(forms.ModelForm):
     def clean_email(self):
         data = self.cleaned_data['email']
         domain = data.split('@')[1]
-        domain_list = ["edostate.gov.ng",]
+        domain_list = ["edostate.gov.ng"]
+        
         if domain not in domain_list:
-            raise forms.ValidationError("Please enter an Email Address with a valid domain")
-        return data
+            raise ValidationError("Error! Please enter your official email address")
+        return data   
         
         
 # Update Staff form
@@ -43,6 +44,19 @@ class staffDetailsUpdateForm(forms.ModelForm):
         data = self.cleaned_data['email']
         domain = data.split('@')[1]
         domain_list = ["edostate.gov.ng",]
+        
         if domain not in domain_list:
             raise forms.ValidationError("Please enter an Email Address with a valid domain")
         return data
+    
+    # profile picture
+    # def clean_staff_image(self):
+    #     delete_image = self.cleaned_data['delete_image']
+    #     gender = self.cleaned_data['gender']
+        
+    #     if image == '':
+    #         if gender == 2:
+    #             image = 'staffimages/default-female.png'
+    #         elif gender == 1:
+    #             image = 'staffimages/default-male.png'
+    #     return image

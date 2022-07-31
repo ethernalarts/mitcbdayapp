@@ -11,19 +11,19 @@
 {% block content %}  
     <!-- Search bar -->
     {% include 'snippets/searchbar.html' %}
-
-    <!-- Date Picker -->
-	<!-- <script>
-        $(function () {
-            $("#datepicker").datepicker();
-        });
-    </script> -->
+    
+    <!-- Form Errors -->    
+    {% if form.errors.email %}
+        <div class="bg-red-500 mx-auto py-4 max-w-3xl text-center text-white rounded-md font-medium">
+            {{ form.errors.email }}
+        </div>
+    {% endif %}
 
     <!-- Outer Container -->
-    <div class="min-h-full flex items-center justify-center -mb-4 md:-mb-4 py-8 sm:px-6 lg:px-8">
+    <div class="min-h-full flex items-center justify-center -mb-4 md:-mb-4 py-8">
     
         <!-- Inner Container -->
-        <div class="w-full lg:max-w-3xl -mt-4 lg:-mb-10 bg-white shadow-md rounded-lg px-10 py-8">
+        <div class="w-full max-w-3xl -mt-4 -mb-10 bg-white shadow-md rounded-lg px-10 py-8">
     
             <!-- Form -->
             <form action="" method="POST" enctype="multipart/form-data">
@@ -44,7 +44,7 @@
                 <p class="text-md mt-10 font-medium text-red-600"><em>Fields marked with <span class="text-lg font-medium text-red-600"><em>*</em></span> are required</em></p>
     
                 <!-- Fields -->
-                <div class="grid gap-6 mt-10 md:mt-8 mb-6 md:grid-cols-2 lg:grid-cols-2">
+                <fieldset class="grid gap-6 mt-10 md:mt-8 mb-6 md:grid-cols-2 lg:grid-cols-2">
                     <input type="hidden" name="remember" value="true">
 
                     <!-- First Name -->
@@ -81,6 +81,9 @@
                     <div>
                         <label for="email" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.email.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
                         {% render_field form.email placeholder='e.g. jondoe@edostate.gov.ng' class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-400 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% comment %} {% if form.errors.email %}
+                            <span class="text-red-600 font-medium">{{ form.errors.email }}</span>
+                        {% endif %} {% endcomment %}
                     </div>
                     
                     <!-- Cadre -->
@@ -131,7 +134,7 @@
                         {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full py-2 px-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or GIF (MAX. 1500x1500px).</p>
                     </div>
-                </div>
+                </fieldset>
     
                 <!-- Submit Button -->
                 <div class="flex items-center w-full space-x-4">
@@ -139,7 +142,7 @@
                     <button type="submit" 
                             class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 py-3 px-4 border border-transparent 
                                    text-md font-medium rounded-md text-white bg-blue-700 hover:bg-blue-600 focus:outline-none 
-                                   focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                   focus:ring-4 focus:ring-offset-2 focus:ring-blue-500">
                         <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                             <!-- Heroicon name: user-plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
@@ -154,7 +157,7 @@
                     <button type="reset" 
                             class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 py-3 px-4 border border-red-700 
                                    text-md font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none 
-                                   focus:ring-2 focus:ring-offset-2 focus:ring-red-500 hover:border-red-600">
+                                   focus:ring-4 focus:ring-offset-2 focus:ring-red-500 hover:border-red-600">
                         Reset
                     </button>
                 </div>

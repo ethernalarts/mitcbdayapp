@@ -23,7 +23,7 @@ class staffDetails(models.Model):
     first_appointment = models.DateField(("Date of First Appointment"), default=datetime.date.today, null=False, blank=False)    
     
     DEPARTMENTS = (
-        ('Administration & Supply', ('Administration &d Supply')),
+        ('Administration and Supply', ('Administration and Supply')),
         ('Accounts', ('Accounts')),
         ('Business Premises', ('Business Premises')),
         ('Cooperatives', ('Cooperatives')),
@@ -34,38 +34,35 @@ class staffDetails(models.Model):
         ('Trade Promotions and Marketing', ('Trade Promotions and Marketing'))
     )        
         
-    department = models.CharField('Department', choices=DEPARTMENTS, max_length=100, null=False, default='Administration & Supply')    
+    department = models.CharField('Department', choices=DEPARTMENTS, max_length=100, null=False, default='Administration and Supply')    
     level = models.IntegerField('Grade Level', null=False, default=6)    
     step = models.IntegerField('Step', null=False, default=2)     
     staff_image = models.ImageField("Profile Picture", upload_to='staffimages', default='staffimages/default.png')
     delete_image = models.BooleanField('Delete Profile Picture', default=0)    
     
-    # get profile picture
+    # profile picture
     @property
-    def profile_picture(self):
-        if self.staff_image == '':
-            if self.gender == 2:
-                obj = self.__class__.objects.get(id=self.id)
-                obj.staff_image = 'staffimages/default-female.png'
-                obj.save()
-            elif self.gender == 1:
-                obj = self.__class__.objects.get(id=self.id)
-                obj.staff_image = 'staffimages/default-male.png'
-                obj.save()
-        return self.staff_image    
-    
-    # update profile picture
-    @property
-    def profile_picture(self): 
+    def profile_picture(self):   
+        # Profile Picture
+        if (self.staff_image == 'staffimages/default.png') and (self.gender == 1):
+            self.staff_image = 'staffimages/default-male.png'
+        if (self.staff_image == 'staffimages/default.png') and (self.gender == 2):
+            self.staff_image = 'staffimages/default-female.png'
+        
+        # Update profile picture  
         if (self.staff_image == 'staffimages/default-male.png') and (self.gender == 2):
             self.staff_image = 'staffimages/default-female.png'
         if (self.staff_image == 'staffimages/default-female.png') and (self.gender == 1):
             self.staff_image = 'staffimages/default-male.png'
-        return self.staff_image
+        return self.staff_image 
     
-    # def delete(self, using=None, keep_parents=False):
-    #     self.staff_image.storage.delete(self.staff_image.first_name)
-    #     super().delete()
+    # delete profile picture
+    @property    
+    def delete_profile_picture(self):
+        if self.delete_image:
+            
+            self.staff_image.storage.delete(self.staff_image.first_name)
+            super().delete()
         
     GENDER = ((1, 'Male'), (2, 'Female'))
         
