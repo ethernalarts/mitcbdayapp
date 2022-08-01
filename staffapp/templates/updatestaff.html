@@ -14,10 +14,10 @@
     {% include 'snippets/searchbar.html' %}  
 
     <!-- Outer Container -->
-    <div class="max-w-3xl min-h-full flex items-center justify-center mx-auto py-8 ">
+    <div class="bg-white max-w-3xl min-h-full flex items-center shadow-lg rounded-lg justify-center mx-auto -mb-4 mt-8 py-8">
     
         <!-- Inner Container -->
-        <div class="w-full bg-white -mt-6 -mb-10 shadow-md rounded-lg px-10 py-8">
+        <div class="w-full -mt-6 min-h-full px-8 pt-8 pb-4">
 
             <!-- Form -->
             <form action="" method="POST" enctype="multipart/form-data">
@@ -37,10 +37,17 @@
                 </div>
 
                 <p class="text-md mt-10 font-medium text-red-600"><em>Fields marked with <span class="text-lg font-medium text-red-600">*</span> are required</em></p>
+                
+                <!-- BIO DETAILS HEADER-->
+                <div class="w-32 mt-12">
+                    <h2 class="text-[20px] py-2 text-center font-medium bg-blue-700 text-white">
+                        Bio Details
+                    </h2>
+                </div>
 
-                <!-- Fields -->
-                <div class="grid gap-6 mt-8 md:mt-8 mb-6 lg:grid-cols-2">
-                    <input type="hidden" name="remember" value="true">
+                <!-- Bio Details Fields -->
+                <fieldset class="grid gap-6 md:grid-cols-2 lg:grid-cols-2 bg-blue-50 p-6 shadow-md">
+                    <input type="hidden" name="remember" value="true">                    
 
                     <!-- First Name -->
                     <div>
@@ -71,6 +78,43 @@
                         <label for="phone_number" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.phone_number.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
                         {% render_field form.phone_number class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
+                    
+                    <!-- Birth Month -->
+                    <div>
+                        <label for="birth_month" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_month.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
+                        {% render_field form.birth_month class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                    </div>
+                    
+                    <!-- Birth Day -->
+                    <div>
+                        <label for="birth_day" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_day.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
+                        {% render_field form.birth_day class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                    </div>
+
+                    <!-- Profile Picture -->
+                    <div>
+                        <label for="staff_image" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.staff_image.label }}<span class="ml-1 text-1xl"></span></label>
+                        {% render_field form.staff_image class+="cursor-pointer bg-white text-md md:text-md font-medium block rounded-md w-full px-3 py-2 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or GIF (MAX. 1500x1500px)</p>
+                        
+                        <!-- Delete Remove Profile Picture -->
+                        <div class="flex items-center">                            
+                            {% render_field form.delete_image value="" id="checked-checkbox" type="checkbox" class+="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border border-2 border-blue-60 focus:ring-blue-500 focus:ring-2" %}                            
+                            <label for="checked-checkbox" class="cursor-pointer ml-2 text-md font-medium text-gray-700">{{ form.delete_image.label }}</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                
+                <!-- OFFICIAL DETAILS HEADER-->
+                <div class="w-40 mt-20">
+                    <h2 class="text-[20px] p-2 text-center font-medium bg-blue-700 text-white">
+                        Official Details
+                    </h2>
+                </div>
+
+                <!-- Official Details Field -->
+                <fieldset class="grid gap-6 lg:grid-cols-2 p-6 pb-8 bg-blue-50 shadow-md">
                     
                     <!-- Official Email -->
                     <div>
@@ -107,40 +151,16 @@
                         <label for="step" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.step.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
                         {% render_field form.step class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
-                    
-                    <!-- Birth Month -->
-                    <div>
-                        <label for="birth_month" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_month.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.birth_month class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
-                    </div>
-                    
-                    <!-- Birth Day -->
-                    <div>
-                        <label for="birth_day" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_day.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.birth_day class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
-                    </div>
-
-                    <!-- Profile Picture -->
-                    <div>
-                        <label for="staff_image" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.staff_image.label }}<span class="ml-1 text-1xl"></span></label>
-                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md md:w-full w-full px-3 py-2 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or GIF (MAX. 1500x1500px).</p>
-                        
-                        <!-- Delete Remove Profile Picture -->
-                        <div class="flex items-center">                            
-                            {% render_field form.delete_image value="" id="checked-checkbox" type="checkbox" class+="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border border-4 border-gray-300 focus:ring-blue-500 focus:ring-2" %}                        
-                            <label for="checked-checkbox" class="cursor-pointer ml-2 text-md font-medium text-gray-700">{{ form.delete_image.label }}</label>
-                        </div>
-                    </div>
-                </div>
+                </fieldset>
                 
                 
                 <!-- Update and Remove buttons -->
-                <div class="flex items-center w-full space-x-4">
+                <div class="flex items-center mx-auto justify-center px-2 w-96 mt-20 space-x-4">
                     <!-- Update -->
-                    <button type="submit" class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 py-3 px-4 border border-transparent 
-                                                text-md font-medium rounded-md text-white bg-blue-700 hover:bg-blue-600 focus:outline-none 
-                                                 focus:ring-4 focus:ring-offset-2 focus:ring-blue-500">
+                    <button type="submit" 
+                            class="relative w-full flex items-center justify-center py-3 px-4 border border-transparent 
+                                   text-md font-medium rounded-md text-white bg-blue-700 hover:bg-blue-600 focus:outline-none 
+                                   focus:ring-4 focus:ring-offset-2 focus:ring-blue-500">
                         <span class="absolute left-0 inset-y-0 flex items-center pl-3 inline-flex items-center">
                             <svg class="-ml-1 mr-2 h-7 w-7 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                 fill="currentColor" aria-hidden="true">
@@ -152,10 +172,11 @@
                     </button>
 
                     <!-- Back to Profile -->
-                    <a href="{% url 'staffdetails' staff.id %}" class="w-full">
-                        <button type="button" class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 py-3 px-4 border border-red-700 
-                                                text-md font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none 
-                                                 focus:ring-4 focus:ring-offset-2 focus:ring-red-500 hover:border-red-600">
+                    <a href="{% url 'staffdetails' staff.id %}" class="w-96">
+                        <button type="button" 
+                                class="w-full py-3 px-4 border border-red-700 text-md font-medium rounded-md text-white 
+                                       bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-offset-2 
+                                       focus:ring-red-500 hover:border-red-600">
                             Cancel
                         </button>
                     </a>

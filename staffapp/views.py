@@ -10,6 +10,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import  (get_object_or_404, redirect,	render,	HttpResponseRedirect)
 from django.db.models import Q
+from requests import request
 from birthday.models import staffDetails
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView, DetailView, UpdateView
@@ -87,22 +88,20 @@ class staffDetailsUpdate(UpdateView):
         return reverse('staffdetails', kwargs={'pk': self.object.id})
     
     # def redirect_to(self, obj):
-    #     return reverse('staffdetails', args=[obj.id, obj.staff_image])
+    #     return reverse('staffdetails', args=[obj.id])
     
-    # def form_valid(self, form, *args, **kwargs):
-    #     """If the form is valid, save the associated model."""
-    #     if form.is_valid:
-    #         profile_image = form.cleaned_data.get('delete_image')
-            
-    #         if profile_image:
-    #             obj = staffDetailsView.objects.get(id=self.object.id)
-    #             obj.staff_image.delete(save=True)
-    #             obj.staff_image = 'staffapp/static/img/default-male.jpg'
-                
-    #             obj.delete(staffDetails)
+    # def form_valid(self, form, request):
+    #     form = staffDetailsUpdateForm(request.POST)
         
-    #     self.object = form.save()
-    #     return super().form_valid(form)
+    #     if form.is_valid:
+    #         if profile_image := form.cleaned_data['delete_image']:
+                
+    #             obj = staffDetailsView.objects.get(id=self.object.id)
+    #             obj.staff_image = None
+    #             #obj.staff_image = 'staffapp/static/img/default-male.jpg'
+    #             obj.save()
+        
+    #     return super(staffDetailsUpdate, self).form_valid(request, form)
     
     
 

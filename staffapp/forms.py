@@ -60,3 +60,14 @@ class staffDetailsUpdateForm(forms.ModelForm):
     #         elif gender == 1:
     #             image = 'staffimages/default-male.png'
     #     return image
+    
+    def form_valid(self, form):                
+        cd = self.cleaned_data
+        profile_image = cd.get['staff_image']
+
+        if delete_image := cd.get['delete_image']:
+            if form.is_valid:                
+                profile_image = None
+                #obj.staff_image = 'staffapp/static/img/default-male.jpg'
+                form.save()
+        return profile_image
