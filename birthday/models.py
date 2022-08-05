@@ -1,6 +1,5 @@
 
 from dataclasses import fields
-from email.policy import default
 import datetime
 from enum import unique
 from django.db import models
@@ -17,16 +16,35 @@ class staffDetails(models.Model):
     first_name = models.CharField('First Name', max_length=20, null=False)    
     middle_name = models.CharField('Middle Name', max_length=20, null=True, blank=True)    
     last_name = models.CharField('Last Name', max_length=20, null=False)    
-    phone_number = PhoneNumberField('Phone Number', default='09123456789')    
-    email = models.EmailField('Official Email', max_length = 254, null=False)        
-    cadre = models.CharField(("Cadre"), max_length=50, null=False, default='Admin Officer')    
-    first_appointment = models.DateField(("Date of First Appointment"), default=datetime.date.today, null=False, blank=False)    
+    phone_number = PhoneNumberField('Phone Number', null=False)        
+    email = models.EmailField('Official Email', max_length = 254, null=False)
+    
+    CADRE = (
+        ('Administrative', ('Administrative')),
+        ('Account Officer', ('Account Officer')),
+        ('Executive', ('Executive')),
+        ('Chief Secretary Assistant', ('Chief Secretary Assistant')),
+        ('Commercial Officer', ('Commercial Officer')),
+        ('Cooperative Officer', ('Cooperative Officer')),
+        ('Driver/Mechanic', ('Driver/Mechanic')),
+        ('Industrial Promotion Officer', ('Industrial Promotion Officer')),
+        ('Messenger', ('Messenger')),
+        ('Procurement', ('Procurement')),
+        ('Program Analyst', ('Program Analyst')),
+        ('Statistician', ('Statistician')),
+        ('Stores Officer', ('Stores Officer')),
+        ('Trade Officer', ('Trade Officer')),
+        ('Watchman', ('Watchman'))
+    )
+    
+    cadre = models.CharField(('Cadre'), choices=CADRE, max_length=100, null=False, default='Administrative')   
+    first_appointment = models.DateField(("Date of First Appointment"), default=datetime.date.today, null=False)    
     
     DEPARTMENTS = (
-        ('Administration and Supply', ('Administration and Supply')),
         ('Accounts', ('Accounts')),
         ('Business Premises', ('Business Premises')),
         ('Cooperatives', ('Cooperatives')),
+        ('Human Resource', ('Human Resource')),
         ('Industry', ('Industry')),
         ('MSMEs', ('MSMEs')),
         ('Policy Formulation', ('Policy Formulation')),
@@ -35,8 +53,8 @@ class staffDetails(models.Model):
     )        
         
     department = models.CharField('Department', choices=DEPARTMENTS, max_length=100, null=False, default='Administration and Supply')    
-    level = models.IntegerField('Grade Level', null=False, default=6)    
-    step = models.IntegerField('Step', null=False, default=2)     
+    level = models.IntegerField('Grade Level', null=False)    
+    step = models.IntegerField('Step', null=False)     
     staff_image = models.ImageField("Profile Picture", upload_to='staffimages', default='staffimages/default.png')
     delete_image = models.BooleanField('Delete Profile Picture', default=0)    
     
@@ -44,11 +62,12 @@ class staffDetails(models.Model):
     @property
     def profile_picture(self):   
         # Profile Picture
-        if (self.staff_image == 'staffimages/default.png') and (self.gender == 1):
-            self.staff_image = 'staffimages/default-male.png'
-        if (self.staff_image == 'staffimages/default.png') and (self.gender == 2):
-            self.staff_image = 'staffimages/default-female.png'
-        
+        if self.staff_image == 'staffimages/default.png':
+            if self.gender == 1:
+                self.staff_image = 'staffimages/default-male.png'
+            elif self.gender == 2:
+                self.staff_image = 'staffimages/default-female.png'
+
         # Update profile picture  
         if (self.staff_image == 'staffimages/default-male.png') and (self.gender == 2):
             self.staff_image = 'staffimages/default-female.png'

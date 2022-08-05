@@ -6,7 +6,9 @@ from birthday.models import staffDetails
 
 
 # Add Staff form
-class staffDetailsCreateForm(forms.ModelForm):    
+class staffDetailsCreateForm(forms.ModelForm):
+    first_appointment = forms.DateField(label="Date of First Appointment", widget=forms.DateInput(attrs={'type': 'date'}))
+    level = forms.IntegerField(label="Grade Level", min_value=1, max_value=17)
     
     class Meta: 
         model = staffDetails 
@@ -23,13 +25,25 @@ class staffDetailsCreateForm(forms.ModelForm):
         domain_list = ["edostate.gov.ng"]
         
         if domain not in domain_list:
-            raise ValidationError("Error! Please enter your official email address")
+            raise ValidationError("Please provide your official email address")
         return data   
+    
+    # validate image format
+    def clean_staff_image(self):
+        data = self.cleaned_data['staff_image']
+        filetype = data.split('.')[1]
+        filetype_list = ["png", "jpg", "jpeg", "gif"]
+        
+        if filetype not in filetype_list:
+            raise forms.ValidationError("Please upload a JPG, PNG or GIF file only")
+        return data
         
         
 # Update Staff form
 class staffDetailsUpdateForm(forms.ModelForm):      
-    staff_image = forms.ImageField(label='Change Profile Picture', widget=forms.FileInput, required=False) 
+    staff_image = forms.ImageField(label='Change Profile Picture', widget=forms.FileInput, required=False)
+    level = forms.IntegerField(label="Grade Level", min_value=1, max_value=17)
+    #delete_image = forms.BooleanField()
     
     class Meta: 
         model = staffDetails 
@@ -41,32 +55,32 @@ class staffDetailsUpdateForm(forms.ModelForm):
     
     # validate email domain name
     def clean_email(self):
-        data = self.cleaned_data['email']
-        domain = data.split('@')[1]
+        email = self.cleaned_data['email']
+        domain = email.split('@')[1]
         domain_list = ["edostate.gov.ng",]
         
         if domain not in domain_list:
-            raise forms.ValidationError("Please enter an Email Address with a valid domain")
+            raise forms.ValidationError("Please provide your official email address")
+        return email
+    
+    # validate image format
+    def clean_staff_image(self):
+        data = self.cleaned_data['staff_image']
+        filetype = data.split('.')[1]
+        filetype_list = ["png", "jpg", "jpeg", "gif"]
+        
+        if filetype not in filetype_list:
+            raise forms.ValidationError("Please upload a JPG, PNG or GIF file only")
         return data
     
-    # profile picture
-    # def clean_staff_image(self):
-    #     delete_image = self.cleaned_data['delete_image']
-    #     gender = self.cleaned_data['gender']
-        
-    #     if image == '':
-    #         if gender == 2:
-    #             image = 'staffimages/default-female.png'
-    #         elif gender == 1:
-    #             image = 'staffimages/default-male.png'
-    #     return image
     
-    def form_valid(self, form):                
-        cd = self.cleaned_data
-        profile_image = cd.get['staff_image']
+    def form_valid(self, form):
 
-        if delete_image := cd.get['delete_image']:
-            if form.is_valid:                
+        if form.is_valid:                
+            cd = self.cleaned_data
+            profile_image = cd.get['staff_image']
+            
+            if delete_image := cd.get['delete_image']:                
                 profile_image = None
                 #obj.staff_image = 'staffapp/static/img/default-male.jpg'
                 form.save()

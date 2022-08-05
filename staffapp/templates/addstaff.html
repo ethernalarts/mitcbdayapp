@@ -14,16 +14,16 @@
     
     <!-- Form Errors -->    
     {% if form.errors.email %}
-        <div class="bg-red-500 mx-auto py-4 max-w-3xl text-center text-white rounded-md font-medium">
+        <div class="bg-red-500 mx-auto p-6 mt-8 max-w-3xl text-center text-white rounded-md font-medium">
             {{ form.errors.email }}
         </div>
     {% endif %}
 
     <!-- Outer Container -->
-    <div class="min-h-full flex items-center justify-center -mb-4 md:-mb-4 py-8">
+    <div class="bg-white max-w-3xl min-h-full flex items-center shadow-lg rounded-lg justify-center mx-auto -mb-4 mt-8 py-8">
     
         <!-- Inner Container -->
-        <div class="w-full max-w-3xl -mt-4 -mb-10 bg-white shadow-md rounded-lg px-10 py-8">
+        <div class="w-full -mt-6 min-h-full px-8 lg:px-10 pt-8 pb-4">
     
             <!-- Form -->
             <form action="" method="POST" enctype="multipart/form-data">
@@ -42,105 +42,124 @@
                 </div>
 
                 <p class="text-md mt-10 font-medium text-red-600"><em>Fields marked with <span class="text-lg font-medium text-red-600"><em>*</em></span> are required</em></p>
-    
-                <!-- Fields -->
-                <fieldset class="grid gap-6 mt-10 md:mt-8 mb-6 md:grid-cols-2 lg:grid-cols-2">
-                    <input type="hidden" name="remember" value="true">
+
+                <!-- BIO DETAILS HEADER-->
+                <div class="w-32 mt-12">
+                    <h2 class="text-[20px] py-2 text-center font-medium bg-blue-500 text-white">
+                        Bio Details
+                    </h2>
+                </div>
+
+                <!-- Bio Details Fields -->
+                <fieldset class="grid gap-6 md:grid-cols-2 lg:grid-cols-2 bg-blue-100 white p-6 shadow-md">
+                    <input type="hidden" name="remember" value="true">                    
 
                     <!-- First Name -->
                     <div>
                         <label for="first_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.first_name.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.first_name class+="text-md md:text-md font-medium block w-full p-3 rounded-md border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.first_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
 
                     <!-- Middle Name -->
                     <div>
                         <label for="middle_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.middle_name.label }}<span class="ml-1 text-1xl"></span></label>
-                        {% render_field form.middle_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.middle_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
 
                     <!-- Last Name -->
                     <div>
                         <label for="last_name" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.last_name.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.last_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}  
+                        {% render_field form.last_name class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
 
                     <!-- Gender -->
                     <div>
                         <label for="gender" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.gender.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.gender class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.gender class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Phone Number -->
                     <div>
                         <label for="phone_number" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.phone_number.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.phone_number placeholder='e.g. 0902 345 6789 ' class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-400 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
-                    </div>
-                    
-                    <!-- Official Email -->
-                    <div>
-                        <label for="email" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.email.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.email placeholder='e.g. jondoe@edostate.gov.ng' class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-400 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
-                        {% comment %} {% if form.errors.email %}
-                            <span class="text-red-600 font-medium">{{ form.errors.email }}</span>
-                        {% endif %} {% endcomment %}
-                    </div>
-                    
-                    <!-- Cadre -->
-                    <div>
-                        <label for="cadre" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.cadre.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.cadre class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
-                    </div>
-
-                    <!-- First Appointment -->
-                    <div>
-                        <label for="department" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.first_appointment.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.first_appointment id="datepicker" type=text class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
-                    </div>
-                    
-                    <!-- Department -->
-                    <div>
-                        <label for="department" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.department.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.department class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
-                    </div>
-                    
-                    <!-- Level -->
-                    <div>
-                        <label for="level" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.level.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.level class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
-                    </div>
-                    
-                    <!-- Step -->
-                    <div>
-                        <label for="step" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.step.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.step class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        {% render_field form.phone_number class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Birth Month -->
                     <div>
                         <label for="birth_month" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_month.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.birth_month class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        {% render_field form.birth_month class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
                     
                     <!-- Birth Day -->
                     <div>
                         <label for="birth_day" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_day.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.birth_day class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.birth_day class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
-                        
+
                     <!-- Profile Picture -->
-                    <div class="w-full">
+                    <div>
                         <label for="staff_image" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.staff_image.label }}<span class="ml-1 text-1xl"></span></label>
-                        {% render_field form.staff_image class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full py-2 px-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or GIF (MAX. 1500x1500px).</p>
+                        {% render_field form.staff_image class+="cursor-pointer bg-white text-md md:text-md font-medium block rounded-md w-full px-3 py-2 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or GIF (MAX. 1500x1500px)</p>
+                    </div>
+                </fieldset>
+
+
+                <!-- OFFICIAL DETAILS HEADER-->
+                <div class="w-40 mt-20">
+                    <h2 class="text-[20px] p-2 text-center font-medium bg-blue-500 text-white">
+                        Official Details
+                    </h2>
+                </div>
+
+                <!-- Official Details Field -->
+                <fieldset class="grid gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 pb-8 bg-blue-100 shadow-md">
+                    
+                    <!-- Official Email -->
+                    <div>
+                        <label for="email" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.email.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
+                        {% render_field form.email class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% if form.errors.email %}
+                            <span class="text-red-600 font-medium">{{ form.errors.email }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Cadre -->
+                    <div>
+                        <label for="cadre" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.cadre.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
+                        {% render_field form.cadre class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                    </div>
+
+                    <!-- First Appointment -->
+                    <div>
+                        <label for="first_appointment" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.first_appointment.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
+                        {% render_field form.first_appointment type="date" name="first_appointment" class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                    </div>
+                    
+                    <!-- Department -->
+                    <div>
+                        <label for="department" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.department.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
+                        {% render_field form.department class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                    </div>
+                    
+                    <!-- Level -->
+                    <div>
+                        <label for="level" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.level.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
+                        {% render_field form.level class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                    </div>
+                    
+                    <!-- Step -->
+                    <div>
+                        <label for="step" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.step.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
+                        {% render_field form.step class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
                 </fieldset>
     
                 <!-- Submit Button -->
-                <div class="flex items-center w-full space-x-4">
+                <div class="flex items-center mx-auto justify-center px-2 w-96 mt-20 space-x-4">
                     <!-- Add -->
                     <button type="submit" 
-                            class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 py-3 px-4 border border-transparent 
+                            class="relative w-full flex items-center mx-auto justify-center py-3 px-4 border border-transparent 
                                    text-md font-medium rounded-md text-white bg-blue-700 hover:bg-blue-600 focus:outline-none 
                                    focus:ring-4 focus:ring-offset-2 focus:ring-blue-500">
                         <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -155,7 +174,7 @@
 
                     <!-- Clear form -->
                     <button type="reset" 
-                            class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 py-3 px-4 border border-red-700 
+                            class="group relative w-full flex items-center mx-auto justify-center py-3 px-4 border border-red-700 
                                    text-md font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none 
                                    focus:ring-4 focus:ring-offset-2 focus:ring-red-500 hover:border-red-600">
                         Reset

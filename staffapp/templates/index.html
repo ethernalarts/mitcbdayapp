@@ -6,20 +6,21 @@
 {% endblock %}
 
 {% block content %}
+
 	<!-- Body Container -->
-	<div class="grid place-items-center h-auto">
+	<div class="grid gap-y-8 place-items-center min-h-auto">
 
 		<div>
 
-			<!-- Subheader -->
-			<div class="w-96 md:w-[600px] mt-14 md:mt-20 overflow-visible">
+			<!-- HEADER -->
+			<div class="w-96 md:w-[600px] mt-16 lg:mt-20 overflow-visible">
 				<h1 class="text-4xl text-gray-700 font-extrabold text-center">
 					Ministry of Industry, Trade and Cooperatives's Staff Directory
 				</h1>
 			</div>
 	
 			<!-- Search bar container -->
-			<div class="max-w-3xl rounded-lg mt-20 mb-10 sm:w-full md:w-full">
+			<div class="max-w-3xl rounded-lg mt-20 mb-4 w-full">
 		
 				<!-- Search form -->
 				<form action="{% url 'searchresult' %}" class="flex items-center" method="GET">
@@ -27,18 +28,18 @@
 					<!-- Input -->
 					<div class="relative w-full">
 						<input type="text" id="simple-search" name="q" 
-									class="bg-white block font-medium border border-2 border-blue-600 text-gray-900 text-lg rounded-lg 
-											focus:border-blue-600 block w-full p-4 md:p-6 ring-2 ring-blue-600 
-											focus:ring-4 focus:outline-none focus:ring-blue-600"
-									placeholder="Search for a staff..."
+									class="bg-white block font-medium border border-4 border-blue-600 text-gray-900 text-lg rounded-lg 
+											focus:border-blue-600 block w-full p-4 md:p-6 ring-2 ring-blue-600 focus:bg-blue-50
+											focus:ring-2 focus:outline-none focus:ring-blue-600"
+									placeholder="Search for a Staff..."
 							required>
 					</div>
 		
 					<!-- Submit Query -->
-					<button type="submit" class="px-8 p-4 md:py-6 ml-2 text-lg font-bold text-white bg-blue-700 rounded-lg border
-												border-0 border-blue-700 hover:border-blue-800 hover:bg-blue-800 focus:ring-0 
-												focus:outline-none focus:ring-blue-300 
-												dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+					<button type="submit" 
+							class="px-8 p-4 md:py-6 ml-2 text-lg font-bold text-white bg-blue-700 rounded-lg border
+									border-2 border-blue-700 hover:border-blue-800 hover:bg-blue-800 focus:ring-0 
+									focus:outline-none focus:ring-blue-700 ">
 						<span class="inline-flex items-center">
 							<svg class="w-7 h-7 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24"
 								xmlns="http://www.w3.org/2000/svg">

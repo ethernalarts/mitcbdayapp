@@ -11,13 +11,27 @@
 {% block content %}
 
     <!-- Search bar -->
-    {% include 'snippets/searchbar.html' %}  
+    {% include 'snippets/searchbar.html' %}
+    
+    <!-- Email Errors -->    
+    {% if form.errors.email %}
+        <div class="bg-red-500 mx-auto p-6 mt-8 max-w-3xl text-center text-white rounded-md font-medium">
+            {{ form.errors.email }}
+        </div>
+    {% endif %}
+
+    <!-- Profile Picture Errors -->    
+    {% if form.errors.staff_image %}
+        <div class="bg-red-500 mx-auto p-6 mt-8 max-w-3xl text-center text-white rounded-md font-medium">
+            {{ form.errors.staff_image }}
+        </div>
+    {% endif %}
 
     <!-- Outer Container -->
     <div class="bg-white max-w-3xl min-h-full flex items-center shadow-lg rounded-lg justify-center mx-auto -mb-4 mt-8 py-8">
     
         <!-- Inner Container -->
-        <div class="w-full -mt-6 min-h-full px-8 pt-8 pb-4">
+        <div class="w-full -mt-6 min-h-full px-8 lg:px-10 pt-8 pb-4">
 
             <!-- Form -->
             <form action="" method="POST" enctype="multipart/form-data">
@@ -32,7 +46,7 @@
                 <!-- Form title -->
                 <div class="w-full mb-6 md:w-[450px] md:mx-auto">
                     <h2 class="text-center text-3xl font-extrabold text-gray-900">
-                        Update: <span class="underline underline-offset-4"><em>{{ staff.first_name }} {{ staff.last_name }}</em></span>
+                        Update: <span class="underline underline-offset-4"><em>{{ staff.first_name.title }} {{ staff.last_name.title }}</em></span>
                     </h2>
                 </div>
 
@@ -40,13 +54,13 @@
                 
                 <!-- BIO DETAILS HEADER-->
                 <div class="w-32 mt-12">
-                    <h2 class="text-[20px] py-2 text-center font-medium bg-blue-700 text-white">
+                    <h2 class="text-[20px] py-2 text-center font-medium bg-blue-500 text-white">
                         Bio Details
                     </h2>
                 </div>
 
                 <!-- Bio Details Fields -->
-                <fieldset class="grid gap-6 md:grid-cols-2 lg:grid-cols-2 bg-blue-50 p-6 shadow-md">
+                <fieldset class="grid gap-6 md:grid-cols-2 lg:grid-cols-2 bg-blue-100 white p-6 shadow-md">
                     <input type="hidden" name="remember" value="true">                    
 
                     <!-- First Name -->
@@ -70,7 +84,7 @@
                     <!-- Gender -->
                     <div>
                         <label for="gender" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.gender.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.gender class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.gender class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Phone Number -->
@@ -82,7 +96,7 @@
                     <!-- Birth Month -->
                     <div>
                         <label for="birth_month" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.birth_month.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.birth_month class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
+                        {% render_field form.birth_month class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                        
                     </div>
                     
                     <!-- Birth Day -->
@@ -99,33 +113,39 @@
                         
                         <!-- Delete Remove Profile Picture -->
                         <div class="flex items-center">                            
-                            {% render_field form.delete_image value="" id="checked-checkbox" type="checkbox" class+="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border border-2 border-blue-60 focus:ring-blue-500 focus:ring-2" %}                            
+                            {% render_field form.delete_image value="" name="delete_image" id="checked-checkbox" type="checkbox" class+="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border border-2 border-blue-60 focus:ring-blue-500 focus:ring-2" %}                            
                             <label for="checked-checkbox" class="cursor-pointer ml-2 text-md font-medium text-gray-700">{{ form.delete_image.label }}</label>
                         </div>
+                        {% if form.errors.staff_image %}
+                            <span class="text-red-600 font-medium">{{ form.errors.staff_image }}</span>
+                        {% endif %}
                     </div>
                 </fieldset>
 
                 
                 <!-- OFFICIAL DETAILS HEADER-->
                 <div class="w-40 mt-20">
-                    <h2 class="text-[20px] p-2 text-center font-medium bg-blue-700 text-white">
+                    <h2 class="text-[20px] p-2 text-center font-medium bg-blue-500 text-white">
                         Official Details
                     </h2>
                 </div>
 
                 <!-- Official Details Field -->
-                <fieldset class="grid gap-6 lg:grid-cols-2 p-6 pb-8 bg-blue-50 shadow-md">
+                <fieldset class="grid gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 pb-8 bg-blue-100 shadow-md">
                     
                     <!-- Official Email -->
                     <div>
                         <label for="email" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.email.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
                         {% render_field form.email class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% if form.errors.email %}
+                            <span class="text-red-600 font-medium">{{ form.errors.email }}</span>
+                        {% endif %}
                     </div>
                     
                     <!-- Cadre -->
                     <div>
                         <label for="cadre" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.cadre.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.cadre class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.cadre class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
 
                     <!-- First Appointment -->
@@ -137,7 +157,7 @@
                     <!-- Department -->
                     <div>
                         <label for="department" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.department.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
-                        {% render_field form.department class+="text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
+                        {% render_field form.department class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     
                     <!-- Level -->
@@ -155,7 +175,7 @@
                 
                 
                 <!-- Update and Remove buttons -->
-                <div class="flex items-center mx-auto justify-center px-2 w-96 mt-20 space-x-4">
+                <div class="flex items-center mx-auto w-full md:w-[500px] lg:w-[500px] px-2 mt-20 space-x-4">
                     <!-- Update -->
                     <button type="submit" 
                             class="relative w-full flex items-center justify-center py-3 px-4 border border-transparent 
@@ -172,7 +192,7 @@
                     </button>
 
                     <!-- Back to Profile -->
-                    <a href="{% url 'staffdetails' staff.id %}" class="w-96">
+                    <a href="{% url 'staffdetails' staff.id %}" class="w-full">
                         <button type="button" 
                                 class="w-full py-3 px-4 border border-red-700 text-md font-medium rounded-md text-white 
                                        bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-offset-2 
