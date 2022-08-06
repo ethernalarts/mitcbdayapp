@@ -63,7 +63,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'active_link',
     'tailwind',
-    'django_rename_app',
     'theme',
     'mathfilters',
     'django_cleanup.apps.CleanupConfig',

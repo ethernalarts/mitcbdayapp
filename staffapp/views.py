@@ -1,11 +1,8 @@
 
 # Create your views here.
 
-from email.policy import default
 from multiprocessing import context
 from operator import attrgetter
-import os
-import pathlib
 from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import  (get_object_or_404, redirect,	render,	HttpResponseRedirect)
@@ -16,7 +13,6 @@ from django.views.generic.edit import CreateView
 from django.views.generic import ListView, DetailView, UpdateView
 from django.urls import reverse
 from .forms import *
-from rest_framework.decorators import api_view
 
 
 
@@ -160,8 +156,8 @@ def removeStaff(request, pk):  # sourcery skip: avoid-builtin-shadow
                     'middle_name': list[1],
                     'last_name': list[2]
                 }
-                    )
-                        )
+            )
+        )
 
   
 

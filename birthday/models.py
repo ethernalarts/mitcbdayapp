@@ -78,10 +78,16 @@ class staffDetails(models.Model):
     # delete profile picture
     @property    
     def delete_profile_picture(self):
-        if self.delete_image:
-            
+        if self.delete_image:            
             self.staff_image.storage.delete(self.staff_image.first_name)
             super().delete()
+    
+    # get phone number
+    @property
+    def get_phone_number(self):
+        if self.phone_number is None:
+            self.phone_number = '0700 000 0000'
+        return self.phone_number
         
     GENDER = ((1, 'Male'), (2, 'Female'))
         

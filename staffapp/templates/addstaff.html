@@ -12,12 +12,24 @@
     <!-- Search bar -->
     {% include 'snippets/searchbar.html' %}
     
-    <!-- Form Errors -->    
-    {% if form.errors.email %}
-        <div class="bg-red-500 mx-auto p-6 mt-8 max-w-3xl text-center text-white rounded-md font-medium">
-            {{ form.errors.email }}
-        </div>
-    {% endif %}
+    <!-- Form Errors messages -->    
+    {% for field in form %}
+        {% if field.errors %}
+            <div class="error-message relative bg-red-500 mx-auto p-6 mt-8 max-w-3xl text-center text-white rounded-md font-medium">                
+                {{ field.errors|striptags }}
+
+                <button type="button" 
+                    class="close-error-message absolute top-2 right-2 text-white bg-transparent hover:text-red-200 
+                            text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5 text-bold" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        {% endif %}
+    {% endfor %}
 
     <!-- Outer Container -->
     <div class="bg-white max-w-3xl min-h-full flex items-center shadow-lg rounded-lg justify-center mx-auto -mb-4 mt-8 py-8">
@@ -101,6 +113,9 @@
                         <label for="staff_image" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.staff_image.label }}<span class="ml-1 text-1xl"></span></label>
                         {% render_field form.staff_image class+="cursor-pointer bg-white text-md md:text-md font-medium block rounded-md w-full px-3 py-2 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %}                        
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or GIF (MAX. 1500x1500px)</p>
+                        {% if form.errors.staff_image %}
+                            <span class="text-red-600 font-medium">{{ form.errors.staff_image }}</span>
+                        {% endif %}
                     </div>
                 </fieldset>
 
@@ -181,7 +196,25 @@
                     </button>
                 </div>
             </form>
+            <!-- End of form -->
+
+            <!-- JavaScript to close error message -->
+            <script>
+                // Get the error message popup
+                var message = document.getElementsByClassName("error-message");
+
+                // Get the X <button> element that closes the error message
+                var closebutton = document.getElementsByClassName("close-error-message");
+
+                // Get the X <button> to close each error message
+                for (let i = 0; i < message.length; i++) {
+                    for (let i = 0; i < closebutton.length; i++) {
+                        closebutton[i].onclick = function () {
+                            message[i].style.display = "none";
+                        } 
+                    }
+                }
+            </script>
         </div>
     </div>
-
 {% endblock %}
