@@ -25,6 +25,7 @@ class staffDetails(models.Model):
         ('Executive', ('Executive')),
         ('Chief Secretary Assistant', ('Chief Secretary Assistant')),
         ('Commercial Officer', ('Commercial Officer')),
+        ('Confidential Secretary', ('Confidential Secretary')),
         ('Cooperative Officer', ('Cooperative Officer')),
         ('Driver/Mechanic', ('Driver/Mechanic')),
         ('Industrial Promotion Officer', ('Industrial Promotion Officer')),
@@ -47,6 +48,8 @@ class staffDetails(models.Model):
         ('Human Resource', ('Human Resource')),
         ('Industry', ('Industry')),
         ('MSMEs', ('MSMEs')),
+        ('Office of the Permanent Secretary', ('Office of the Permanent Secretary')),
+        ('Office of the Honourable Commissioner', ('Office of the Honourable Commissioner')),
         ('Policy Formulation', ('Policy Formulation')),
         ('Planning, Research and Statistics', ('Planning, Research and Statistics')),
         ('Trade Promotions and Marketing', ('Trade Promotions and Marketing'))

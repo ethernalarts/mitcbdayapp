@@ -45,7 +45,7 @@ class staffListView(ListView):
 
 # Staff Detail View
 class staffDetailsView(DetailView):
-    context_object_name = 'staff'  # your own name for the list as a template variable
+    context_object_name = 'staff'
     template_name = 'staffdetails.html'
            
     def get_queryset(self):        

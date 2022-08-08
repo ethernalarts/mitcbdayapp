@@ -1,7 +1,9 @@
+
 {% extends "base.html" %}
 {% load static tailwind_tags %}
 {% load widget_tweaks %}
 {% load static %}
+{% load custom_filter %}
 
 {% block title %}
     <title>
@@ -56,12 +58,10 @@
             <!-- Department -->
             <div class="flex flex-row items-center justify-center mt-4">
                 <span class="text-center">
-                    {% if staff.department %}
-                        {% if staff.first_name == 'Abieyuwa' %}
-                            <p class="text-lg font-bold text-gray-500 dark:text-gray-400"><em>Office of the Permanent Secretary</em></p>
-                            {% else %}
-                                <p class="text-lg font-bold text-gray-500 dark:text-gray-400"><em>Department of {{ staff.department }}</em></p>  
-                        {% endif %}
+                    {% if staff.department in "Office of the Permanent Secretary, Office of the Honourable Commissioner" %}
+                        <p class="text-lg font-bold text-gray-500"><em>{{ staff.department }}</em></p>
+                        {% else %}
+                            <p class="text-lg font-bold text-gray-500"><em>Department of {{ staff.department }}</em></p>          
                     {% endif %}
                 </span>
             </div>
@@ -295,7 +295,7 @@
                     }
 
                     // When the user clicks on 'No, Cancel' button, close the modal
-                        button2.onclick = function () {
+                    button2.onclick = function () {
                         modal.style.display = "none";
                     }
 
