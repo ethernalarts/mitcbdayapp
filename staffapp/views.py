@@ -43,6 +43,15 @@ class staffListView(ListView):
     
 
 
+# Add Staff View
+class staffDetailsCreate(CreateView):
+    model = staffDetails
+    form_class = staffDetailsCreateForm
+    context_object_name = 'staff'
+    template_name = 'addstaff.html'
+    
+
+
 # Staff Detail View
 class staffDetailsView(DetailView):
     context_object_name = 'staff'
@@ -59,15 +68,6 @@ class staffDetailsView(DetailView):
         context['phone_number_default'] = staffDetails._meta.get_field('phone_number').get_default()
     
         return context
-    
-
-
-# Add Staff View
-class staffDetailsCreate(CreateView):
-    model = staffDetails
-    form_class = staffDetailsCreateForm
-    context_object_name = 'staff'
-    template_name = 'addstaff.html'
     
     
 

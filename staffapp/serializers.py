@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.utils import timezone
 from rest_framework.exceptions import NotAuthenticated, PermissionDenied
-#from .utils import average_rating
+# from .utils import average_rating
 from birthday.models import staffDetails
 
 

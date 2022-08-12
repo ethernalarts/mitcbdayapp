@@ -15,6 +15,7 @@ def validate_email_domain(value):
 class staffDetailsCreateForm(forms.ModelForm):
     first_appointment = forms.DateField(label="Date of First Appointment", widget=forms.DateInput(attrs={'type': 'date'}))
     level = forms.IntegerField(label="Grade Level", min_value=1, max_value=17)
+    step = forms.IntegerField(label="Step", min_value=1, max_value=6)
     email = forms.EmailField(validators=[validate_email_domain])
     
     class Meta: 
@@ -36,6 +37,7 @@ class staffDetailsCreateForm(forms.ModelForm):
 class staffDetailsUpdateForm(forms.ModelForm):      
     staff_image = forms.ImageField(label='Change Profile Picture', widget=forms.FileInput, required=False)
     level = forms.IntegerField(label="Grade Level", min_value=1, max_value=17)
+    step = forms.IntegerField(label="Step", min_value=1, max_value=6)
     email = forms.EmailField(validators=[validate_email_domain])
     #delete_image = forms.BooleanField()
     
