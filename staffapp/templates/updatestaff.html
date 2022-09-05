@@ -119,7 +119,7 @@
                         
                         <!-- Delete Remove Profile Picture -->
                         <div class="flex items-center">                            
-                            {% render_field form.delete_image value="" name="delete_image" id="checked-checkbox" type="checkbox" class+="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border border-2 border-blue-60 focus:ring-blue-500 focus:ring-2" %}                            
+                            {% render_field form.delete_image name="delete_image" id="checked-checkbox" type="checkbox" class+="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border border-2 border-blue-60 focus:ring-blue-500 focus:ring-2" %}                            
                             <label for="checked-checkbox" class="cursor-pointer ml-2 text-md font-medium text-gray-700">{{ form.delete_image.label }}</label>
                         </div>
                         {% if form.errors.staff_image %}

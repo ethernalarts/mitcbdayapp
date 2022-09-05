@@ -10,9 +10,14 @@ from django.urls import reverse  # To generate URLS by reversing URL patterns
 
 # Create your models here.
 
+default_pic = 'staffimages/default.png'
+male_pic = 'staffimages/default-male.png'
+female_pic = 'staffimages/default-female.png'
+
 
 class staffDetails(models.Model):
     
+    id = models.IntegerField(primary_key=True)
     first_name = models.CharField('First Name', max_length=20, null=False)    
     middle_name = models.CharField('Middle Name', max_length=20, null=True, blank=True)    
     last_name = models.CharField('Last Name', max_length=20, null=False)    
@@ -55,35 +60,42 @@ class staffDetails(models.Model):
         ('Trade Promotions and Marketing', ('Trade Promotions and Marketing'))
     )        
         
-    department = models.CharField('Department', choices=DEPARTMENTS, max_length=100, null=False, default='Administration and Supply')    
-    level = models.IntegerField('Grade Level', null=False)    
-    step = models.IntegerField('Step', null=False)     
+    department = models.CharField('Department', choices=DEPARTMENTS, max_length=100, null=False, default='Administration and Supply')
+    level = models.IntegerField('Grade Level', null=False)
+    step = models.IntegerField('Step', null=False)
     staff_image = models.ImageField("Profile Picture", upload_to='staffimages', default='staffimages/default.png')
     delete_image = models.BooleanField('Delete Profile Picture', default=0)    
     
     # profile picture
     @property
-    def profile_picture(self):   
+    def profile_picture(self): 
         # Profile Picture
-        if self.staff_image == 'staffimages/default.png':
+        if self.staff_image == default_pic:
             if self.gender == 1:
-                self.staff_image = 'staffimages/default-male.png'
+                self.staff_image = male_pic
             elif self.gender == 2:
-                self.staff_image = 'staffimages/default-female.png'
+                self.staff_image = female_pic
 
         # Update profile picture  
-        if (self.staff_image == 'staffimages/default-male.png') and (self.gender == 2):
-            self.staff_image = 'staffimages/default-female.png'
-        if (self.staff_image == 'staffimages/default-female.png') and (self.gender == 1):
-            self.staff_image = 'staffimages/default-male.png'
+        if (self.staff_image == male_pic) and (self.gender == 2):
+            self.staff_image = female_pic
+        if (self.staff_image == female_pic) and (self.gender == 1):
+            self.staff_image = male_pic
+
         return self.staff_image 
     
     # delete profile picture
     @property    
     def delete_profile_picture(self):
-        if self.delete_image:            
-            self.staff_image.storage.delete(self.staff_image.first_name)
-            super().delete()
+        if self.staff_image != [male_pic, female_pic, default_pic]:
+            self.staff_image.delete()
+            if self.gender == 1:
+                self.staff_image = male_pic
+                super().save()
+            elif self.gender == 2:
+                self.staff_image = female_pic
+                super().save()
+        return self.staff_image
     
     # get phone number
     @property

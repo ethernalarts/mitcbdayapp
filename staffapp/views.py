@@ -81,50 +81,8 @@ class staffDetailsUpdate(UpdateView):
         return staffDetails.objects.all()
 
     def get_success_url(self):
-        return reverse('staffdetails', kwargs={'pk': self.object.id})
-    
-    # def redirect_to(self, obj):
-    #     return reverse('staffdetails', args=[obj.id])
-    
-    # def form_valid(self, form, request):
-    #     form = staffDetailsUpdateForm(request.POST)
+        return reverse('staffdetails', kwargs={'pk': self.object.id})  
         
-    #     if form.is_valid:
-    #         if profile_image := form.cleaned_data['delete_image']:
-                
-    #             obj = staffDetailsView.objects.get(id=self.object.id)
-    #             obj.staff_image = None
-    #             #obj.staff_image = 'staffapp/static/img/default-male.jpg'
-    #             obj.save()
-        
-    #     return super(staffDetailsUpdate, self).form_valid(request, form)
-    
-    
-
-# update view for details
-def staffDetailsUpdates(request, pk):
-    # fetch the object related to passed id
-    obj = get_object_or_404(staffDetails, id=pk)
-
-    # pass the object as instance in form
-    form = staffDetailsUpdateForm(request.POST or None, instance=obj)
-
-    # save the data from the form and
-    # redirect to detail_view
-    if form.is_valid():
-
-        if delete_image := form.cleaned_data['delete_image']:
-            obj.RemoveProfileImage(staffDetails.objects.get(id=pk))
-        #     # # delete image from the database
-        #     # image.delete()
-        #     pass
-
-        form.save()
-        return redirect('staffdetails', pk=obj.id) 
-
-    context = {"form": form, "staff": obj}
-    return render(request, "updatestaff.html", context)
-    
 
 
 # removeStaff view
