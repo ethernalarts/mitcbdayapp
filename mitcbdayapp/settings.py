@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'theme',
     'mathfilters',
     'django_cleanup.apps.CleanupConfig',
+    'django.contrib.postgres',
     'rest_framework',
 ]
 

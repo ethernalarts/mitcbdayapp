@@ -39,6 +39,7 @@ def bdaycheck(request):
         #t = loader.get_template('emailsent.html')
         #return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
         return sendmail(request, celebrants)
+    
     else:
         print("No birthdays today \n")
         t = loader.get_template('nobirthday.html')

@@ -79,6 +79,19 @@ class staffDetailsUpdate(UpdateView):
     
     def get_queryset(self):
         return staffDetails.objects.all()
+    
+    def do_not_delete(self):
+        if self.object.staff_image == ['staffimages/default.png', 
+                                       'staffimages/default-female.png', 
+                                       'staffimages/default-male.png']:
+            self.staff_image.delete()
+            if self.gender == 1:
+                self.staff_image = male_pic
+                super().save()
+            elif self.gender == 2:
+                self.staff_image = female_pic
+                super().save()
+        return self.staff_image
 
     def get_success_url(self):
         return reverse('staffdetails', kwargs={'pk': self.object.id})  
@@ -135,7 +148,8 @@ class searchQueryView(ListView):
             results = staffDetails.objects.filter(
                    Q(first_name__icontains=q) |
                     Q(middle_name__icontains=q) |
-                    Q(last_name__icontains=q)
+                    Q(last_name__icontains=q) |
+                    Q(cadre__icontains=q)
                 ).distinct()
 
             queryset.extend(iter(results))
