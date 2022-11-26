@@ -1,6 +1,6 @@
 
-from dataclasses import fields
 import datetime
+from dataclasses import fields
 from enum import unique
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
@@ -51,7 +51,7 @@ class staffDetails(models.Model):
         ('Accounts', ('Accounts')),
         ('Business Premises', ('Business Premises')),
         ('Cooperatives', ('Cooperatives')),
-        ('Human Resource', ('Human Resource')),
+        ('Human Resources', ('Human Resources')),
         ('Industry', ('Industry')),
         ('MSMEs', ('MSMEs')),
         ('Office of the Permanent Secretary', ('Office of the Permanent Secretary')),

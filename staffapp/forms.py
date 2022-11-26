@@ -65,4 +65,5 @@ class staffDetailsUpdateForm(forms.ModelForm):
                 profile_image = None
                 #obj.staff_image = 'staffapp/static/img/default-male.jpg'
                 form.save()
+                
         return profile_image

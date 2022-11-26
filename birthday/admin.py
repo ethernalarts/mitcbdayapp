@@ -4,7 +4,7 @@ from .models import staffDetails
 # Register your models here.
 
 
-# Register the Admin classes for Book using the decorator
+# Register the Admin classes for staffDetails using the decorator
 @admin.register(staffDetails)
 class staffDetailsAdmin(admin.ModelAdmin):
     
