@@ -13,22 +13,36 @@ from django.urls import reverse
 
 
 # Birthday Check View
-def bdaycheck(request):  
+def bdaycheck(request):    
+    # sourcery skip: list-comprehension, move-assign-in-block
+    celebrants = []
     data = staffDetails.objects.all()
 
     print("\nChecking...\n")
 
-    if celebrants := [
-            {
-                'profileimage': record.staff_image,
-                'firstname': record.first_name,
-                'middlename': record.middle_name,
-                'lastname': record.last_name,
-                'email': record.email,
-                'department': record.department
-            } 
-            for record in data if record.BIRTHDAY_TODAY
-        ]:
+    # iterate over the QuerySet "data" to look for any record with "birth_month" 
+    # and "birth_day" fields that matches "current_month" and "current_day"
+    for record in data:
+        if record.BIRTHDAY_TODAY:
+            celebrants.append(
+                {
+                    'databaseid': record.id,
+                    'firstname': record.first_name,
+                    'middlename': record.middle_name,
+                    'lastname': record.last_name,
+                    'email': record.email,
+                    'phonenumber': record.phone_number
+                }
+            )
+
+    # no birthdays today
+    if not celebrants:    
+
+        print("No birthdays today \n")        
+        t = loader.get_template('nobirthday.html')        
+        return HttpResponse(t.render())    
+
+    else:
         print("We have birthday(s) today: \n")
 
         for celebrant in celebrants:
@@ -36,14 +50,9 @@ def bdaycheck(request):
                 print(f'{key}: {value}')
             print('')            
 
-        #t = loader.get_template('emailsent.html')
-        #return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
+        # t = loader.get_template('emailsent.html')
+        # return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
         return sendmail(request, celebrants)
-    
-    else:
-        print("No birthdays today \n")
-        t = loader.get_template('nobirthday.html')
-        return HttpResponse(t.render())
 
 
 
