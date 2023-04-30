@@ -65,38 +65,42 @@ class staffDetails(models.Model):
     level = models.IntegerField('Grade Level', null=False)
     step = models.IntegerField('Step', null=False)
     staff_image = models.ImageField("Profile Picture", upload_to='staffimages', default='staffimages/default.png')
-    delete_image = models.BooleanField('Delete Profile Picture', default=0)    
+    delete_image = models.BooleanField('Delete Profile Picture', default=0)
+    
+    @property
+    def staff_image_default(self):
+        return self._meta.get_field('staff_image').get_default()
     
     # profile picture
-    @property
-    def profile_picture(self): 
-        # Profile Picture
-        if self.staff_image == default_pic:
-            if self.gender == 1:
-                self.staff_image = male_pic
-            elif self.gender == 2:
-                self.staff_image = female_pic
+    # @property
+    # def profile_picture(self): 
+    #     # Profile Picture
+    #     if self.staff_image == default_pic:
+    #         if self.gender == 1:
+    #             self.staff_image = male_pic
+    #         elif self.gender == 2:
+    #             self.staff_image = female_pic
 
-        # Update profile picture  
-        if (self.staff_image == male_pic) and (self.gender == 2):
-            self.staff_image = female_pic
-        if (self.staff_image == female_pic) and (self.gender == 1):
-            self.staff_image = male_pic
+    #     # Update profile picture  
+    #     if (self.staff_image == male_pic) and (self.gender == 2):
+    #         self.staff_image = female_pic
+    #     if (self.staff_image == female_pic) and (self.gender == 1):
+    #         self.staff_image = male_pic
 
-        return self.staff_image 
+    #     return self.staff_image 
     
     # delete profile picture
     @property    
-    def delete_profile_picture(self):
-        if self.staff_image != [male_pic, female_pic, default_pic]:
-            self.staff_image.delete()
-            if self.gender == 1:
-                self.staff_image = male_pic
-                super().save()
-            elif self.gender == 2:
-                self.staff_image = female_pic
-                super().save()
-        return self.staff_image
+    # def delete_profile_picture(self):
+    #     if self.staff_image != [male_pic, female_pic, default_pic]:
+    #         self.staff_image.delete()
+    #         if self.gender == 1:
+    #             self.staff_image = male_pic
+    #             super().save()
+    #         elif self.gender == 2:
+    #             self.staff_image = female_pic
+    #             super().save()
+    #     return self.staff_image
     
     # get phone number
     @property

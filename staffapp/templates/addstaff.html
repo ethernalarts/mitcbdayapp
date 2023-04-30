@@ -85,7 +85,12 @@
 
                     <!-- Gender -->
                     <div>
-                        <label for="gender" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">{{ form.gender.label }}<span class="ml-1 text-1xl font-medium text-red-600"><em>*</em></span></label>
+                        <label for="gender" class="block mb-2 text-md font-bold text-gray-500 dark:text-gray-300">
+                            {{ form.gender.label }}
+                            <span class="ml-1 text-1xl font-medium text-red-600">
+                                <em>*</em>
+                            </span>
+                        </label>
                         {% render_field form.gender class+="cursor-pointer text-md md:text-md font-medium block rounded-md w-full p-3 border border-4 border-gray-300 placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}                                                
                     </div>
                     

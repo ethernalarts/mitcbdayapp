@@ -91,7 +91,6 @@ def sendmail(request, celebrants):
 
         except Exception as e:
             print(f"Birthday felicitation not sent to {celebrant.get('email')}. Reason: {e} \n")
-
             failed.append(celebrant)
             
     connection.close()

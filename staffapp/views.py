@@ -99,36 +99,35 @@ class staffDetailsUpdate(UpdateView):
 
 
 # removeStaff view
-def removeStaff(request, pk):  # sourcery skip: avoid-builtin-shadow
-    # fetch the object related to passed id
+def removeStaff(request, pk):
     obj = get_object_or_404(staffDetails, id=pk)
 
     if request.method == "POST":    
         
-        # list to copy some data before deletion
-        list = [f"{obj.first_name}"]
+        # save first name for context data
+        first_name = obj.first_name
 
-        # save middle name for context
+        # save middle name for context data
         if obj.middle_name:
-            list.append(f"{obj.middle_name}")
-        else:
-            list.append('')
+            middle_name = obj.middle_name
 
-        # save last name for context
-        list.append(f"{obj.last_name}")
+        # save last name for context data
+        last_name = obj.last_name
 
         # delete object
-        obj.delete()       
+        obj.delete()    
+        
+        context = {
+                    'first_name': first_name,
+                    'middle_name': middle_name,
+                    'last_name': last_name
+                }   
                 
-        # after deletion, redirect
+        # retrieve template to render
         t = loader.get_template('staffdeleted.html')
-        return HttpResponse(t.render(context={
-                    'first_name': list[0],
-                    'middle_name': list[1],
-                    'last_name': list[2]
-                }
-            )
-        )
+        
+        # after deletion, redirect
+        return HttpResponse(t.render(context))
 
   
 

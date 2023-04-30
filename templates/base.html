@@ -4,7 +4,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 	<head>
         {% block title%}{% endblock %}
 		<meta charset="UTF-8">
@@ -30,11 +30,12 @@
 			  });
 			} );
 		</script>
+		
 		{% tailwind_css %}
 	</head>
 
 	<!-- Body -->
-	<body class="max-h-auto bg-gray-200 font-sans p-6 mx-auto">
+	<body class="max-h-auto bg-gray-300 font-sans p-6 mx-auto">
         
 		<!-- Navbar -->
 		<nav class="bg-white rounded-md shadow-lg px-4 md:px-4 lg:px-4 py-3 md:py-3 lg:py-3">
@@ -44,9 +45,9 @@
 	
 				<!-- Logo -->
 				<a href="https://mitc.edostate.gov.ng" class="flex items-center">
-					<img src="{% static 'img/mbtc-logo.png' %}" class="mr-3 md:h-9 h-9" alt="MITC-logo">
-					<span class="self-center text-xl text-gray-700 font-extrabold whitespace-nowrap dark:text-white">Staff
-						Directory</span>
+					<img src="{% static 'img/mbtc-logo-gray-800.png' %}" class="mr-3 md:h-14 h-14" alt="MITC-logo">
+					<span class="self-center text-xl text-gray-700 font-extrabold whitespace-nowrap dark:text-white">					
+					</span>
 				</a>
 	
 				<!-- Mobile Menu -->
@@ -82,6 +83,7 @@
 											hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700
 											md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 
 											dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+
 								<span class="inline-flex items-center">
 									<svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor"
 										stroke-width="2">
@@ -102,6 +104,7 @@
 											md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white 
 											dark:hover:bg-gray-700 dark:hover:text-white block py-2 pr-4 pl-3 text-gray-600
 											md:dark:hover:bg-transparent dark:border-gray-700">
+											
 								<span class="inline-flex items-center">
 									<svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-6 w-6" fill="none"
 										viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -166,16 +169,16 @@
 	<!-- End Body -->
 	
 	<!-- Footer -->	
-	<footer class="mt-24 bg-none pb-2 bottom-0 md:bottom-0 lg:bottom-0">		
+	<footer class="mt-20 bg-none pb-2 bottom-0 md:bottom-0 lg:bottom-0">		
 
 		<!-- Horizontal line -->
-		<hr class="my-6 border border-1 border-gray-300 sm:mx-auto dark:border-gray-700 lg:my-8">
+		<hr class="my-6 border border-1 border-gray-400 sm:mx-auto lg:my-8">
 
 		<!-- Copyright, Address and Social Media container -->
 		<div class="flex md:flex-row md:justify-between items-center flex-col space-y-8 md:space-y-px justify-between">
 			
 			<!-- Copyright section -->
-			<span class="block text-md text-gray-500 text-center dark:text-gray-400">Copyright © 2022 
+			<span class="block text-md text-gray-500 text-center dark:text-gray-400">Copyright © 2023 
                 <a href="https://mitc.edostate.gov.ng" target="_blank"
 					class="hover:underline">MBTC Staff Directory™
                 </a>. All Rights Reserved.

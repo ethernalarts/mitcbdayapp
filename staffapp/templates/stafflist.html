@@ -25,11 +25,18 @@
                 {% for staff in stafflist %}
                     <li class="py-3 sm:py-4">
         
-                        <!-- Profile Picture -->
+                        <!-- Profile -->
                         <div class="flex items-center space-x-4">
+
+                            <!-- Profile Picture -->
                             <div class="flex-shrink-0">
-                                <img class="w-14 h-14 rounded-full" src="{{ staff.profile_picture.url }}"
-                                    alt="{{ staff.first_name }}'s' image">
+                                <img class="w-14 h-14 rounded-full" 
+                                    {% if staff.staff_image %}
+                                        src="{{ staff.staff_image.url }}"
+                                        {% else %}
+                                            src="{% static 'img/default.png' %}"
+                                    {% endif %}
+                                        alt="{{ staff.first_name }}'s' image">
                             </div>
         
                             <!-- Name and Email -->
