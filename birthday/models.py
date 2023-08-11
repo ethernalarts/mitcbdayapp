@@ -59,7 +59,7 @@ class staffDetails(models.Model):
         ('Policy Formulation', ('Policy Formulation')),
         ('Planning, Research and Statistics', ('Planning, Research and Statistics')),
         ('Trade Promotions and Marketing', ('Trade Promotions and Marketing'))
-    )        
+    )     
         
     department = models.CharField('Department', choices=DEPARTMENTS, max_length=100, null=False, default='Administration and Supply')
     level = models.IntegerField('Grade Level', null=False)

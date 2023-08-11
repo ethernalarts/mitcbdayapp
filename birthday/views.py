@@ -73,7 +73,7 @@ def sendmail(request, celebrants):
         html_content = template.render(context)
 
         subject = f"Happy Birthday {celebrant.get('firstname')} {celebrant.get('lastname')}!!"
-        from_ = f"MITC Edo State <{settings.EMAIL_HOST_USER}>"
+        from_ = f"MBTC Edo State <{settings.EMAIL_HOST_USER}>"
         to_ = celebrant.get('email')
 
         msg = mail.EmailMultiAlternatives(subject, html_content, from_, [to_], connection = connection)
