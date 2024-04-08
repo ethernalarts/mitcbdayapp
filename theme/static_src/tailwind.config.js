@@ -15,6 +15,12 @@ module.exports = {
     presets: [],
     darkMode: 'class', // or 'media'
     theme: {
+		extend:{
+			backgroundImage: {
+				'index': "url('/static/theme/img/sunrays.jpg')",
+				// 'templates': "url(../img/spencer.jpg)",
+			},
+		},
         screens: {
             sm: '640px',
             md: '768px',

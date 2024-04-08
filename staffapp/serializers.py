@@ -1,18 +1,16 @@
-
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.utils import timezone
 from rest_framework.exceptions import NotAuthenticated, PermissionDenied
 # from .utils import average_rating
-from birthday.models import staffDetails
-
+from staffapp.models import staffDetails
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['lastname', 'email']
-        
+
 
 class StaffDetailsSerializer(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True)
@@ -21,14 +19,14 @@ class StaffDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = staffDetails
         fields = [
-            'staff_image', 'first_name', 'middle_name', 'last_name', 
+            'staff_image', 'first_name', 'middle_name', 'last_name',
             'gender_text', 'level', 'step', 'email', 'cadre', 'department'
         ]
 
     def create(self, validated_data):
         request = self.context["request"]
         creator = request.user
-        
+
         if not creator.is_authenticated:
             raise NotAuthenticated('Authentication required.')
         book = Book.objects.get(pk=request.data['book_id'])

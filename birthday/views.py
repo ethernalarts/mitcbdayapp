@@ -8,14 +8,13 @@ from django.core import mail
 from django.http import HttpResponse
 from django.shortcuts import  (get_object_or_404, redirect, render)
 from mitcbdayapp import settings
-from birthday.models import staffDetails
+from staffapp.models import staffDetails
 from django.urls import reverse
 
 
 # Birthday Check View
 def bdaycheck(request):    
-    # sourcery skip: list-comprehension, move-assign-in-block
-    celebrants = []
+    # celebrants = []
     data = staffDetails.objects.all()
 
     print("\nChecking...\n")
@@ -24,7 +23,7 @@ def bdaycheck(request):
     # and "birth_day" fields that matches "current_month" and "current_day"
     for record in data:
         if record.BIRTHDAY_TODAY:
-            celebrants.append(
+            celebrants = [
                 {
                     'databaseid': record.id,
                     'firstname': record.first_name,
@@ -33,7 +32,7 @@ def bdaycheck(request):
                     'email': record.email,
                     'phonenumber': record.phone_number
                 }
-            )
+            ]
 
     # no birthdays today
     if not celebrants:    
