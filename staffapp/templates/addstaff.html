@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block content %}
+
     <!-- Navbar Searchbar -->
     {% include 'snippets/searchbar.html' %}
 
@@ -76,15 +77,15 @@
                     <!-- STAFF DETAILS -->
                     <div>
 
-                        <!-- HEADER - SOCIETY DETAILS -->
-                        <h2 class="mt-10 text-[18px] font-bold p-2 px-4 bg-green-900 text-white">
+                        <!-- HEADER - STAFF DETAILS -->
+                        <h2 class="mt-10 text-xl font-bold py-2 px-4 bg-green-900 text-white">
                             1. Bio Details
                         </h2>
 
                         <!-- Staff Details -->
                         <div
                             class="grid gap-6 mt-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 pb-6 pt-4
-                                   md:px-6 md:pb-8 bg-stone-50 border border-1 border-gray-300 shadow-md"
+                                   md:px-6 md:pb-8 bg-stone-50 border border-1 border-gray-300 shadow-sm"
                         >
 
                             <!-- First Name -->
@@ -97,7 +98,7 @@
                                 </label>
 
                                 <div id="first_name">
-                                    {% render_field form.first_name class+="text-md md:text-md font-medium block w-full p-2 rounded-sm border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}
+                                    {% render_field form.first_name class+="text-lg md:text-lg font-bold block w-full p-2 rounded-sm border border-2 border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-green-900 focus:border-green-900 focus:z-10" %}
                                 </div>
 
                                 {% if form.errors.first_name %}
@@ -111,13 +112,10 @@
                             <div>
                                 <label for="middle_name" class="block mb-2 text-md font-bold text-gray-500">
                                     {{ form.middle_name.label }}
-                                    <span class="ml-1 text-1xl font-medium text-red-600">
-                                        <em>*</em>
-                                    </span>
                                 </label>
 
                                 <div id="middle_name">
-                                    {% render_field form.middle_name class+="text-md md:text-md font-medium block w-full p-2 rounded-sm border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}
+                                    {% render_field form.middle_name class+="text-lg md:text-lg font-bold block w-full p-2 rounded-sm border border-2 border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-green-900 focus:border-green-900 focus:z-10" %}
                                 </div>
 
                                 {% if form.errors.middle_name %}
@@ -137,7 +135,7 @@
                                 </label>
 
                                 <div id="last_name">
-                                    {% render_field form.last_name class+="text-md md:text-md font-medium block w-full p-2 rounded-sm border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}
+                                    {% render_field form.last_name class+="text-lg md:text-lg font-bold block w-full p-2 rounded-sm border border-2 border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-green-900 focus:border-green-900 focus:z-10" %}
                                 </div>
 
                                 {% if form.errors.last_name %}
@@ -147,21 +145,87 @@
                                 {% endif %}
                             </div>
 
-                            <!-- SOCIETY LGA OF ACTIVITIES -->
+                            <!-- Phone Number -->
                             <div>
-                                <label for="society_lga_of_activities" class="block mb-2 text-md font-bold text-gray-500">
-                                    {{ form.society_lga_of_activities.label }}
+                                <label for="phone_number" class="block mb-2 text-md font-bold text-gray-500">
+                                    {{ form.phone_number.label }}
                                     <span class="ml-1 text-1xl font-medium text-red-600">
                                         <em>*</em>
                                     </span>
                                 </label>
-                                {% render_field form.society_lga_of_activities class+="cursor-pointer text-md md:text-md font-medium block rounded-sm w-full p-2 border border-2 border-gray-300 bg-white placeholder-gray-500 text-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10" %}
-                                {% if form.errors.society_lga_of_activities %}
+
+                                <div id="phone_number">
+                                    {% render_field form.phone_number class+="text-lg md:text-lg font-bold block w-full p-2 rounded-sm border border-2 border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-green-900 focus:border-green-900 focus:z-10" %}
+                                </div>
+
+                                {% if form.errors.phone_number %}
                                     <span class="text-red-600 font-medium">
-                                        {{ form.errors.society_lga_of_activities }}
+                                        {{ form.errors.phone_number }}
                                     </span>
                                 {% endif %}
                             </div>
+
+                            <!-- Gender -->
+                            <div>
+                                <label for="gender" class="block mb-2 text-md font-bold text-gray-500">
+                                    {{ form.gender.label }}
+                                    <span class="ml-1 text-1xl font-medium text-red-600">
+                                        <em>*</em>
+                                    </span>
+                                </label>
+
+                                <div id="gender">
+                                    {% render_field form.gender class+="cursor-pointer text-lg md:text-lg font-bold block w-full py-2.5 px-2 pr-2 rounded-sm border border-2 border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-green-900 focus:border-green-900 focus:z-10" %}
+                                </div>
+
+                                {% if form.errors.gender %}
+                                    <span class="text-red-600 font-medium">
+                                        {{ form.errors.gender }}
+                                    </span>
+                                {% endif %}
+                            </div>
+
+                            <!-- Date of Birth -->
+                            <div>
+                                <label for="date_of_birth" class="block mb-2 text-md font-bold text-gray-500">
+                                    {{ form.date_of_birth.label }}
+                                    <span class="ml-1 text-1xl font-medium text-red-600">
+                                        <em>*</em>
+                                    </span>
+                                </label>
+
+                                <div id="date_of_birth">
+                                    {% render_field form.date_of_birth class+="text-lg md:text-lg font-bold block w-full p-2 rounded-sm border border-2 border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-green-900 focus:border-green-900 focus:z-10" %}
+                                </div>
+
+                                {% if form.errors.date_of_birth %}
+                                    <span class="text-red-600 font-medium">
+                                        {{ form.errors.date_of_birth }}
+                                    </span>
+                                {% endif %}
+                            </div>
+
+                            <!-- Profile Photo -->
+                            <div class="break-all col-span-full">
+                                <label for="staff_image" class="block text-lg font-bold leading-6 text-gray-500">
+                                    Profile Picture
+                                </label>
+                                <div class="mt-2 flex justify-center rounded-sm border border-2 border-gray-300 px-6 py-10 md:py-7">
+                                    <div class="text-center">
+                                        <svg class="mx-auto h-16 w-16 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+                                        </svg>
+                                        <div id="staff_image" class="mt-4 flex text-md leading-6 text-gray-600 place-items-center">
+                                            <label for="staff_image" class="relative cursor-pointer items-center rounded-sm bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                                {% render_field form.staff_image class+='cursor-pointer' %}
+                                            </label>
+                                        </div>
+                                        <p class="text-xs leading-5 text-gray-600 text-center">PNG, JPG, JPEG</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 

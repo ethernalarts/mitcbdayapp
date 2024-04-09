@@ -8,5 +8,5 @@ from staffapp.models import staffDetails
 @admin.register(staffDetails)
 class staffDetailsAdmin(admin.ModelAdmin):
     
-    list_display = ('last_name', 'first_name', 'email', 'birth_month', 'birth_day')
-    list_filter = ('birth_month', 'birth_day')
+    list_display = ('last_name', 'first_name', 'middle_name', 'official_email', 'date_of_birth')
+    list_filter = ('date_of_birth',)

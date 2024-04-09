@@ -22,8 +22,8 @@ def index(request):
 # Staff List View
 class staffListView(ListView):
     model = staffDetails
-    context_object_name = 'stafflist'  # your own name for the list as a template variable
-    template_name = 'stafflist.html'  # Specify your own template name/location
+    context_object_name = 'stafflist'
+    template_name = 'stafflist.html'
     paginate_by = 10
 
     def get_queryset(self):

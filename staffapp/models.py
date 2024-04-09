@@ -19,7 +19,7 @@ class staffDetails(models.Model):
     middle_name = models.CharField('Middle Name', max_length=20, null=True, blank=True)
     last_name = models.CharField('Last Name', max_length=20, null=False)
     phone_number = PhoneNumberField('Phone Number', null=False)
-    email = models.EmailField('Official Email', max_length=254, null=False)
+    official_email = models.EmailField('Official Email', max_length=254, null=False)
 
     CADRE = (
         ('Administrative', ('Administrative')),
@@ -107,9 +107,17 @@ class staffDetails(models.Model):
             self.phone_number = '0700 000 0000'
         return self.phone_number
 
-    GENDER = ((1, 'Male'), (2, 'Female'))
+    GENDER = [
+        ("Male", "Male"),
+        ("Female", "Female"),
+    ]
 
-    gender = models.IntegerField('Gender', choices=GENDER, default=2)
+    gender = models.CharField(
+        choices=GENDER,
+        max_length=20,
+        blank=False,
+        default="Male",
+    )
 
     def gender_text(self):
         return dict(staffDetails.GENDER)[self.gender]
@@ -131,6 +139,10 @@ class staffDetails(models.Model):
 
     birth_month = models.IntegerField('Birth Month', choices=MONTHS, default=1)
     birth_day = models.IntegerField('Birth Day', null=False)
+
+    date_of_birth = models.DateField(
+        "Date of Birth", default=datetime.date.today, null=False, blank=False
+    )
 
     def birth_month_verbose(self):
         return dict(staffDetails.MONTHS)[self.birth_month]

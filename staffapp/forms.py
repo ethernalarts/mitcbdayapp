@@ -12,6 +12,8 @@ def validate_email_domain(value):
 
 # Add Staff form
 class staffDetailsCreateForm(forms.ModelForm):
+    date_of_birth = forms.DateField(label="Date of Birth",
+                                    widget=forms.DateInput(attrs={'type': 'date'}))
     first_appointment = forms.DateField(label="Date of First Appointment",
                                         widget=forms.DateInput(attrs={'type': 'date'}))
     level = forms.IntegerField(label="Grade Level", min_value=1, max_value=17)
@@ -21,16 +23,16 @@ class staffDetailsCreateForm(forms.ModelForm):
     class Meta:
         model = staffDetails
         fields = [
-            'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'email',
+            'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'official_email',
             'cadre', 'first_appointment', 'department', 'level', 'step', 'staff_image',
-            'birth_month', 'birth_day'
+            'date_of_birth'
         ]
 
     # validate image format
     def clean(self):
         cleaned_data = super().clean()
         if not cleaned_data.get("staff_image"):
-            raise forms.ValidationError("Please upload a JPG, PNG or GIF file only")
+            raise forms.ValidationError("Please upload a JPG, or PNG file only")
 
 
 # Update Staff form
@@ -47,7 +49,7 @@ class staffDetailsUpdateForm(forms.ModelForm):
         fields = [
             'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'email',
             'cadre', 'first_appointment', 'department', 'level', 'step', 'staff_image',
-            'birth_month', 'birth_day', 'delete_image'
+            'date_of_birth'
         ]
 
         # validate image format
