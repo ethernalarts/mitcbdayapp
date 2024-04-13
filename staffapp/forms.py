@@ -12,20 +12,31 @@ def validate_email_domain(value):
 
 # Add Staff form
 class staffDetailsCreateForm(forms.ModelForm):
-    date_of_birth = forms.DateField(label="Date of Birth",
-                                    widget=forms.DateInput(attrs={'type': 'date'}))
-    first_appointment = forms.DateField(label="Date of First Appointment",
-                                        widget=forms.DateInput(attrs={'type': 'date'}))
-    level = forms.IntegerField(label="Grade Level", min_value=1, max_value=17)
-    step = forms.IntegerField(label="Step", min_value=1, max_value=6)
-    email = forms.EmailField(validators=[validate_email_domain])
+    date_of_birth = forms.DateField(
+        label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"})
+    )
+    first_appointment = forms.DateField(
+        label="Date of First Appointment",
+        widget=forms.DateInput(attrs={"type": "date"}),
+    )
+    official_email = forms.EmailField(validators=[validate_email_domain])
 
     class Meta:
         model = staffDetails
         fields = [
-            'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'official_email',
-            'cadre', 'first_appointment', 'department', 'level', 'step', 'staff_image',
-            'date_of_birth'
+            "first_name",
+            "middle_name",
+            "last_name",
+            "gender",
+            "phone_number",
+            "official_email",
+            "cadre",
+            "first_appointment",
+            "department",
+            "grade_level",
+            "step",
+            "staff_image",
+            "date_of_birth",
         ]
 
     # validate image format
@@ -37,19 +48,31 @@ class staffDetailsCreateForm(forms.ModelForm):
 
 # Update Staff form
 class staffDetailsUpdateForm(forms.ModelForm):
-    staff_image = forms.ImageField(label='Change Profile Picture', widget=forms.FileInput, required=False)
+    staff_image = forms.ImageField(
+        label="Change Profile Picture", widget=forms.FileInput, required=False
+    )
     level = forms.IntegerField(label="Grade Level", min_value=1, max_value=17)
     step = forms.IntegerField(label="Step", min_value=1, max_value=6)
     email = forms.EmailField(validators=[validate_email_domain])
 
-    #delete_image = forms.BooleanField()
+    # delete_image = forms.BooleanField()
 
     class Meta:
         model = staffDetails
         fields = [
-            'first_name', 'middle_name', 'last_name', 'gender', 'phone_number', 'email',
-            'cadre', 'first_appointment', 'department', 'level', 'step', 'staff_image',
-            'date_of_birth'
+            "first_name",
+            "middle_name",
+            "last_name",
+            "gender",
+            "phone_number",
+            "email",
+            "cadre",
+            "first_appointment",
+            "department",
+            "level",
+            "step",
+            "staff_image",
+            "date_of_birth",
         ]
 
         # validate image format
@@ -63,11 +86,11 @@ class staffDetailsUpdateForm(forms.ModelForm):
 
         if form.is_valid:
             cd = self.cleaned_data
-            profile_image = cd.get('staff_image')
+            profile_image = cd.get("staff_image")
 
-            if delete_image := cd.get('delete_image'):
+            if delete_image := cd.get("delete_image"):
                 profile_image = None
-                #obj.staff_image = 'staffapp/static/img/default-male.jpg'
+                # obj.staff_image = 'staffapp/static/img/default-male.jpg'
                 form.save()
 
         return profile_image
