@@ -49,11 +49,8 @@ class staffDetailsCreateForm(forms.ModelForm):
 # Update Staff form
 class staffDetailsUpdateForm(forms.ModelForm):
     staff_image = forms.ImageField(
-        label="Change Profile Picture", widget=forms.FileInput, required=False
-    )
-    level = forms.IntegerField(label="Grade Level", min_value=1, max_value=17)
-    step = forms.IntegerField(label="Step", min_value=1, max_value=6)
-    email = forms.EmailField(validators=[validate_email_domain])
+        label="Change Profile Picture", widget=forms.FileInput, required=False)
+    official_email = forms.EmailField(validators=[validate_email_domain])
 
     # delete_image = forms.BooleanField()
 
@@ -65,11 +62,11 @@ class staffDetailsUpdateForm(forms.ModelForm):
             "last_name",
             "gender",
             "phone_number",
-            "email",
+            "official_email",
             "cadre",
             "first_appointment",
             "department",
-            "level",
+            "grade_level",
             "step",
             "staff_image",
             "date_of_birth",
@@ -81,16 +78,3 @@ class staffDetailsUpdateForm(forms.ModelForm):
         cleaned_data = super().clean()
         if not cleaned_data.get("staff_image"):
             raise forms.ValidationError("Please upload a JPG, PNG or GIF file only")
-
-    def delete_profile_picture(self, form):
-
-        if form.is_valid:
-            cd = self.cleaned_data
-            profile_image = cd.get("staff_image")
-
-            if delete_image := cd.get("delete_image"):
-                profile_image = None
-                # obj.staff_image = 'staffapp/static/img/default-male.jpg'
-                form.save()
-
-        return profile_image

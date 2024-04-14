@@ -2,6 +2,7 @@ from multiprocessing import context
 from operator import attrgetter
 
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponseRedirect
@@ -62,22 +63,19 @@ class staffDetailsCreate(CreateView):
 
 # Staff Detail View
 class staffDetailsView(DetailView):
+    model = staffDetails
     context_object_name = "staff"
     template_name = "staffdetails.html"
 
-    def get_queryset(self):
-        return staffDetails.objects.all().distinct()
+    def get_object(self, queryset=None):
+        try:
+            return staffDetails.objects.get(id=self.kwargs["pk"])
+        except ObjectDoesNotExist as e:
+            raise ObjectDoesNotExist("Staff not found") from e
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
         context = super(staffDetailsView, self).get_context_data(**kwargs)
-
-        # Create any data and add it to the context
         context["tag"] = staffDetailsCreateForm
-        context["phone_number_default"] = staffDetails._meta.get_field(
-            "phone_number"
-        ).get_default()
-
         return context
 
 
@@ -90,25 +88,17 @@ class staffDetailsUpdate(UpdateView):
     def get_queryset(self):
         return staffDetails.objects.all()
 
-    def do_not_delete(self):
-        if self.object.staff_image == [
-            "staffimages/default.png",
-            "staffimages/default-female.png",
-            "staffimages/default-male.png",
-        ]:
-            self.staff_image.delete()
-            if self.gender == 1:
-                self.staff_image = male_pic
-                super().save()
-            elif self.gender == 2:
-                self.staff_image = female_pic
-                super().save()
-        return self.staff_image
-
     def get_success_url(self):
         return reverse("staffdetails", kwargs={"pk": self.object.id})
 
-    # removeStaff view
+    def form_invalid(self, form):
+        for error in form.non_field_errors():
+            messages.error(self.request, f"{error}")
+        return self.render_to_response(
+            self.get_context_data(
+                form=self.form_class(self.request.POST)
+            )
+        )
 
 
 def removeStaff(request, pk):

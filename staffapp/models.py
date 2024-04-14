@@ -13,6 +13,10 @@ male_pic = "staffimages/default-male.png"
 female_pic = "staffimages/default-female.png"
 
 
+def phone_number_default():
+    return staffDetails._meta.get_field("phone_number").get_default()
+
+
 class staffDetails(models.Model):
     id = models.BigAutoField(primary_key=True)
     first_name = models.CharField("First Name", max_length=20, null=False)
@@ -100,7 +104,7 @@ class staffDetails(models.Model):
         default="Administration and Supply",
     )
     grade_level = models.IntegerField("Grade Level", default=1, choices=GRADE_LEVEL, null=False)
-    step = models.IntegerField("Step",  default=1, choices=STEP, null=False)
+    step = models.IntegerField("Step", default=1, choices=STEP, null=False)
     staff_image = models.ImageField(
         "Profile Picture", upload_to="staffimages", default="staffimages/default.png"
     )
@@ -142,9 +146,6 @@ class staffDetails(models.Model):
     class Meta:
         db_table = "birthday_staffdetails"
 
-    def phone_number_default(self):
-        return staffDetails._meta.get_field("phone_number").get_default()
-
     @property
     def BIRTHDAY_TODAY(self):
         return (self.birth_month, self.birth_day) == (
@@ -156,8 +157,6 @@ class staffDetails(models.Model):
 
     def get_absolute_url(self):
         return reverse("staffdetails", args=[str(self.id)])
-
-        # Update Staff Reverse URL
 
     def get_absolute_url_update_staff(self):
         """Returns the url to update a particular staff instance."""
