@@ -13,10 +13,13 @@ def validate_email_domain(value):
 # Add Staff form
 class staffDetailsCreateForm(forms.ModelForm):
     date_of_birth = forms.DateField(
-        label="Date of Birth", widget=forms.DateInput(attrs={"type": "date"})
+        label="Date of Birth",
+        required=True,
+        widget=forms.DateInput(attrs={"type": "date"})
     )
     first_appointment = forms.DateField(
         label="Date of First Appointment",
+        required=True,
         widget=forms.DateInput(attrs={"type": "date"}),
     )
     official_email = forms.EmailField(validators=[validate_email_domain])

@@ -1,4 +1,4 @@
-
+import dj_database_url
 import environ, os
 
 
@@ -117,13 +117,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # Location of media files
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-STATICFILES_DIRS = [ MEDIA_ROOT ]
 
 
 BIRTHDAY_STATIC = os.path.join(BASE_DIR, "birthday/templates/static/")
-STAFFAPP_STATIC = os.path.join(BASE_DIR, "staffapp/templates/static/")
+STAFFAPP_STATIC = os.path.join(BASE_DIR, "staffapp/static/staffapp")
 THEME_STATIC = os.path.join(BASE_DIR, "theme/static/")
-STATICFILES_DIRS = [BIRTHDAY_STATIC, STAFFAPP_STATIC, THEME_STATIC]
+STATICFILES_DIRS = [MEDIA_ROOT, BIRTHDAY_STATIC, STAFFAPP_STATIC, THEME_STATIC]
 
 
 WSGI_APPLICATION = 'mitcbdayapp.wsgi.application'
@@ -133,14 +132,11 @@ WSGI_APPLICATION = 'mitcbdayapp.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('HOST'),
-        'PORT': env('DB_PORT'),
-    }
+    'default': dj_database_url.parse(
+        env('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True
+    )
 }
 
 
@@ -185,5 +181,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 PHONENUMBER_DB_FORMAT = 'INTERNATIONAL'
 PHONENUMBER_DEFAULT_REGION = 'NG'
 PHONENUMBER_DEFAULT_FORMAT = 'E164'
-
-ACTIVE_LINK_CSS_CLASS = 'inactive'

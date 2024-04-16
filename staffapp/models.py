@@ -1,6 +1,4 @@
 import datetime
-from dataclasses import fields
-from enum import unique
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from datetime import date
@@ -13,17 +11,25 @@ male_pic = "staffimages/default-male.png"
 female_pic = "staffimages/default-female.png"
 
 
-def phone_number_default():
-    return staffDetails._meta.get_field("phone_number").get_default()
-
-
 class staffDetails(models.Model):
     id = models.BigAutoField(primary_key=True)
     first_name = models.CharField("First Name", max_length=20, null=False)
-    middle_name = models.CharField("Middle Name", max_length=20, null=True, blank=True)
+    middle_name = models.CharField("Middle Name", max_length=20, null=True, blank=True, default="")
     last_name = models.CharField("Last Name", max_length=20, null=False)
     phone_number = PhoneNumberField("Phone Number", null=False)
     official_email = models.EmailField("Official Email", max_length=254, null=False)
+
+    GENDER = [
+        ("Male", "Male"),
+        ("Female", "Female"),
+    ]
+
+    gender = models.CharField(
+        choices=GENDER,
+        max_length=20,
+        blank=False,
+        default="Male",
+    )
 
     CADRE = (
         ("Administrative", "Administrative"),
@@ -49,7 +55,11 @@ class staffDetails(models.Model):
         "Cadre", choices=CADRE, max_length=100, null=False, default="Administrative"
     )
     first_appointment = models.DateField(
-        "Date of First Appointment", default=datetime.date.today, null=False
+        "Date of First Appointment", default=datetime.date.today, null=False, blank=True
+    )
+
+    date_of_birth = models.DateField(
+        "Date of Birth", default=datetime.date.today, null=False, blank=True
     )
 
     DEPARTMENTS = (
@@ -110,6 +120,11 @@ class staffDetails(models.Model):
     )
     delete_image = models.BooleanField("Delete Profile Picture", default=0)
 
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(args, **kwargs)
+    #     self.birth_day = None
+    #     self.birth_month = None
+
     @property
     def staff_image_default(self):
         return self._meta.get_field("staff_image").get_default()
@@ -121,24 +136,8 @@ class staffDetails(models.Model):
             self.phone_number = "0700 000 0000"
         return self.phone_number
 
-    GENDER = [
-        ("Male", "Male"),
-        ("Female", "Female"),
-    ]
-
-    gender = models.CharField(
-        choices=GENDER,
-        max_length=20,
-        blank=False,
-        default="Male",
-    )
-
     def gender_text(self):
         return dict(staffDetails.GENDER)[self.gender]
-
-    date_of_birth = models.DateField(
-        "Date of Birth", default=datetime.date.today, null=False, blank=False
-    )
 
     def birth_month_verbose(self):
         return dict(staffDetails.MONTHS)[self.birth_month]
@@ -156,7 +155,7 @@ class staffDetails(models.Model):
         # Staff Details Reverse URL
 
     def get_absolute_url(self):
-        return reverse("staffdetails", args=[str(self.id)])
+        return reverse("staffdetails", kwargs={"pk": self.id})
 
     def get_absolute_url_update_staff(self):
         """Returns the url to update a particular staff instance."""
