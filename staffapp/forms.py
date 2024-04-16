@@ -51,8 +51,6 @@ class staffDetailsCreateForm(forms.ModelForm):
 
 # Update Staff form
 class staffDetailsUpdateForm(forms.ModelForm):
-    staff_image = forms.ImageField(
-        label="Change Profile Picture", widget=forms.FileInput, required=False)
     official_email = forms.EmailField(validators=[validate_email_domain])
 
     # delete_image = forms.BooleanField()

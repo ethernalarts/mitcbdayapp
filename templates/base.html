@@ -31,8 +31,6 @@
 		class="bg-index bg-no-repeat bg-cover bg-center bg-fixed font-sans min-h-screen bg-gray-900 font-sans
 				p-2 md:p-4 mx-auto"
 	>
-	    <!-- Error/Success messages   -->
-	    {% include 'snippets/messages.html' %}
 
 		<!-- Nav bar -->
 		<nav class="bg-white shadow-md">
@@ -190,6 +188,9 @@
 			</div>
 		</nav>
 
+	    <!-- Error/Success messages   -->
+	    {% include 'snippets/messages.html' %}
+
         <!-- Mobile menu, show/hide based on menu state. -->
 		{% include 'snippets/mobile-menu.html' %}
 
@@ -198,6 +199,9 @@
         {% endblock %}
 	</body>
 	<!-- End Body -->
+
+	<!-- JavaScript to close error message -->
+	<script src="{% static 'js/close-notif-message.js' %}"></script>
 	
 	<!-- Footer -->
 	<footer class="sticky top-[100vh] mb-auto py-0 text-white mx-auto">

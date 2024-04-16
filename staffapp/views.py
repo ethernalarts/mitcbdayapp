@@ -1,4 +1,3 @@
-from multiprocessing import context
 from operator import attrgetter
 
 from django.contrib import messages
@@ -84,12 +83,22 @@ class staffDetailsUpdate(UpdateView):
     form_class = staffDetailsUpdateForm
     context_object_name = "staff"
     template_name = "updatestaff.html"
+    model = staffDetails
 
-    def get_queryset(self):
-        return staffDetails.objects.all()
+    def get_object(self, queryset=None):
+        try:
+            return staffDetails.objects.get(id=self.kwargs["pk"])
+        except ObjectDoesNotExist as e:
+            raise ObjectDoesNotExist("User not found") from e
 
     def get_success_url(self):
         return reverse("staffdetails", kwargs={"pk": self.object.id})
+
+    def form_valid(self, form):
+        profile = form.save(commit=False)
+        profile.save()
+        messages.success(self.request, "Your Profile has been updated")
+        return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form):
         for error in form.non_field_errors():
