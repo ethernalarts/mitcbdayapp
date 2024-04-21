@@ -1,28 +1,33 @@
 {% load active_link_tags %}
 
 <!-- Pagination -->
-<div class="bg-white pt-6 md:pb-4 flex items-center justify-between border-t border-gray-200">
+<div class="bg-white md:p-6 flex items-center justify-between border-t border-gray-200">
     {% block pagination %}
         {% if is_paginated %}
     
             <!-- Previous and Next buttons for mobile menu -->
-            <div class="flex-1 flex justify-between sm:hidden">
+            <div class="flex-1 flex justify-between sm:hidden p-6">
 
                 <!-- Previous button (Mobile) -->
                 {% if page_obj.has_previous %}                    
                     <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
-                        <button type="button"
-                            class="relative inline-flex items-center px-4 py-2 border border-gray-300 
-                                    text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100
-                                    focus:ring-gray-300 focus:ring-2">
+                        <button
+                            type="button"
+                            class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm
+                                   font-medium rounded-none text-gray-700 bg-white hover:text-white
+                                   hover:bg-green-900 focus:ring-gray-300 hover:border-green-900"
+                        >
                             Previous
                         </button>
                     </a>
                     {% else %}                   
                         <a>
-                            <button type="button" disabled
+                            <button
+                                type="button"
+                                disabled
                                 class="relative inline-flex items-center px-4 py-2 border border-gray-300 
-                                       text-sm font-medium rounded-md text-gray-400 bg-white">
+                                       text-sm font-medium rounded-none text-gray-400 bg-white"
+                            >
                                 Previous
                             </button>
                         </a>
@@ -31,16 +36,20 @@
                 <!-- Next button (Mobile) -->
                 {% if page_obj.has_next %}                    
                     <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" 
-                            class="relative inline-flex items-center px-4 py-2 border border-gray-300 
-                                    text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100
-                                    focus:ring-gray-300 focus:ring-2">
+                            class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm
+                                   font-medium rounded-none text-gray-700 bg-white hover:border-green-900
+                                   hover:bg-green-900 focus:ring-green-900 hover:text-white"
+                    >
                         Next
                     </a>
                     {% else %}                   
                         <a>
-                            <button type="button" disabled
+                            <button
+                                type="button"
+                                disabled
                                 class="relative inline-flex items-center px-4 py-2 border border-gray-300 
-                                        text-sm font-medium rounded-md text-gray-400 bg-white">
+                                       text-sm font-medium rounded-none text-gray-400 bg-white"
+                            >
                                 Next
                             </button>
                         </a>
@@ -71,19 +80,29 @@
                 <!-- Pages Div Container -->
                 <div>                            
                     <!-- Pages Navbar -->
-                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                    <nav
+                        class="relative z-0 inline-flex rounded-none shadow-sm -space-x-px"
+                        aria-label="Pagination"
+                    >
                         
                         <!-- Previous -->
                         {% if page_obj.has_previous %}
                             <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
                                 <button type="button" 
-                                        class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 
-                                                bg-white text-sm font-medium text-gray-500 hover:bg-gray-50
-                                                hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                                        class="relative inline-flex items-center px-2 py-2 rounded-none border
+                                               border-gray-300 bg-white text-sm font-medium text-gray-500
+                                               hover:bg-green-900 hover:text-white hover:border-green-900"
+                                >
                                     <span class="sr-only">Previous</span>
+
                                     <!-- Heroicon name: solid/chevron-left -->
-                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                        aria-hidden="true">
+                                    <svg
+                                        class="h-5 w-5"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
                                         <path fill-rule="evenodd"
                                             d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                             clip-rule="evenodd" />
@@ -106,12 +125,22 @@
 
                             {% else %}
                                 <a>
-                                    <button type="button" disabled class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 
-                                                                        bg-white text-sm font-medium text-gray-400">
+                                    <button
+                                        type="button"
+                                        disabled
+                                        class="relative inline-flex items-center px-2 py-2 rounded-none border
+                                               border-gray-300 bg-white text-sm font-medium text-gray-400"
+                                    >
                                         <span class="sr-only">Previous</span>
+
                                         <!-- Heroicon name: solid/chevron-left -->
-                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                            aria-hidden="true">
+                                        <svg
+                                            class="h-5 w-5"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
                                             <path fill-rule="evenodd"
                                                 d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                 clip-rule="evenodd" />
@@ -120,21 +149,21 @@
                                 </a>
                         {% endif %}
                         
-                        <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-                        
                         <!-- Pages --> 
                         {% for num in page_obj.paginator.page_range %}
                             {% if page_obj.number == num %}
-                                <a  class="bg-blue-500 border-blue-500 text-white hover:bg-blue-500 hidden md:inline-flex 
-                                           hover:text-white relative items-center px-4 py-2 border text-sm font-medium
-                                           hover:border-blue-500">
+                                <a  class="bg-green-900 border-green-900 text-white hover:bg-green-900 hidden
+                                           md:inline-flex hover:text-white relative items-center px-4 py-2
+                                           border text-sm font-medium hover:border-green-900"
+                                >
                                     {{ num }}
                                 </a>
                             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                                 <a href="?page={{ num }}" 
-                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex 
-                                            relative items-center px-4 py-2 border text-sm font-medium
-                                            hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                                    class="bg-white border-gray-300 text-gray-500 hover:bg-green-900 hidden
+                                           md:inline-flex relative items-center px-4 py-2 border text-sm
+                                           font-medium hover:text-white hover:border-green-900"
+                                >
                                     {{ num }}
                                 </a>
                             {% endif %}
@@ -147,25 +176,30 @@
                                 <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 
                                             bg-white text-sm font-medium text-gray-700">... </span>
                                 <a href="?page={{ page_obj.paginator.num_pages }}" 
-                                        class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex 
-                                                relative items-center px-4 py-2 border text-sm font-medium
-                                                hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                                        class="bg-white border-gray-300 text-gray-500 hidden md:inline-flex
+                                               relative items-center px-4 py-2 border text-sm font-medium
+                                               hover:bg-green-900 hover:text-white hover:border-green-900"
+                                >
                                     {{ page_obj.paginator.num_pages }}
                                 </a>
                                 {% elif page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
                                     <a href="?page={{ page_obj.paginator.num_pages }}" 
-                                        class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex 
-                                                relative items-center px-4 py-2 border text-sm font-medium
-                                                hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                                        class="bg-white border-gray-300 text-gray-500 hidden md:inline-flex
+                                               relative items-center px-4 py-2 border text-sm font-medium
+                                               hover:bg-green-900 hover:text-white hover:border-green-900"
+                                    >
                                         {{ page_obj.paginator.num_pages }}
                                     </a>
                             {% endif %}
                             
                             <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">
-                                <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white 
-                                                text-sm font-medium text-gray-500 hover:bg-gray-50 hover:bg-blue-500 
-                                                hover:text-white hover:border-blue-500">
+                                <button
+                                    class="relative inline-flex items-center px-2 py-2 rounded-none border
+                                           border-gray-300 bg-white text-sm font-medium text-gray-500
+                                           hover:bg-green-900 hover:text-white hover:border-green-900"
+                                >
                                     <span class="sr-only">Next</span>
+
                                     <!-- Heroicon name: solid/chevron-right -->
                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                         aria-hidden="true">
@@ -177,12 +211,22 @@
                             </a>
                             {% else %}
                                 <a>
-                                    <button type="button" disabled class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white 
-                                                    text-sm font-medium text-gray-400">
+                                    <button
+                                        type="button"
+                                        disabled
+                                        class="relative inline-flex items-center px-2 py-2 rounded-none border
+                                               border-gray-300 bg-white text-sm font-medium text-gray-400"
+                                    >
                                         <span class="sr-only">Next</span>
+
                                         <!-- Heroicon name: solid/chevron-right -->
-                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                            aria-hidden="true">
+                                        <svg
+                                            class="h-5 w-5"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
                                             <path fill-rule="evenodd"
                                                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                 clip-rule="evenodd" />

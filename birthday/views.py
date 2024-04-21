@@ -1,4 +1,3 @@
-
 # Create your views here.
 
 import pathlib
@@ -6,14 +5,14 @@ from multiprocessing import context
 from django.template import Template, Context, loader
 from django.core import mail
 from django.http import HttpResponse
-from django.shortcuts import  (get_object_or_404, redirect, render)
+from django.shortcuts import (get_object_or_404, redirect, render)
 from mitcbdayapp import settings
 from staffapp.models import staffDetails
 from django.urls import reverse
 
 
 # Birthday Check View
-def bdaycheck(request):    
+def bdaycheck(request):
     # celebrants = []
     data = staffDetails.objects.all()
 
@@ -35,11 +34,11 @@ def bdaycheck(request):
             ]
 
     # no birthdays today
-    if not celebrants:    
+    if not celebrants:
 
-        print("No birthdays today \n")        
-        t = loader.get_template('nobirthday.html')        
-        return HttpResponse(t.render())    
+        print("No birthdays today \n")
+        t = loader.get_template('nobirthday.html')
+        return HttpResponse(t.render())
 
     else:
         print("We have birthday(s) today: \n")
@@ -47,12 +46,11 @@ def bdaycheck(request):
         for celebrant in celebrants:
             for key, value in celebrant.items():
                 print(f'{key}: {value}')
-            print('')            
+            print('')
 
-        # t = loader.get_template('emailsent.html')
+            # t = loader.get_template('emailsent.html')
         # return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
         return sendmail(request, celebrants)
-
 
 
 # Sendmail View
@@ -75,14 +73,13 @@ def sendmail(request, celebrants):
         from_ = f"MBTC Edo State <{settings.EMAIL_HOST_USER}>"
         to_ = celebrant.get('email')
 
-        msg = mail.EmailMultiAlternatives(subject, html_content, from_, [to_], connection = connection)
+        msg = mail.EmailMultiAlternatives(subject, html_content, from_, [to_], connection=connection)
         msg.attach_alternative(html_content, "text/html")
         payload = msg.send()
 
         try:
             # this means the email was sent
             if payload == 1:
-
                 # keeps count of the number of emails sent
                 mail_count = mail_count + payload
 
@@ -91,10 +88,10 @@ def sendmail(request, celebrants):
         except Exception as e:
             print(f"Birthday felicitation not sent to {celebrant.get('email')}. Reason: {e} \n")
             failed.append(celebrant)
-            
+
     connection.close()
 
     if mail_count != len(celebrants):
-        return HttpResponse(render(request, 'emailerror.html', context = {'failed_msgs': failed}))
+        return HttpResponse(render(request, 'emailerror.html', context={'failed_msgs': failed}))
     t = loader.get_template('emailsent.html')
-    return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))
+    return HttpResponse(t.render(context={'celebrants': celebrants, 'title': 'Birthdays Today'}))

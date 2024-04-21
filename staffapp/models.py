@@ -33,12 +33,14 @@ class staffDetails(models.Model):
 
     CADRE = (
         ("Administrative", "Administrative"),
+        ("Assistant Director", "Assistant Director"),
         ("Account Officer", "Account Officer"),
         ("Executive", "Executive"),
         ("Chief Secretary Assistant", "Chief Secretary Assistant"),
         ("Commercial Officer", "Commercial Officer"),
         ("Confidential Secretary", "Confidential Secretary"),
         ("Cooperative Officer", "Cooperative Officer"),
+        ("Director", "Director"),
         ("Driver/Mechanic", "Driver/Mechanic"),
         ("Industrial Promotion Officer", "Industrial Promotion Officer"),
         ("Messenger", "Messenger"),
@@ -57,7 +59,6 @@ class staffDetails(models.Model):
     first_appointment = models.DateField(
         "Date of First Appointment", default=datetime.date.today, null=False, blank=True
     )
-
     date_of_birth = models.DateField(
         "Date of Birth", default=datetime.date.today, null=False, blank=True
     )
@@ -120,11 +121,6 @@ class staffDetails(models.Model):
     )
     delete_image = models.BooleanField("Delete Profile Picture", default=0)
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(args, **kwargs)
-    #     self.birth_day = None
-    #     self.birth_month = None
-
     @property
     def staff_image_default(self):
         return self._meta.get_field("staff_image").get_default()
@@ -135,9 +131,6 @@ class staffDetails(models.Model):
         if self.phone_number is None:
             self.phone_number = "0700 000 0000"
         return self.phone_number
-
-    def gender_text(self):
-        return dict(staffDetails.GENDER)[self.gender]
 
     def birth_month_verbose(self):
         return dict(staffDetails.MONTHS)[self.birth_month]

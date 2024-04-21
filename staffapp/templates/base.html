@@ -22,6 +22,19 @@
 					display: none !important;
 				}
 			}
+
+			.shadow {
+				box-shadow:
+					rgba(0, 0, 0, 0.3) 0px 19px 38px,
+					rgba(0, 0, 0, 0.22) 0px 15px 12px,
+					rgba(0, 0, 0, 0.35) 0px 5px 15px
+				;
+			}
+
+			.shadow-min {
+				box-shadow:
+					rgba(0, 0, 0, 0.35) 0px 5px 15px;
+			}
 		</style>
 
 	</head>
@@ -84,9 +97,15 @@
 					<div class="flex flex-1 items-center justify-between">
 
 						<!-- Navbar logo -->
-						<div class="flex flex-shrink-0 items-center">
-							<img class="h-14 w-auto" src="{% static 'img/edsg-mbtc-logo.svg' %}" alt="Your Company">
-						</div>
+						<a href="{% url 'index' %}">
+							<div class="flex flex-shrink-0 items-center">
+								<img
+									class="h-14 w-auto"
+									src="{% static 'img/edsg-mbtc-logo.svg' %}"
+									alt="MBTC-Edo-State"
+								>
+							</div>
+						</a>
 
 						<!-- Nav Links -->
 						<div class="hidden flex items-center md:block">
@@ -95,11 +114,11 @@
 								<a
 								    href="{% url 'index' %}"
 								    class="{% active_link 'index' strict=True css_class='text-white md:text-white bg-green-900 md:hover:h-20 md:hover:bg-green-900 hover:text-white' %}
-								            flex h-20 items-center hover:h-20 hover:bg-green-900 text-gray-800 hover:text-white
-								            rounded-none p-4 md:px-6 text-lg font-extrabold"
+								           flex h-20 items-center hover:h-20 hover:bg-green-900 text-gray-800 hover:text-white
+								           rounded-none p-4 md:px-6 text-lg font-extrabold"
 								    aria-current="page"
 								>
-									<!-- Home -->
+									<!-- Home icon -->
 									<span class="inline-flex items-center">
 								        <svg
 								            xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +157,7 @@
 								<!-- All Staff -->
 								<a
 								    href="{% url 'stafflist' %}"
-								    class="{% active_link 'stafflist' strict=True css_class='md:text-white bg-green-900 md:hover:h-20 md:hover:bg-green-900 hover:text-white' %}
+								    class="{% active_link 'stafflist' css_class='md:text-white bg-green-900 md:hover:h-20 md:hover:bg-green-900 hover:text-white' %}
 								            flex h-20 items-center hover:h-20 hover:bg-green-900 text-gray-800 hover:text-white
 								            rounded-none p-4 md:px-6 text-lg font-extrabold"
 								    aria-current="page"
@@ -194,14 +213,10 @@
         <!-- Mobile menu, show/hide based on menu state. -->
 		{% include 'snippets/mobile-menu.html' %}
 
-		{% block content %}		
-
+		{% block content %}
         {% endblock %}
 	</body>
 	<!-- End Body -->
-
-	<!-- JavaScript to close error message -->
-	<script src="{% static 'js/close-notif-message.js' %}"></script>
 	
 	<!-- Footer -->
 	<footer class="sticky top-[100vh] mb-auto py-0 text-white mx-auto">
@@ -323,6 +338,9 @@
 
 	</footer>
 	<!-- End of footer -->
+
+	<!-- JavaScript to close error message -->
+	<script src="{% static 'js/close-notif-message.js' %}"></script>
 
 	<!-- JavaScript to open mobile menu -->
 	<script src="{% static 'js/mobilemenu.js' %}"></script>

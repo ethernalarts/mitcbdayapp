@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-    <title>{{ title }}</title>
+    <title>All Staff</title>
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
     
     <!-- Staff list -->
     <div
-        class="mt-4 md:mt-8 max-w-3xl mb-8 bg-white rounded-none border pt-8 pb-0
+        class="mt-4 md:mt-8 max-w-3xl mb-12 md:mb-20 bg-white rounded-none border pt-8 pb-0
                mx-auto shadow-md"
     >
         <div class="mx-auto text-center">
@@ -26,7 +26,7 @@
         <div class="flow-root">
             <ul role="list" class="divide-y divide-gray-200">
                 {% for staff in stafflist %}
-                    <li class="p-4 md:p-8 md:py-6 hover:bg-gray-100">
+                    <li class="p-4 md:p-6 md:py-6 hover:bg-gray-100">
         
                         <!-- Profile -->
                         <div class="flex items-center space-x-4">

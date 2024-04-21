@@ -1,13 +1,14 @@
 from operator import attrgetter
 
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponseRedirect
 from django.db.models import Q
 from staffapp.models import staffDetails
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic import ListView, DetailView, UpdateView
 from django.urls import reverse, reverse_lazy
 from staffapp.forms import *
@@ -23,17 +24,13 @@ class staffListView(ListView):
     model = staffDetails
     context_object_name = "stafflist"
     template_name = "stafflist.html"
-    paginate_by = 10
+    paginate_by = 3
 
     def get_queryset(self):
         return staffDetails.objects.all().order_by("first_name")
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
         context = super(staffListView, self).get_context_data(**kwargs)
-
-        # Create any data and add it to the context
-        context["title"] = "List of all Staff"
         context["total_staff"] = staffDetails.objects.all().count()
         return context
 
@@ -51,11 +48,11 @@ class staffDetailsCreate(CreateView):
         return self.object.get_absolute_url()
 
     def form_invalid(self, form):
-        for error in form.non_field_errors():
+        for error in form.errors:
             messages.error(self.request, f"{error}")
         return self.render_to_response(
             self.get_context_data(
-                form=self.form_class(self.request.GET),
+                form=self.form_class(self.request.POST),
             )
         )
 
@@ -85,6 +82,9 @@ class staffDetailsUpdate(UpdateView):
     template_name = "updatestaff.html"
     model = staffDetails
 
+    # def get_template_names(self):
+    #     return self.object.get_absolute_url_update_staff()
+
     def get_object(self, queryset=None):
         try:
             return staffDetails.objects.get(id=self.kwargs["pk"])
@@ -92,7 +92,7 @@ class staffDetailsUpdate(UpdateView):
             raise ObjectDoesNotExist("User not found") from e
 
     def get_success_url(self):
-        return reverse("staffdetails", kwargs={"pk": self.object.id})
+        return self.object.get_absolute_url()
 
     def form_valid(self, form):
         profile = form.save(commit=False)
@@ -104,41 +104,33 @@ class staffDetailsUpdate(UpdateView):
         for error in form.non_field_errors():
             messages.error(self.request, f"{error}")
         return self.render_to_response(
-            self.get_context_data(
-                form=self.form_class(self.request.POST)
-            )
+            self.get_context_data(form=self.form_class(self.request.POST))
         )
 
 
-def removeStaff(request, pk):
-    obj = get_object_or_404(staffDetails, id=pk)
+class DeleteStaffView(DeleteView):
+    success_url = reverse_lazy("index")
+    context_object_name = "staff"
+    model = staffDetails
 
-    if request.method == "POST":
-
-        # save first name for context data
+    def form_valid(self, form):
+        obj = get_object_or_404(staffDetails, id=self.kwargs["pk"])
         first_name = obj.first_name
-
-        # save middle name for context data
-        if obj.middle_name:
-            middle_name = obj.middle_name
-
-        # save last name for context data
+        middle_name = obj.middle_name if obj.middle_name else ""
         last_name = obj.last_name
 
-        # delete object
-        obj.delete()
+        success_url = self.get_success_url()
+        self.object.delete()
+        messages.success(
+            self.request,
+            f"{str(first_name).title()} {str(middle_name).title()} {str(last_name).title()}'s profile has been deleted",
+        )
+        return HttpResponseRedirect(success_url)
 
-        context = {
-            "first_name": first_name,
-            "middle_name": middle_name,
-            "last_name": last_name,
-        }
-
-        # retrieve template to render
-        t = loader.get_template("staffdeleted.html")
-
-        # after deletion, redirect
-        return HttpResponse(t.render(context))
+    def form_invalid(self, form):
+        for error in form.non_field_errors():
+            messages.error(self.request, f"{error}")
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 # Search view
@@ -146,7 +138,7 @@ class searchQueryView(ListView):
     model = staffDetails
     template_name = "searchresult.html"
     context_object_name = "searchresult"
-    paginate_by = 8
+    paginate_by = 3
 
     # get search query object
     def get_queryset(self, query=None):
@@ -166,12 +158,8 @@ class searchQueryView(ListView):
 
     # context data
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
         context = super(searchQueryView, self).get_context_data(**kwargs)
-
-        # Create any data and add it to the context
         context["query"] = str(self.request.GET.get("q"))
         context["count_query"] = len(self.get_queryset())
         context["staffdata"] = staffDetails.objects.all()
-
         return context

@@ -44,19 +44,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jquery',
     'birthday.apps.BirthdayConfig',
     'staffapp.apps.StaffappConfig',
+    'django_cleanup.apps.CleanupConfig',
+    'django.contrib.postgres',
     'phonenumber_field',
     'django_browser_reload',
     'widget_tweaks',
+    'debug_toolbar',
+    'mathfilters',
     'active_link',
     'tailwind',
     'theme',
-    'mathfilters',
-    'django_cleanup.apps.CleanupConfig',
-    'django.contrib.postgres',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -67,8 +66,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
-    'django.middleware.locale.LocaleMiddleware'
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'mitcbdayapp.urls'

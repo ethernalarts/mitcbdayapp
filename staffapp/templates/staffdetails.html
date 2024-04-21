@@ -172,11 +172,12 @@
 
                 <!-- Delete -->
                 <button
+                    id="open-delete-modal"
                     type="reset"
                     class="group relative w-full flex items-center mx-auto justify-center mt-6 mb-4 p-4
                            border border-red-700 text-lg font-medium rounded-none text-white bg-red-700
                            hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-offset-2
-                           focus:ring-red-500 hover:border-red-600"
+                           focus:ring-red-700 hover:border-red-600"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -192,5 +193,11 @@
                 </button>
             </div>
         </div>
+
+        <!-- Modal popup (Delete form) -->
+		{% include 'snippets/delete-modal.html' %}
+
+        <!-- JavaScript for delete modal popup -->
+        <script src="{% static 'js/modal_popup_delete.js' %}"></script>
     </div>
 {% endblock %}
