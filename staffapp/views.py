@@ -7,24 +7,30 @@ from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponseRedirect
 from django.db.models import Q
-from staffapp.models import staffDetails
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic import ListView, DetailView, UpdateView
 from django.urls import reverse, reverse_lazy
 from staffapp.forms import *
+from staffapp.models import staffDetails
 
 
 # Index View
 def index(request):
-    return render(request, "staffdeleted.html")
+    return render(request, "index.html")
 
 
 # Staff List View
 class staffListView(ListView):
     model = staffDetails
     context_object_name = "stafflist"
-    template_name = "stafflist.html"
     paginate_by = 3
+
+    def get_template_names(self):
+        if self.request.htmx:
+            if self.request.GET.get("page"):
+                return "snippets/htmx-staff-list.html"
+            return "searchresult.html"
+        return "stafflist.html"
 
     def get_queryset(self):
         return staffDetails.objects.all().order_by("first_name")
@@ -116,7 +122,7 @@ class DeleteStaffView(DeleteView):
     def form_valid(self, form):
         obj = get_object_or_404(staffDetails, id=self.kwargs["pk"])
         first_name = obj.first_name
-        middle_name = obj.middle_name if obj.middle_name else ""
+        middle_name = obj.middle_name or ""
         last_name = obj.last_name
 
         success_url = self.get_success_url()

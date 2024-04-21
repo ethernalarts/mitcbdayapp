@@ -1,0 +1,293 @@
+{% load active_link_tags %}
+
+<!-- Pagination -->
+<div class="bg-white md:p-6 flex items-center justify-between border-t border-gray-200">
+    {% block pagination %}
+        {% if is_paginated %}
+    
+            <!-- Previous and Next buttons for mobile menu -->
+            <div class="flex-1 flex justify-between sm:hidden p-6">
+
+                <!-- Previous button (Mobile) -->
+                {% if page_obj.has_previous %}
+                    <button
+                        type="button"
+                        hx-target="#stafflist"
+                        hx-get="{{ request.path }}?page={{ page_obj.previous_page_number }}"
+                        class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm
+                               font-medium rounded-none text-gray-700 bg-white hover:text-white
+                               hover:bg-green-900 focus:ring-gray-300 hover:border-green-900"
+                    >
+                        Previous
+                    </button>
+                    {% else %}
+                        <button
+                            disabled
+                            type="button"
+                            class="relative inline-flex items-center px-4 py-2 border border-gray-300
+                                   text-sm font-medium rounded-none text-gray-400 bg-white"
+                        >
+                            Previous
+                        </button>
+                {% endif %}
+
+                <!-- Showing 1 to ... -->
+                <div>
+                    <p class="text-md text-gray-700">
+                        Showing
+                        <span class="font-medium">
+                            {{ page_obj.start_index }}
+                        </span>
+                        to
+                        <span class="font-medium">
+                            {{ page_obj.end_index }}
+                        </span>
+                        of
+                        <span class="font-medium">{{ total_staff }}</span> results
+                    </p>
+                </div>
+                
+                <!-- Next button (Mobile) -->
+                {% if page_obj.has_next %}                    
+                    <button
+                        type="button"
+                        hx-target="#stafflist"
+                        hx-get="{{ request.path }}?page={{ page_obj.next_page_number }}"
+                            class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm
+                                   font-medium rounded-none text-gray-700 bg-white hover:border-green-900
+                                   hover:bg-green-900 focus:ring-green-900 hover:text-white"
+                    >
+                        Next
+                    </button>
+                    {% else %}
+                        <button
+                            type="button"
+                            disabled
+                            class="relative inline-flex items-center px-4 py-2 border border-gray-300
+                                   text-sm font-medium rounded-none text-gray-400 bg-white"
+                        >
+                            Next
+                        </button>
+                {% endif %}
+            </div>
+            <!-- End Previous and Next buttons for mobile menu -->
+        
+            
+            <!-- Desktop view buttons -->
+            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                
+                <!-- Showing 1 to ... -->
+                <div>
+                    <p class="text-md text-gray-700">
+                        Showing
+                        <span class="font-medium">
+                            {{ page_obj.start_index }}
+                        </span>
+                        to
+                        <span class="font-medium">
+                            {{ page_obj.end_index }}
+                        </span>
+                        of
+                        <span class="font-medium">{{ total_staff }}</span> results
+                    </p>
+                </div>
+                
+                <!-- Pages Div Container -->
+                <div>                            
+                    <!-- Pages Navbar -->
+                    <nav
+                        class="relative z-0 inline-flex rounded-none shadow-sm -space-x-px"
+                        aria-label="Pagination"
+                    >
+                        
+                        <!-- Previous -->
+                        {% if page_obj.has_previous %}
+                            <button
+                                type="button"
+                                hx-target="#stafflist"
+                                hx-get="{{ request.path }}?page={{ page_obj.previous_page_number }}"
+                                class="relative inline-flex items-center px-2 py-2 rounded-none border
+                                       border-gray-300 bg-white text-sm font-medium text-gray-500
+                                       hover:bg-green-900 hover:text-white hover:border-green-900"
+                            >
+                                <span class="sr-only">Previous</span>
+
+                                <!-- Heroicon name: solid/chevron-left -->
+                                <svg
+                                    class="h-5 w-5"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path fill-rule="evenodd"
+                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+
+                            {% if page_obj.number > 3 %}
+                                <button
+                                    type="button"
+                                    hx-get="?page=1"
+                                    hx-target="#stafflist"
+                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden text-sm
+                                           md:inline-flex relative items-center px-4 py-2 border font-medium
+                                           hover:bg-blue-500 hover:text-white hover:border-blue-500"
+                                >
+                                    1
+                                </button>
+                                {% if page_obj.number > 4 %}
+                                    <span
+                                        class="relative inline-flex items-center px-4 py-2 border border-gray-300
+                                               bg-white text-sm font-medium text-gray-700"
+                                    >
+                                        ...
+                                    </span>
+                                {% endif %}
+                            {% endif %}
+
+                            {% else %}
+                                <button
+                                    type="button"
+                                    disabled
+                                    class="relative inline-flex items-center px-2 py-2 rounded-none border
+                                           border-gray-300 bg-white text-sm font-medium text-gray-400"
+                                >
+                                    <span class="sr-only">Previous</span>
+
+                                    <!-- Heroicon name: solid/chevron-left -->
+                                    <svg
+                                        class="h-5 w-5"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
+                                        <path fill-rule="evenodd"
+                                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                        {% endif %}
+                        
+                        <!-- Pages --> 
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <button
+                                    type="button"
+                                    class="bg-green-900 border-green-900 text-white hover:bg-green-900 hidden
+                                           md:inline-flex hover:text-white relative items-center px-4 py-2
+                                           border text-sm font-medium hover:border-green-900"
+                                >
+                                    {{ num }}
+                                </button>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <button
+                                    hx-get="?page={{ num }}"
+                                    hx-target="#stafflist"
+                                    class="bg-white border-gray-300 text-gray-500 hover:bg-green-900 hidden
+                                           md:inline-flex relative items-center px-4 py-2 border text-sm
+                                           font-medium hover:text-white hover:border-green-900"
+                                >
+                                    {{ num }}
+                                </button>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        
+                        <!-- Next -->
+                        {% if page_obj.has_next %}
+                            {% if page_obj.number < page_obj.paginator.num_pages|add:'-3' %}
+                                <span
+                                   class="relative inline-flex items-center px-4 py-2 border border-gray-300
+                                          bg-white text-sm font-medium text-gray-700"
+                                >
+                                    ...
+                                </span>
+                                <button
+                                    type="button"
+                                    hx-get="?page={{ page_obj.paginator.num_pages }}"
+                                    hx-target="#stafflist"
+                                    class="bg-white border-gray-300 text-gray-500 hidden md:inline-flex
+                                           relative items-center px-4 py-2 border text-sm font-medium
+                                           hover:bg-green-900 hover:text-white hover:border-green-900"
+                                >
+                                    {{ page_obj.paginator.num_pages }}
+                                </button>
+                                {% elif page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
+                                    <button
+                                        type="button"
+                                        hx-get="?page={{ page_obj.paginator.num_pages }}"
+                                        hx-target="#stafflist"
+                                        class="bg-white border-gray-300 text-gray-500 hidden md:inline-flex
+                                               relative items-center px-4 py-2 border text-sm font-medium
+                                               hover:bg-green-900 hover:text-white hover:border-green-900"
+                                    >
+                                        {{ page_obj.paginator.num_pages }}
+                                    </button>
+                            {% endif %}
+
+                            <button
+                                type="button"
+                                hx-get="{{ request.path }}?page={{ page_obj.next_page_number }}"
+                                hx-target="#stafflist"
+                                class="relative inline-flex items-center px-2 py-2 rounded-none border
+                                       border-gray-300 bg-white text-sm font-medium text-gray-500
+                                       hover:bg-green-900 hover:text-white hover:border-green-900"
+                            >
+                                <span class="sr-only">Next</span>
+
+                                <!-- Heroicon name: solid/chevron-right -->
+                                <svg
+                                    class="h-5 w-5"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </button>
+                            {% else %}
+                                <button
+                                    disabled
+                                    type="button"
+                                    class="relative inline-flex items-center px-2 py-2 rounded-none border
+                                           border-gray-300 bg-white text-sm font-medium text-gray-400"
+                                >
+                                    <span class="sr-only">Next</span>
+
+                                    <!-- Heroicon name: solid/chevron-right -->
+                                    <svg
+                                        class="h-5 w-5"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                </button>
+                        {% endif %}
+                    </nav>
+                    <!-- End of pages -->
+
+                </div>
+                <!-- End pages -->
+
+            </div>
+            <!-- End Desktop view buttons -->
+            
+        {% endif %}
+    {% endblock %}
+</div>
+<!-- End of Pagination -->

@@ -1,4 +1,5 @@
-{% load static tailwind_tags %}
+{% load tailwind_tags %}
+{% load django_htmx %}
 {% load active_link_tags %}
 {% load static %}
 
@@ -11,8 +12,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-		<!-- css style sheet -->
-		<link rel="stylesheet" href="{% static 'css/dist/style.css' %}">
+		<!-- htmx -->
+		<script src="{% static 'js/htmx.min.js' %}" defer></script>
+		{% django_htmx_script %}
 
 		{% tailwind_css %}
 
@@ -41,6 +43,7 @@
 
 	<!-- Body -->
 	<body
+		hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
 		class="bg-index bg-no-repeat bg-cover bg-center bg-fixed font-sans min-h-screen bg-gray-900
 				font-sans p-2 md:p-4 mx-auto"
 	>
