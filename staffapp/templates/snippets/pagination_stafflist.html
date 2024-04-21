@@ -32,6 +32,22 @@
                             </button>
                         </a>
                 {% endif %}
+
+                <!-- Showing 1 to ... -->
+                <div>
+                    <p class="text-md text-gray-700">
+                        Showing
+                        <span class="font-medium">
+                            {{ page_obj.start_index }}
+                        </span>
+                        to
+                        <span class="font-medium">
+                            {{ page_obj.end_index }}
+                        </span>
+                        of
+                        <span class="font-medium">{{ total_staff }}</span> results
+                    </p>
+                </div>
                 
                 <!-- Next button (Mobile) -->
                 {% if page_obj.has_next %}                    

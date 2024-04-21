@@ -16,8 +16,7 @@
     
     <!-- Profile Card -->
     <div
-        class="max-w-3xl mx-auto px-8 mb-20 bg-white rounded-none border
-               border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700"
+        class="max-w-3xl mt-12 md:mt-8 mx-auto px-8 mb-20 bg-white rounded-none border border-gray-200 shadow-lg"
     >
 
         <!-- Container -->
@@ -25,7 +24,7 @@
 
             <!-- Checkmark icon -->
             <svg
-                class="mx-auto mb-4 w-14 h-14 text-green-600 dark:text-gray-200"
+                class="mx-auto mb-4 w-16 h-16 text-green-600"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -34,17 +33,29 @@
             >
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
+<!--            <svg-->
+<!--                xmlns="http://www.w3.org/2000/svg"-->
+<!--                viewBox="0 0 24 24"-->
+<!--                fill="currentColor"-->
+<!--                class="mx-auto mb-4 w-14 h-14 text-green-600"-->
+<!--            >-->
+<!--                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />-->
+<!--            </svg>-->
             
             <!-- Name -->
-            <h5 class="mb-4 text-3xl text-center font-extrabold text-gray-800 dark:text-white">
-                 {{ first_name.title }} 
-                 {{ middle_name.title }} 
-                 {{ last_name.title }}
+            <h5 class="mb-4 text-3xl text-center font-extrabold text-gray-800">Sebastian Bran
+                {{ first_name.title }}
+                {% if middle_name %}
+                    {{ middle_name.title }}
+                    {% else %}
+                        <span></span>
+                {% endif %}
+                {{ last_name.title }}
             </h5>
 
             <!-- Report -->
-            <span class="mb-4 md:mb-4 lg:mb-4 text-lg font-bold text-center text-gray-500">
-                has been deleted from the Database
+            <span class="text-xl font-bold text-center text-gray-500">
+                has been removed from the database
             </span>
 
         <!-- End - Container -->

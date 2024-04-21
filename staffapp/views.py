@@ -16,7 +16,7 @@ from staffapp.forms import *
 
 # Index View
 def index(request):
-    return render(request, "index.html")
+    return render(request, "staffdeleted.html")
 
 
 # Staff List View
