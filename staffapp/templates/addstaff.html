@@ -18,12 +18,12 @@
 
     <!-- Outer Container -->
     <div
-        class="bg-white w-full md:max-w-5xl flex items-center shadow-md rounded-none mb-12
+        class="bg-white w-full md:max-w-5xl flex items-center shadow-md rounded-none mb-20
                justify-center mx-auto mt-12 py-8"
     >
     
         <!-- Inner Container -->
-        <div class="w-full px-8 lg:px-10 pb-4">
+        <div class="w-full px-4 md:px-6 lg:px-10 pb-4">
 
             <!-- Profile Picture -->
             <div class="mb-4 flex flex-col items-center">
@@ -209,9 +209,9 @@
                                             <label
                                                 for="staff_image"
                                                 class="relative cursor-pointer items-center rounded-none bg-white
-                                                       font-semibold text-indigo-600 focus-within:outline-none
-                                                       focus-within:ring-2 focus-within:ring-indigo-600
-                                                       focus-within:ring-offset-2 hover:text-indigo-500"
+                                                       font-semibold text-green-800 focus-within:outline-none
+                                                       focus-within:ring-2 focus-within:ring-green-900
+                                                       focus-within:ring-offset-2 hover:text-green-700"
                                             >
                                                 {% render_field form.staff_image class+='cursor-pointer' %}
                                             </label>
@@ -370,15 +370,19 @@
                     <button
                         type="submit"
                         class="group relative w-full flex items-center mx-auto justify-center mt-6 p-4
-                                border border-transparent text-md font-medium rounded-none text-white bg-green-900
-                                hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-offset-2
-                                focus:ring-green-900"
+                               border border-transparent text-md font-medium rounded-none text-white bg-green-900
+                               hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-offset-2
+                               focus:ring-green-900"
                     >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                fill="currentColor" class="-ml-1 mr-2 h-5 w-5 text-white">
-                                <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
-                            </svg>
-                            Submit
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            class="-ml-1 mr-2 h-5 w-5 text-white"
+                        >
+                            <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+                        </svg>
+                        Submit
                     </button>
 
                     <!-- Clear form -->
@@ -386,11 +390,15 @@
                         type="reset"
                         class="group relative w-full flex items-center mx-auto justify-center mt-6 p-4
                                border border-red-700 text-md font-medium rounded-none text-white bg-red-700
-                              hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-offset-2
-                              focus:ring-red-700 hover:border-red-600"
+                               hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-offset-2
+                               focus:ring-red-700 hover:border-red-600"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                            fill="currentColor" class="-ml-1 mr-2 h-5 w-5 text-white">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            class="-ml-1 mr-2 h-5 w-5 text-white"
+                        >
                             <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" />
                         </svg>
                         Reset

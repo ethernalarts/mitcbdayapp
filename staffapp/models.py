@@ -53,16 +53,6 @@ class staffDetails(models.Model):
         ("Watchman", "Watchman"),
     )
 
-    cadre = models.CharField(
-        "Cadre", choices=CADRE, max_length=100, null=False, default="Administrative"
-    )
-    first_appointment = models.DateField(
-        "Date of First Appointment", default=datetime.date.today, null=False, blank=True
-    )
-    date_of_birth = models.DateField(
-        "Date of Birth", default=datetime.date.today, null=False, blank=True
-    )
-
     DEPARTMENTS = (
         ("Accounts", "Accounts"),
         ("Business Premises", "Business Premises"),
@@ -105,6 +95,16 @@ class staffDetails(models.Model):
         (2, 2),
         (3, 3),
         (4, 4),
+    )
+
+    cadre = models.CharField(
+        "Cadre", choices=CADRE, max_length=100, null=False, default="Administrative"
+    )
+    first_appointment = models.DateField(
+        "Date of First Appointment", default=datetime.date.today, null=False, blank=True
+    )
+    date_of_birth = models.DateField(
+        "Date of Birth", default=datetime.date.today, null=False, blank=True
     )
 
     department = models.CharField(

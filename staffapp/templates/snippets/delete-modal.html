@@ -20,7 +20,7 @@
                 id="closemodal-x"
                 type="button"
                 data-modal-toggle="popup-modal"
-                class="closemodal absolute top-0 right-0 text-white bg-transparent hover:bg-white
+                class="closemodal absolute top-1 right-1 text-white bg-transparent hover:bg-white
                        hover:text-gray-900 rounded-none text-sm p-4 ml-auto inline-flex items-center"
             >
                 <svg
@@ -55,29 +55,45 @@
 
                 <!-- Warning text -->
                 <h3 class="mb-5 text-lg font-normal text-center text-white">
-                    Are you sure you want to remove this Staff? This action cannot be reversed
+                    Are you sure you want to remove
+                    <span class="font-bold">
+                        "{{ staff.first_name.title }} {{ staff.middle_name.title }} {{ staff.last_name.title }}"?
+                    </span>
+                    This action cannot be reversed.
                 </h3>
 
                 <!-- Remove and Cancel buttons -->
                 <div class="flex items-center space-x-6 justify-center mt-8">
 
                     <!-- Yes, Remove -->
-                    <button type="button">
-                        <form action="{% url 'deletestaff' staff.id %}" method="POST">
-                            {% csrf_token %}
-                            <input type="submit"
-                                class="cursor-pointer text-red-500 bg-none hover:bg-red-600 ring-4 ring-red-500
-                                       focus:outline-none font-bold rounded-none text-lg hover:ring-red-600
-                                       px-5 py-1.5 text-center hover:text-white"
-                                value="Yes, Delete"
-                            >
-                        </form>
-                    </button>
+                    <form
+                        action="{% url 'deletestaff' pk=staff.id %}"
+                        method="POST"
+                    >
+                        {% csrf_token %}
+                        <button
+                            type="submit"
+                            class="cursor-pointer text-red-500 bg-none hover:bg-red-600 ring-4 ring-red-500
+                                   focus:outline-none font-bold rounded-none text-lg hover:ring-red-600
+                                   px-5 py-1.5 text-center hover:text-white"
+                        >
+                            Yes, Delete
+                        </button>
+                    </form>
+<!--                    <script>-->
+<!--                        document.querySelector('#delete').addEventListener('click', function myFunction(e) {-->
+<!--                          e.preventDefault();-->
+<!--                        });-->
+<!--                    </script>-->
 
                     <!-- No, Cancel button -->
-                    <button id="closemodal-no" type="button" data-modal-toggle="popup-modal"
-                        class="text-gray-800 text-lg bg-white hover:bg-gray-100 ring-4 focus:outline-none
-                               ring-white rounded-none font-bold px-5 py-1.5 hover:ring-gray-100"
+                    <button
+                        id="closemodal-no"
+                        type="button"
+                        data-modal-toggle="popup-modal"
+                        class="cursor-pointer text-gray-800 bg-white hover:bg-gray-100 ring-4 ring-white
+                               focus:outline-none font-bold rounded-none text-lg hover:ring-gray-100
+                               px-5 py-1.5 text-center"
                     >
                         No, Cancel
                     </button>

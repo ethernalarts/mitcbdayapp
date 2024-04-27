@@ -16,7 +16,7 @@
                         hx-get="{{ request.path }}?page={{ page_obj.previous_page_number }}"
                         class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm
                                font-medium rounded-none text-gray-700 bg-white hover:text-white
-                               hover:bg-green-900 focus:ring-gray-300 hover:border-green-900"
+                               hover:bg-green-700 focus:ring-gray-300 hover:border-green-700"
                     >
                         Previous
                     </button>
@@ -32,7 +32,7 @@
                 {% endif %}
 
                 <!-- Showing 1 to ... -->
-                <div>
+                <div class="flex items-center">
                     <p class="text-md text-gray-700">
                         Showing
                         <span class="font-medium">
@@ -54,8 +54,8 @@
                         hx-target="#stafflist"
                         hx-get="{{ request.path }}?page={{ page_obj.next_page_number }}"
                             class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm
-                                   font-medium rounded-none text-gray-700 bg-white hover:border-green-900
-                                   hover:bg-green-900 focus:ring-green-900 hover:text-white"
+                                   font-medium rounded-none text-gray-700 bg-white hover:border-green-700
+                                   hover:bg-green-700 focus:ring-green-900 hover:text-white"
                     >
                         Next
                     </button>
@@ -108,7 +108,7 @@
                                 hx-get="{{ request.path }}?page={{ page_obj.previous_page_number }}"
                                 class="relative inline-flex items-center px-2 py-2 rounded-none border
                                        border-gray-300 bg-white text-sm font-medium text-gray-500
-                                       hover:bg-green-900 hover:text-white hover:border-green-900"
+                                       hover:bg-green-700 hover:text-white hover:border-green-700"
                             >
                                 <span class="sr-only">Previous</span>
 
@@ -131,9 +131,9 @@
                                     type="button"
                                     hx-get="?page=1"
                                     hx-target="#stafflist"
-                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden text-sm
+                                    class="bg-white border-gray-300 text-gray-500 hover:bg-green-700 hidden text-sm
                                            md:inline-flex relative items-center px-4 py-2 border font-medium
-                                           hover:bg-blue-500 hover:text-white hover:border-blue-500"
+                                           hover:text-white hover:border-green-700"
                                 >
                                     1
                                 </button>
@@ -186,9 +186,9 @@
                                 <button
                                     hx-get="?page={{ num }}"
                                     hx-target="#stafflist"
-                                    class="bg-white border-gray-300 text-gray-500 hover:bg-green-900 hidden
+                                    class="bg-white border-gray-300 text-gray-500 hover:bg-green-700 hidden
                                            md:inline-flex relative items-center px-4 py-2 border text-sm
-                                           font-medium hover:text-white hover:border-green-900"
+                                           font-medium hover:text-white hover:border-green-700"
                                 >
                                     {{ num }}
                                 </button>
@@ -211,7 +211,7 @@
                                     hx-target="#stafflist"
                                     class="bg-white border-gray-300 text-gray-500 hidden md:inline-flex
                                            relative items-center px-4 py-2 border text-sm font-medium
-                                           hover:bg-green-900 hover:text-white hover:border-green-900"
+                                           hover:bg-green-700 hover:text-white hover:border-green-700"
                                 >
                                     {{ page_obj.paginator.num_pages }}
                                 </button>
@@ -222,7 +222,7 @@
                                         hx-target="#stafflist"
                                         class="bg-white border-gray-300 text-gray-500 hidden md:inline-flex
                                                relative items-center px-4 py-2 border text-sm font-medium
-                                               hover:bg-green-900 hover:text-white hover:border-green-900"
+                                               hover:bg-green-700 hover:text-white hover:border-green-700"
                                     >
                                         {{ page_obj.paginator.num_pages }}
                                     </button>
@@ -234,7 +234,7 @@
                                 hx-target="#stafflist"
                                 class="relative inline-flex items-center px-2 py-2 rounded-none border
                                        border-gray-300 bg-white text-sm font-medium text-gray-500
-                                       hover:bg-green-900 hover:text-white hover:border-green-900"
+                                       hover:bg-green-700 hover:text-white hover:border-green-700"
                             >
                                 <span class="sr-only">Next</span>
 

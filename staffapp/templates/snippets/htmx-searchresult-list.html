@@ -1,0 +1,82 @@
+<div class="mx-auto text-center">
+    <h5 class="mb-6 text-2xl md:text-3xl font-bold leading-none text-gray-900">
+        Found {{ total_results }} result(s) for "{{ query }}"
+    </h5>
+</div>
+
+<!-- Search Results -->
+<div class="flow-root">
+    <ul role="list" class="divide-y divide-gray-200">
+        {% if searchresult %}
+            {% for staff in searchresult %}
+                <li class="p-4 md:p-6 md:py-6 hover:bg-gray-100">
+
+                    <!-- Profile -->
+                    <div class="flex items-center space-x-4">
+
+                        <!-- Profile Picture -->
+                        <div class="flex-shrink-0">
+                            <img
+                                class="w-16 h-16 rounded-full"
+                                src="{{ staff.staff_image.url }}"
+                                alt="{{ staff.first_name }}'s' image"
+                            >
+                        </div>
+
+                        <!-- Name and Email -->
+                        <div class="flex-1 min-w-0">
+                            <p class="text-lg font-semibold text-gray-900 truncate">
+                                {{ staff.first_name }}
+                                {% if staff.middle_name %}
+                                    {{ staff.middle_name }}
+                                    {% else %}
+                                        <span></span>
+                                {% endif %}
+                                {{ staff.last_name }}
+                            </p>
+                            <p class="text-lg text-gray-500 truncate dark:text-gray-400">
+                                {{ staff.official_email }}
+                            </p>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+
+                            <!-- View Profile Button -->
+                            <a href="{{ staff.get_absolute_url }}" target="_blank">
+                                <button
+                                    type="button"
+                                    class="inline-flex items-center px-4 py-3 border border-2 border-green-800
+                                           rounded-none text-sm font-medium text-white bg-green-800
+                                           hover:bg-green-700 focus:outline-none hover:border-green-700
+                                           focus:ring-4 focus:ring-offset-2 focus:ring-green-800"
+                                >
+                                    <!-- User icon -->
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="mr-2 h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    View Profile
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            {% else %}
+                <div class="flex items-center justify-center">
+                    <h5 class="text-2xl font-medium text-gray-900 py-6">
+                        <em>No Record(s) found</em>
+                    </h5>
+                </div>
+        {% endif %}
+    </ul>
+</div>
+
+<!-- Pagination -->
+{% include 'snippets/pagination_searchresult.html' with searchresult=page_obj %}

@@ -17,13 +17,14 @@ urlpatterns += [
     re_path(r'^add/$', views.staffDetailsCreate.as_view(), name='addstaff'),
     re_path(r'^staff/(?P<pk>\d+)$', views.staffDetailsView.as_view(), name='staffdetails'),
     re_path(r'^staff/(?P<pk>\d+)/update/$', views.staffDetailsUpdate.as_view(), name='updatestaff'),
-    re_path(r'^staff/(?P<pk>\d+)/delete/$', views.DeleteStaffView.as_view(), name='deletestaff')
+    re_path(r'^staff/(?P<pk>\d+)/delete/$', views.DeleteStaffView.as_view(), name='deletestaff'),
+    re_path(r'^staffdeleted/$', views.staff_deleted, name='staffdeleted'),
 ]
 
 
 # Search
 urlpatterns += [
-    re_path(r'^search/$', views.searchQueryView.as_view(), name='searchresult')
+    re_path(r'^staff/search/$', views.searchQueryView.as_view(), name='searchresult')
 ]
 
 
