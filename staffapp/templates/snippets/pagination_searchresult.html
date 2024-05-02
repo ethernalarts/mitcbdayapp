@@ -1,8 +1,9 @@
 
 <!-- Pagination -->
-<div class="bg-white md:p-6 flex items-center justify-between border-t border-gray-200">
-    {% block pagination %}
-        {% if is_paginated %}
+
+{% block pagination %}
+    {% if is_paginated %}
+        <div class="bg-white md:p-6 flex items-center justify-between border-t border-gray-200">
 
             <!-- Previous and Next buttons for mobile menu -->
             <div class="flex-1 flex justify-between sm:hidden p-6">
@@ -285,8 +286,8 @@
 
             </div>
             <!-- End Desktop view buttons -->
-            
-        {% endif %}
-    {% endblock %}
-</div>
+
+        </div>
+    {% endif %}
+{% endblock %}
 <!-- End of Pagination -->

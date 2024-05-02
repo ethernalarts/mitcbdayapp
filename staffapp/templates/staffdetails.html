@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
-{% load widget_tweaks %}
 
 {% block title %}
     <title>
-        Staff Profile
+        {{ staff.first_name|title }} {{ staff.last_name|title }}'s Profile
     </title>
 {% endblock %}
 
@@ -45,7 +44,7 @@
                     {% endif %}
                     {{ staff.last_name }}
                 </h2>
-                <p class="mt-2 font-bold text-xl italic text-blue-600">
+                <p class="mt-2 font-bold text-xl text-blue-600">
                     {{ staff.official_email }}
                 </p>
             </div>
@@ -155,13 +154,13 @@
                     <button
                         type="submit"
                         class="group relative w-full flex items-center mx-auto justify-center mt-2 mb-4 p-4
-                               border border-transparent text-lg font-medium rounded-none text-white bg-green-900
+                               border border-transparent font-medium rounded-none text-white bg-green-900
                                hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-offset-2
-                               focus:ring-green-800"
+                               focus:ring-green-800 text-lg"
                     >
                         <span class="inline-flex items-center">
                             <svg
-                                class="mr-2 h-5 w-5 text-white"
+                                class="mr-2 h-6 w-6 text-white"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
@@ -185,7 +184,7 @@
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="mr-2 h-5 w-5 text-white inline-flex"
+                        class="mr-2 h-6 w-6 text-white inline-flex"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

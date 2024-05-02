@@ -59,7 +59,7 @@
                     <span class="font-bold">
                         "{{ staff.first_name.title }} {{ staff.middle_name.title }} {{ staff.last_name.title }}"?
                     </span>
-                    This action cannot be reversed.
+                    This action CANNOT be reversed.
                 </h3>
 
                 <!-- Remove and Cancel buttons -->
@@ -67,8 +67,8 @@
 
                     <!-- Yes, Remove -->
                     <form
-                        action="{% url 'deletestaff' pk=staff.id %}"
-                        method="POST"
+                        hx-swap="outerHTML"
+                        hx-post="{% url 'deletestaff' pk=staff.id %}"
                     >
                         {% csrf_token %}
                         <button
@@ -80,11 +80,6 @@
                             Yes, Delete
                         </button>
                     </form>
-<!--                    <script>-->
-<!--                        document.querySelector('#delete').addEventListener('click', function myFunction(e) {-->
-<!--                          e.preventDefault();-->
-<!--                        });-->
-<!--                    </script>-->
 
                     <!-- No, Cancel button -->
                     <button

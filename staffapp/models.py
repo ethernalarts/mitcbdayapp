@@ -135,9 +135,6 @@ class staffDetails(models.Model):
     def birth_month_verbose(self):
         return dict(staffDetails.MONTHS)[self.birth_month]
 
-    class Meta:
-        db_table = "birthday_staffdetails"
-
     @property
     def BIRTHDAY_TODAY(self):
         return (self.birth_month, self.birth_day) == (
@@ -156,3 +153,6 @@ class staffDetails(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    class Meta:
+        db_table = "birthday_staffdetails"

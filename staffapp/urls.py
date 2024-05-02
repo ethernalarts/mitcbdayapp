@@ -1,30 +1,23 @@
-
-from django.urls import include, path, re_path
+from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views, api_views
 
-
-urlpatterns = [ 
-    re_path(r"^__reload__/", include("django_browser_reload.urls"))
-]
-
-
 # Staff
-urlpatterns += [
-    re_path(r'^$', views.index, name='index'),
-    re_path(r'^staff/$', views.staffListView.as_view(), name='stafflist'),
-    re_path(r'^add/$', views.staffDetailsCreate.as_view(), name='addstaff'),
-    re_path(r'^staff/(?P<pk>\d+)$', views.staffDetailsView.as_view(), name='staffdetails'),
-    re_path(r'^staff/(?P<pk>\d+)/update/$', views.staffDetailsUpdate.as_view(), name='updatestaff'),
-    re_path(r'^staff/(?P<pk>\d+)/delete/$', views.DeleteStaffView.as_view(), name='deletestaff'),
+urlpatterns = [
+    re_path(r'^$', views.HomePageView.as_view(), name='index'),
+    re_path(r'^staff/$', views.StaffListView.as_view(), name='stafflist'),
+    re_path(r'^add/$', views.StaffCreateView.as_view(), name='addstaff'),
+    re_path(r'^staff/(?P<pk>\d+)$', views.StaffDetailsView.as_view(), name='staffdetails'),
+    re_path(r'^staff/(?P<pk>\d+)/update/$', views.StaffUpdateView.as_view(), name='updatestaff'),
+    re_path(r'^staff/(?P<pk>\d+)/delete/$', views.StaffDeleteView.as_view(), name='deletestaff'),
     re_path(r'^staffdeleted/$', views.staff_deleted, name='staffdeleted'),
 ]
 
 
 # Search
 urlpatterns += [
-    re_path(r'^staff/search/$', views.searchQueryView.as_view(), name='searchresult')
+    re_path(r'^staff/search/$', views.SearchQueryView.as_view(), name='searchresult')
 ]
 
 

@@ -1,6 +1,5 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
 from staffapp.models import staffDetails
 
 
@@ -52,8 +51,6 @@ class staffDetailsCreateForm(forms.ModelForm):
 # Update Staff form
 class staffDetailsUpdateForm(forms.ModelForm):
     official_email = forms.EmailField(validators=[validate_email_domain])
-
-    # delete_image = forms.BooleanField()
 
     class Meta:
         model = staffDetails

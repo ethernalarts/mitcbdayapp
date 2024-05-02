@@ -7,7 +7,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" id="target">
 	<head>
-        {% block title%}{% endblock %}
+        {% block title%}
+		{% endblock %}
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -42,7 +43,6 @@
 				color: rgb(255 255 255) !important;
 			}
 		</style>
-
 	</head>
 
 	<!-- Body -->
@@ -122,7 +122,7 @@
 								    href="{% url 'index' %}"
 								    class="{% active_link 'index' strict=True css_class='text-white md:text-white bg-green-900 md:hover:h-20 md:hover:bg-green-900 hover:text-white' %}
 								           flex h-20 items-center hover:h-20 hover:bg-green-700 text-gray-800 hover:text-white
-								           rounded-none p-4 md:px-6 text-lg font-extrabold"
+								           rounded-none p-4 md:px-6 text-lg font-extrabold focus:bg-green-600"
 								    aria-current="page"
 								>
 									<!-- Home icon -->
@@ -145,7 +145,7 @@
 								    href="{% url 'addstaff' %}"
 								    class="{% active_link 'addstaff' css_class='text-white md:text-white bg-green-900 md:hover:h-20 md:hover:bg-green-900' %}
 								            flex h-20 items-center hover:h-20 hover:bg-green-700 text-gray-800 hover:text-white
-								            rounded-none p-4 md:px-6 text-lg font-extrabold"
+								            rounded-none p-4 md:px-6 text-lg font-extrabold focus:bg-green-600"
 								    aria-current="page"
 								>
 									<!-- Plus icon -->
@@ -166,7 +166,7 @@
 								    href="{% url 'stafflist' %}"
 								    class="{% active_link 'stafflist || searchresult || deletestaff || staffdetails || updatestaff' css_class='md:text-white bg-green-900 md:hover:h-20 md:hover:bg-green-900 hover:text-white' %}
 								            flex h-20 items-center hover:h-20 hover:bg-green-700 text-gray-800 hover:text-white
-								            rounded-none p-4 md:px-6 text-lg font-extrabold"
+								            rounded-none p-4 md:px-6 text-lg font-extrabold focus:bg-green-600"
 								    aria-current="page"
 								>
 									<!-- Staff icon -->
@@ -186,11 +186,10 @@
 
 								<!-- Birthday -->
 								<a
-								    href="{% url 'birthday' %}"
-								    target="_blank"
-								    class="{% active_link 'birthday' strict=True css_class='md:text-white bg-green-900 md:hover:h-20 md:hover:bg-green-900 hover:text-white' %}
+								    href="{% url 'bday:birthday' %}"
+								    class="{% active_link 'bday:birthday' strict=True css_class='md:text-white bg-green-900 md:hover:h-20 md:hover:bg-green-900 hover:text-white' %}
 								            flex h-20 items-center hover:h-20 hover:bg-green-700 text-gray-800 hover:text-white
-								            rounded-none p-4 md:px-6 text-lg font-extrabold"
+								            rounded-none p-4 md:px-6 text-lg font-extrabold focus:bg-green-600"
 								    aria-current="page"
 								>
 									<!-- Birthday icon -->
@@ -351,4 +350,7 @@
 
 	<!-- JavaScript to open mobile menu -->
 	<script src="{% static 'js/mobilemenu.js' %}"></script>
+
+	<!-- JavaScript to load spinner -->
+<!--    <script src="{% static 'js/loader.js' %}"></script>-->
 </html>

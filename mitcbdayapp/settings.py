@@ -39,10 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "jquery",
     "birthday.apps.BirthdayConfig",
     "staffapp.apps.StaffappConfig",
-    "django_cleanup.apps.CleanupConfig",
     "django.contrib.postgres",
     "phonenumber_field",
     "django_browser_reload",
@@ -53,6 +51,7 @@ INSTALLED_APPS = [
     "active_link",
     "tailwind",
     "theme",
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [
@@ -66,7 +65,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
+    "mitcbdayapp.middleware.BrowserReloadMiddleware",
+    # "livesync.core.middleware.DjangoLiveSyncMiddleware",
     "django.middleware.locale.LocaleMiddleware",
 ]
 
@@ -122,7 +122,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 BIRTHDAY_STATIC = os.path.join(BASE_DIR, "birthday/templates/static/")
 STAFFAPP_STATIC = os.path.join(BASE_DIR, "staffapp/static/staffapp")
 THEME_STATIC = os.path.join(BASE_DIR, "theme/static/theme")
-STATICFILES_DIRS = [MEDIA_ROOT, BIRTHDAY_STATIC, STAFFAPP_STATIC, THEME_STATIC]
+STATICFILES_DIRS = [
+    MEDIA_ROOT,
+    BIRTHDAY_STATIC,
+    STAFFAPP_STATIC,
+    THEME_STATIC
+]
 
 WSGI_APPLICATION = "mitcbdayapp.wsgi.application"
 

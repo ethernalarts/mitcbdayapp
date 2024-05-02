@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+    <title>Birthday Celebrants</title>
+{% endblock %}
+
+{% block content %}
+    
+    <!-- Birthday List -->
+    <div
+        id="stafflist"
+        class="mt-12 max-w-4xl mb-20 bg-white rounded-none border pt-8 pb-0
+               mx-auto shadow-md"
+    >
+        {% include 'snippets/htmx-birthday-list.html' %}
+    </div>
+    <!-- End of Staff list -->    
+
+{% endblock %}
+<!-- End of block content -->

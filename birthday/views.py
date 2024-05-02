@@ -1,97 +1,110 @@
-# Create your views here.
-
 import pathlib
-from multiprocessing import context
-from django.template import Template, Context, loader
+from datetime import date
+from django.contrib import messages
+from django.template import Template, Context
 from django.core import mail
 from django.http import HttpResponse
-from django.shortcuts import (get_object_or_404, redirect, render)
+from django.shortcuts import render
+from django.views.generic.list import ListView
 from mitcbdayapp import settings
 from staffapp.models import staffDetails
-from django.urls import reverse
 
 
-# Birthday Check View
-def bdaycheck(request):
-    # celebrants = []
-    data = staffDetails.objects.all()
+class BirthdayCheckView(ListView):
+    model = staffDetails
+    context_object_name = "celebrants"
+    # paginate_by = 2
 
-    print("\nChecking...\n")
+    def get_template_names(self):
+        if self.request.htmx and self.request.GET.get("page"):
+            return "snippets/htmx-birthday-list.html"
+        return "birthdaylist.html"
 
-    # iterate over the QuerySet "data" to look for any record with "birth_month" 
-    # and "birth_day" fields that matches "current_month" and "current_day"
-    for record in data:
-        if record.BIRTHDAY_TODAY:
-            celebrants = [
-                {
-                    'databaseid': record.id,
-                    'firstname': record.first_name,
-                    'middlename': record.middle_name,
-                    'lastname': record.last_name,
-                    'email': record.email,
-                    'phonenumber': record.phone_number
+    def get_context_data(self, **kwargs):
+        context = super(BirthdayCheckView, self).get_context_data(**kwargs)
+        context["today"] = date.today()
+        return context
+
+    def get_queryset(self):
+        return [
+            staff
+            for staff in staffDetails.objects.all()
+            if (staff.date_of_birth.month, staff.date_of_birth.day)
+               == (date.today().month, date.today().day)
+        ]
+
+
+def send_birthday_message(request, pk):
+    celebrant = staffDetails.objects.get(id=pk)
+
+    try:
+        connection = mail.get_connection()
+        connection.open()
+    except Exception as e:
+        messages.error(
+            request,
+            f"{e}"
+        )
+        return HttpResponse(
+            render(
+                request,
+                'snippets/birthday-message-error.html',
+                context={
+                    "var": "Connection Error",
+                    "pk": celebrant.id
                 }
-            ]
+            )
+        )
 
-    # no birthdays today
-    if not celebrants:
+    contents = pathlib.Path('birthday/templates/bmessage-1.html').read_text()
+    template = Template(contents)  # convert 'contents' to a template object
+    context = Context({"NAME": f"{celebrant.firstname} {celebrant.lastname}"})
+    html_content = template.render(context)
+    subject = f"Happy Birthday {str(celebrant.firstname).title()} {str(celebrant.lastname).title()}!!"
+    from_ = f"MBTC Edo State <{settings.EMAIL_HOST_USER}>"
+    to_ = celebrant.official_email
 
-        print("No birthdays today \n")
-        t = loader.get_template('nobirthday.html')
-        return HttpResponse(t.render())
+    msg = mail.EmailMultiAlternatives(
+        subject,
+        html_content,
+        from_,
+        [to_],
+        connection=connection
+    )
+    msg.attach_alternative(html_content, "text/html")
 
+    try:
+        msg.send()
+    except Exception as e:
+        messages.error(
+            request,
+            f"{e}"
+        )
+        connection.close()
+        return HttpResponse(
+            render(
+                request,
+                'snippets/birthday-message-error.html',
+                context={
+                    "var": "Message not sent",
+                    "pk": celebrant.id
+                }
+            )
+        )
     else:
-        print("We have birthday(s) today: \n")
-
-        for celebrant in celebrants:
-            for key, value in celebrant.items():
-                print(f'{key}: {value}')
-            print('')
-
-            # t = loader.get_template('emailsent.html')
-        # return HttpResponse(t.render(context = {'celebrants': celebrants, 'title': 'Birthdays Today'}))    
-        return sendmail(request, celebrants)
+        connection.close()
+        return HttpResponse(
+            render(
+                request,
+                'snippets/birthday-message-success.html'
+            )
+        )
 
 
-# Sendmail View
-def sendmail(request, celebrants):
-    connection = mail.get_connection()
-    connection.open()
-    mail_count = 0
-    failed = []
-
-    print("Sending Birthday felicitation(s)...\n")
-
-    contents = pathlib.Path('birthday/templates/bmessage_1.html').read_text()
-    for celebrant in celebrants:
-        # convert 'contents' to a template object
-        template = Template(contents)
-        context = Context({"NAME": f"{celebrant.get('firstname')} {celebrant.get('lastname')}"})
-        html_content = template.render(context)
-
-        subject = f"Happy Birthday {celebrant.get('firstname')} {celebrant.get('lastname')}!!"
-        from_ = f"MBTC Edo State <{settings.EMAIL_HOST_USER}>"
-        to_ = celebrant.get('email')
-
-        msg = mail.EmailMultiAlternatives(subject, html_content, from_, [to_], connection=connection)
-        msg.attach_alternative(html_content, "text/html")
-        payload = msg.send()
-
-        try:
-            # this means the email was sent
-            if payload == 1:
-                # keeps count of the number of emails sent
-                mail_count = mail_count + payload
-
-                print(f"Birthday felicitation sent to {celebrant.get('email')} \n")
-
-        except Exception as e:
-            print(f"Birthday felicitation not sent to {celebrant.get('email')}. Reason: {e} \n")
-            failed.append(celebrant)
-
-    connection.close()
-
-    if mail_count != len(celebrants):
-        return HttpResponse(render(request, 'emailerror.html', context={'failed_msgs': failed}))
-    t = loader.get_template('emailsent.html')
-    return HttpResponse(t.render(context={'celebrants': celebrants, 'title': 'Birthdays Today'}))
+# def send_birthday_message_button(request):
+#     return HttpResponse(
+#         render(
+#             request,
+#             'snippets/send-birthday-message.html'
+#         )
+#     )

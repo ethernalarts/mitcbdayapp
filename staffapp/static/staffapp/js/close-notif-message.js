@@ -1,4 +1,3 @@
-
 const message = document.getElementsByClassName("error-message");
 const closebutton = document.getElementsByClassName("close-error-message");
 
